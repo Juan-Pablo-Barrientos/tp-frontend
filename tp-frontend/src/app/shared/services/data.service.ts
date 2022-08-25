@@ -14,4 +14,9 @@ export class DataService {
   getPosts(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'posts');
   }
+
+  getPostsByTitle(TitleSearch:String){
+    return this.http.get<Response>(this.baseUrl + 'postsByTitle/'+TitleSearch);
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/services/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,22 @@ import { DataService } from 'src/app/shared/services/data.service';
 })
 export class HomeComponent implements OnInit {
   posts : any;
-
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private route:ActivatedRoute) {}
+  titleSearch:String="";
 
   ngOnInit(): void {
-    this.dataService.getPosts().subscribe((response : any) => {
+    this.route.queryParams.subscribe(params =>{
+      this.titleSearch=params["searchbar"]
+    })
+
+    if (this.titleSearch!=="" && this.titleSearch!=null) {
+      this.dataService.getPostsByTitle(this.titleSearch).subscribe((response:any)=>{
+        this.posts = response.data;
+      })
+    }else{
+      this.dataService.getPosts().subscribe((response : any) => {
       this.posts = response.data;
-    });
+    });}
   }
+
 }
