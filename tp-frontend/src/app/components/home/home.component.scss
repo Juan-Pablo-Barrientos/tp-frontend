@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.body {
+    width: 100%;
+}
+
+.card-border {
+    width: 400px;
+}
+
+.group{
+    justify-content: center;
+}
