@@ -15,8 +15,12 @@ export class DataService {
     return this.http.get<Response>(this.baseUrl + 'posts');
   }
 
-  getPostsByTitle(TitleSearch:String){
+  getPostsByTitle(TitleSearch: String){
     return this.http.get<Response>(this.baseUrl + 'postsByTitle/'+TitleSearch);
+  }
+
+  addUser(request: any) : Observable<ArrayBuffer> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + 'user', request);
   }
 
 }
