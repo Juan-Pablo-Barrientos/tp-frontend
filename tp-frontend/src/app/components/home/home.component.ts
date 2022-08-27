@@ -8,23 +8,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  posts : any;
-  constructor(private dataService: DataService, private route:ActivatedRoute) {}
-  titleSearch:String="";
+  posts: any;
+  constructor(private dataService: DataService, private route: ActivatedRoute) { }
+  titleSearch: any = "";
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params =>{
-      this.titleSearch=params["searchbar"]
+    this.route.queryParams.subscribe(params => {
+      this.titleSearch = params["searchbar"]
     })
-
-    if (this.titleSearch!=="" && this.titleSearch!=null) {
-      this.dataService.getPostsByTitle(this.titleSearch).subscribe((response:any)=>{
-        this.posts = response.data;
-      })
-    }else{
-      this.dataService.getPosts().subscribe((response : any) => {
+    this.dataService.getPosts(this.titleSearch ??= "").subscribe((response: any) => {
       this.posts = response.data;
-    });}
+    });
   }
-
 }

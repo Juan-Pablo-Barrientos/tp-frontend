@@ -11,13 +11,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UsersComponent } from './components/users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
+import { PostAuthorComponent } from './components/post-author/post-author.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UsersComponent,
-    RegisterComponent
+    RegisterComponent,
+    PostAuthorComponent
   ],
   imports: [
     BrowserModule,
