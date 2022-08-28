@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,6 +14,11 @@ export class DataService {
   getPosts(title: string): Observable<Response> {
     let params = new HttpParams().set('title', title);
     return this.http.get<Response>(this.baseUrl + 'posts', { params: params });
+  }
+
+  userExists(username: string): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'user/userExist/'+username)
+
   }
 
   addUser(request: any): Observable<ArrayBuffer> {
