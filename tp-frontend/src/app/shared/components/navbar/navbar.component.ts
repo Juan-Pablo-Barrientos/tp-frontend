@@ -17,14 +17,12 @@ export class NavbarComponent implements OnInit {
       this.dataService.posts = response.data;
     });
   }
-  cambioInput() {
+  inputChange() {
     if (this.title.length === 0) {
       this.search();
     }
   }
-  buscoAlgo(): boolean {
-    return this.title != "";
-  }
+
 
 }
 
