@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/services/data.service';
 import { FormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,10 +8,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private dataService: DataService) {}
+  title: string = "";
+  constructor(private dataService: DataService) { }
   ngOnInit(): void {
   }
-
+  search() {
+    this.dataService.getPosts(this.title).subscribe((response: any) => {
+      this.dataService.posts = response.data;
+    });
+  }
+  cambioInput() {
+    if (this.title.length === 0) {
+      this.search();
+    }
+  }
+  buscoAlgo(): boolean {
+    return this.title != "";
+  }
 
 }
 

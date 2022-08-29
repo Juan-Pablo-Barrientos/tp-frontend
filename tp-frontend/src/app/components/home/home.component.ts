@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   posts: any;
-  constructor(private dataService: DataService, private route: ActivatedRoute) { }
+  constructor(public dataService: DataService, private route: ActivatedRoute) { }
   titleSearch: any = "";
 
   ngOnInit(): void {
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
       this.titleSearch = params["searchbar"]
     })
     this.dataService.getPosts(this.titleSearch ??= "").subscribe((response: any) => {
-      this.posts = response.data;
+      this.dataService.posts = response.data;
     });
   }
 }

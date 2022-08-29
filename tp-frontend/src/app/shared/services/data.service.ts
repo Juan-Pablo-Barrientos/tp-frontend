@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
   private baseUrl = environment.apiUrl;
-
+  posts: any = [];
   constructor(private http: HttpClient) { }
 
   getPosts(title: string): Observable<Response> {
@@ -21,6 +21,6 @@ export class DataService {
   }
 
   getPostsByIdWithAuthor(idPost: number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + 'posts/withAuthor/'+idPost);
+    return this.http.get<Response>(this.baseUrl + 'posts/withAuthor/' + idPost);
   }
 }

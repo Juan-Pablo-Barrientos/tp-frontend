@@ -22,14 +22,14 @@ import { PostAuthorComponent } from './components/post-author/post-author.compon
     PostAuthorComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
     SharedModule,
     FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
