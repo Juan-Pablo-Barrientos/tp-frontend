@@ -12,6 +12,7 @@ import { UsersComponent } from './components/users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { PostAuthorComponent } from './components/post-author/post-author.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PostAuthorComponent } from './components/post-author/post-author.compon
     HomeComponent,
     UsersComponent,
     RegisterComponent,
-    PostAuthorComponent
+    PostAuthorComponent,
+    UserListComponent
   ],
   imports: [
     FormsModule,
