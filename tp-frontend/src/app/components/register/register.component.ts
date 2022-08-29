@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { map, subscribeOn } from 'rxjs/operators';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -7,22 +9,27 @@ import { DataService } from 'src/app/shared/services/data.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+  signUpForm: any;
+  usernameControl:any;
 
-  //TO DO: ASYNC VALIDATOR
-  signUpForm = new FormGroup({
-    usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)], asyncValidators: this.validateUser(), updateOn: 'blur'}),
+  ngOnInit(): void {
+
+  this.signUpForm = new FormGroup({
+    usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)], asyncValidators: this.validateUser.bind(this), updateOn: 'blur'}),
     nameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     passwordControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    passwordConfirmControl:new FormControl('',[Validators.required,Validators.maxLength(20)]),
+    passwordConfirmControl:new FormControl('',[Validators.maxLength(20),Validators.required]),
     emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    subscribeControl:new FormControl(false)
-  })
+    subscribeControl:new FormControl(false),
+  },{validators: [this.checkPasswords]})
+
+  this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
+  }
 
   constructor(private dataService : DataService) {
-    this.signUpForm.valueChanges.subscribe(value => console.log(value))
   }
 
   onSubmit() {
@@ -41,16 +48,26 @@ export class RegisterComponent {
       console.log(response);
     });
   }
-
-  validateUser() {
-    return null;
-  }
-
-  userExists() {
-
-  }
   reset() {
     this.signUpForm.reset();
   }
+
+  checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
+    let pass = group.get('passwordControl')?.value;
+    let confirmPass = group.get('passwordConfirmControl')?.value
+    return pass === confirmPass ? null : { 'notSame': true }
+  }
+
+  validateUser(control: AbstractControl) {
+    return this.dataService.userExists(control.value).pipe(
+        map((res:any) => {console.log(res);
+            return res.exist ? { 'usernameExists': true }:null ;
+        })
+    );
+  }
+
+  getUserNameControl() {
+    return this.signUpForm.controls['usernameControl'];
+}
 
 }
