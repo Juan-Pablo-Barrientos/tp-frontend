@@ -13,20 +13,20 @@ export class RegisterComponent implements OnInit {
   signUpForm: any;
   usernameControl:any;
 
-  ngOnInit(): void {
+    ngOnInit(): void {
 
-  this.signUpForm = new FormGroup({
-    usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)], asyncValidators: this.validateUser.bind(this), updateOn: 'blur'}),
-    nameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    passwordControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    passwordConfirmControl:new FormControl('',[Validators.maxLength(20),Validators.required]),
-    emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
-    phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    subscribeControl:new FormControl(false),
-  },{validators: [this.checkPasswords]})
+    this.signUpForm = new FormGroup({
+      usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)], asyncValidators: this.validateUser.bind(this), updateOn: 'blur'}),
+      nameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+      surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+      passwordControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+      passwordConfirmControl:new FormControl('',[Validators.maxLength(20),Validators.required]),
+      emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
+      phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+      subscribeControl:new FormControl(false),
+    },{validators: [this.checkPasswords]})
 
-  this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
+    this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
   }
 
   constructor(private dataService : DataService) {
