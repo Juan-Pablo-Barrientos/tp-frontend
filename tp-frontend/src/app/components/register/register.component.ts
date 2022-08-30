@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   signUpForm: any;
   usernameControl:any;
 
-    ngOnInit(): void {
+  ngOnInit(): void {
 
     this.signUpForm = new FormGroup({
       usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)], asyncValidators: this.validateUser.bind(this), updateOn: 'blur'}),
