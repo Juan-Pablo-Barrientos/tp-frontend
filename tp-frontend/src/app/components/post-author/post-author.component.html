@@ -1,19 +1,23 @@
-<div class="blog-post">
-    <div class="blog-post-img">
-        <img src="../../../assets/NJ4HQ35BTZEVTOLYTYJIJIWRPM.webp" alt="">
+<div class="row my-3 px-3 py-4 shadow-lg rounded-3">
+  <div class="col-6">
+    <img class="rounded" src="../../../assets/NJ4HQ35BTZEVTOLYTYJIJIWRPM.webp" alt="">
+  </div>
+  <div class="col-6 d-flex flex-column justify-content-between">
+    <div class="row">
+      <h1>{{postAuthor.title}}</h1>
+      <div class="mb-5">
+        <h6 class="d-inline">Author: </h6>
+        <p class="d-inline">{{postAuthor.user.name+" "+postAuthor.user.surname}}</p>
+      </div>
+      <p>{{postAuthor.body}}</p>
     </div>
-    <div class="blog-post-info">
-        <div class="blog-post-date">
-            <span>Sunday</span>
-            <br>
-            <span>October 25 2022</span>
-        </div>
-        <h1 class="blog-post-title">{{postAuthor.title}}</h1>
-        <p class="blog-post-text">{{postAuthor.body}}} Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptate culpa, expedita voluptas autem sunt maiores quam dolore dolorem accusamus ex facilis, sed nesciunt
-            voluptatum amet ipsa rerum et molestiae vero!</p>
-        <h1 class="blog-post-title">Author:</h1>
-        <p class="blog-post-text">{{postAuthor.user.name+" "+postAuthor.user.surname}}}</p>
-        <a href="#" [routerLink]="'/'">Go back to the home page</a>
+    <div class="row">
+      <div class="col-9">
+        <button routerLink="/" class="btn btn-primary w-100">Go back</button>
+      </div>
+      <div class="col-3">
+        <button (click)="onClickDeleteButton()" class="btn btn-danger w-100">Delete</button>
+      </div>
     </div>
+  </div>
 </div>

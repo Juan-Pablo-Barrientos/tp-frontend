@@ -10,14 +10,19 @@ import { DataService } from 'src/app/shared/services/data.service';
 export class PostAuthorComponent implements OnInit {
 
   postAuthor: any;
-
-  constructor(private dataService: DataService, private route: ActivatedRoute) { }
+  idPost : string;
+  constructor(private dataService: DataService, private route: ActivatedRoute) {
+    this.idPost = this.route.snapshot.paramMap.get("id")!;
+  }
 
   ngOnInit(): void {
-    let idPost = +this.route.snapshot.paramMap.get("id")!;
-    this.dataService.getPostsByIdWithAuthor(idPost).subscribe((response: any) => {
+    this.dataService.getPostsByIdWithAuthor(parseInt(this.idPost)).subscribe((response: any) => {
       this.postAuthor = response.data;
       console.log(this.postAuthor);
     });
+  }
+
+  onClickDeleteButton(){
+    this.dataService.deletePost(this.idPost).subscribe();
   }
 }
