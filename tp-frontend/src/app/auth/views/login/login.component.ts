@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Iniciado sesión con Éxito', 'Éxito',{positionClass:'toast-bottom-right'})
         this.router.navigate(['/home']);
       }else{
-        this.toastr.error('No se ha encontrado ese usuario y/o contraseña', '🥺',{positionClass:'toast-bottom-full-width'})}
+        this.toastr.error('No se ha encontrado ese usuario y/o contraseña', '🥺',{positionClass:'toast-bottom-right'})}
       });
   }
 
