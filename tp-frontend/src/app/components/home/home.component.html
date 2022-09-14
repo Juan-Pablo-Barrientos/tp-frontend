@@ -1,17 +1,5 @@
-<div *ngFor="let post of dataService.posts">
-  <div class="blog-post">
-    <div class="blog-post-img">
-      <img src="../../../assets/NJ4HQ35BTZEVTOLYTYJIJIWRPM.webp" alt="">
-    </div>
-    <div class="blog-post-info">
-      <div class="blog-post-date">
-        <span>Sunday</span>
-        <br>
-        <span>October 25 2022</span>
-      </div>
-      <h1 class="blog-post-title">{{post.title}}</h1>
-      <p class="blog-post-text">{{post.body}}}</p>
-      <a [routerLink]="['/PostAuthor', post.id]" class="blog-post-cta">Read More</a>
-    </div>
+<div class="container mt-3">
+  <div class="row">
+    <app-card class="col-12 col-sm-6 mb-4" *ngFor="let post of dataService.posts" [post]="post"></app-card>
   </div>
 </div>
