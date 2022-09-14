@@ -6,19 +6,19 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a [routerLink]="'/'" [routerLinkActive]="['text-white', 'active']" [routerLinkActiveOptions]="{exact: true}"class="nav-link">
+        <a [routerLink]="'/'" [routerLinkActive]="['text-white', 'active']" [routerLinkActiveOptions]="{exact: true}"class="nav-link text-white sidebarText">
           <svg class="bi me-2" width="16" height="16"></svg>
           Home
         </a>
       </li>
       <li>
-        <a [routerLink]="'/users'" [routerLinkActive]="['text-white', 'active']" class="nav-link">
+        <a [routerLink]="'/users'" [routerLinkActive]="['text-white', 'active']" class="nav-link text-white sidebarText">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
           Users
         </a>
       </li>
       <li>
-        <a *ngIf="this.authService.getUserRole()==='Author' && this.authService.isLoggedIn()" [routerLink]="'/redactPost'" class="nav-link text-white">
+        <a *ngIf="this.authService.getUserRole()==='Author' && this.authService.isLoggedIn()" [routerLinkActive]="['text-white', 'active']" [routerLink]="'/redactPost'" class="nav-link sidebarText">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
           Redactar noticia
         </a>
