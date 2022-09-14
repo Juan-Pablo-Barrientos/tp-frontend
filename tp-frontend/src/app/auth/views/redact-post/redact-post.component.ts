@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/services/data.service';
 import { AuthService } from '../../service/auth.service';
@@ -15,11 +16,7 @@ export class RedactPostComponent implements OnInit {
   categories: any;
   provinces: any;
 
-  constructor(private dataService:DataService, private authService:AuthService, private toastr:ToastrService) { }
-
-  get getCreatePostForm(){
-    return this.createPostForm.controls;
-  }
+  constructor(private dataService:DataService, private authService:AuthService, private toastr:ToastrService, private router:Router) { }
 
 
   ngOnInit(): void {
@@ -71,23 +68,25 @@ export class RedactPostComponent implements OnInit {
 
   onSubmit(){
     const formData = new FormData()
-    formData.append('myImage',this.getCreatePostForm.get('fileSource').value);
-    formData.append('title',this.getCreatePostForm.controls['titleControl'].value);
-    formData.append('body',this.getCreatePostForm.controls['bodyControl'].value );
+    formData.append('myImage',this.createPostForm.get('fileSource').value);
+    formData.append('title',this.createPostForm.controls['titleControl'].value);
+    formData.append('body',this.createPostForm.controls['bodyControl'].value );
     formData.append('userId',this.authService.getUserId());
-    formData.append('categoryId',this.getCreatePostForm.controls['provinceControl'].value );
-    formData.append('provinceId',this.getCreatePostForm.controls['genreControl'].value );
+    formData.append('categoryId',this.createPostForm.controls['categoryControl'].value );
+    formData.append('provinceId',this.createPostForm.controls['provinceControl'].value );
     formData.append('requiresSubscription',"0");
 
     this.dataService.addPost(formData).subscribe({
       next : (res:any)=>{
-        this.toastr.success('Se ha añadido la película', 'Éxito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha añadido la noticia', 'Éxito',{positionClass:'toast-bottom-right'});
+        console.log(res)
+        this.router.navigate(['/PostAuthor', res.body.id])
       },
       error: (error: HttpErrorResponse) => {
-      if (error.status==201){
-        this.toastr.success('Se ha añadido la película', 'Éxito',{positionClass:'toast-bottom-right'});
+      if (error.status==200){
+        this.toastr.success('Se ha añadido la noticia', 'Éxito',{positionClass:'toast-bottom-right'});
       }else {
-        this.toastr.error('Error al crear la película' , '🥺' , {positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al crear la noticia' , '🥺' , {positionClass:'toast-bottom-right'});
       }}
      });
   }
