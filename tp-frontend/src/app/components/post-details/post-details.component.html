@@ -15,7 +15,7 @@
       <div class="col-9">
         <button routerLink="/" class="btn btn-primary w-100">Go back</button>
       </div>
-      <div class="col-3">
+      <div *ngIf="this.authService.getUserRole()==='Author' && this.authService.isLoggedIn()" class="col-3 ">
         <button (click)="onClickDeleteButton()" class="btn btn-danger w-100">Delete</button>
       </div>
     </div>

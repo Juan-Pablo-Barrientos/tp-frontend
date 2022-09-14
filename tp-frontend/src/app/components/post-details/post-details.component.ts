@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/service/auth.service';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class PostDetailsComponent implements OnInit {
 
   postDetails: any;
   idPost : string;
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, public authService:AuthService) {
     this.idPost = this.route.snapshot.paramMap.get("id")!;
   }
 

@@ -54,6 +54,12 @@ export class AuthService {
     return role
   }
 
+  getUserId():string{
+    let id_user
+    (this.getJwtToken()) ? id_user = this.getDecodedAccessToken(this.getJwtToken()!).id_user : id_user=null
+    return id_user
+  }
+
   logout() {
     this.doLogoutUser();
     if (this.router.url!== '/login') {this.router.navigate(['/home']);}

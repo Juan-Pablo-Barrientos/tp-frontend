@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,12 @@ export class DataService {
   getPosts(title: string): Observable<Response> {
     let params = new HttpParams().set('title', title);
     return this.http.get<Response>(this.baseUrl + 'posts', { params: params });
+  }
+  getProvinces(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'provinces');
+  }
+  getCategories(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'categories');
   }
 
   deletePost(id: string) : Observable<Response> {
@@ -33,4 +39,9 @@ export class DataService {
   getPostsByIdWithAuthor(idPost: number): Observable<Response> {
     return this.http.get<Response>(this.baseUrl +'posts/'+ idPost + '/autor');
   }
+
+  addPost(request: any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/posts/', request,{ observe: 'response' });
+  }
+
 }
