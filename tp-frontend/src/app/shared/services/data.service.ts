@@ -16,6 +16,11 @@ export class DataService {
     return this.http.get<Response>(this.baseUrl + 'posts', { params: params });
   }
 
+  deletePost(id: string) : Observable<Response> {
+    let params = new HttpParams().set('id', id);
+    return this.http.delete<Response>(this.baseUrl + 'posts/' + id, { params: params });
+  }
+
   userExists(username: string): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'user/userExist/' + username)
 
