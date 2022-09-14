@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
     )
     .subscribe(success => {
       if (this.authService.isLoggedIn()) {
-        this.toastr.success('Iniciado sesión con Éxito', 'Éxito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Sesión iniciada.','¡Éxito! 🥳',{positionClass:'toast-bottom-right'})
         this.router.navigate(['/home']);
       }else{
-        this.toastr.error('No se ha encontrado ese usuario y/o contraseña', '🥺',{positionClass:'toast-bottom-right'})}
+        this.toastr.error('Usuario y/o contraseña incorrectos.', 'Error 🥺' ,{positionClass:'toast-bottom-right'})}
       });
   }
 
