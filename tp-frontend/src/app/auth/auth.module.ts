@@ -5,12 +5,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RedactPostComponent } from './views/redact-post/redact-post.component';
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RedactPostComponent
   ],
   providers:[
     AuthGuard

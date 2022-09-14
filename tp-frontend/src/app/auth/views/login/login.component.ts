@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       }else{
         this.toastr.error('No se ha encontrado ese usuario y/o contraseña', '🥺',{positionClass:'toast-bottom-full-width'})}
-    });
+      });
   }
 
 

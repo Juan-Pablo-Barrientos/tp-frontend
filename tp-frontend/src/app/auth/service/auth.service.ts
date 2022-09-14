@@ -48,9 +48,15 @@ export class AuthService {
     }
   }
 
+  getUserRole():string{
+    let role
+    (this.getJwtToken()) ? role = this.getDecodedAccessToken(this.getJwtToken()!).role : role=null
+    return role
+  }
+
   logout() {
     this.doLogoutUser();
-    this.router.navigate(['/home']);
+    if (this.router.url!== '/login') {this.router.navigate(['/home']);}
   }
 
   isLoggedIn() {
