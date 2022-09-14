@@ -27,13 +27,17 @@ export class DataService {
     return this.http.delete<Response>(this.baseUrl + 'posts/' + id, { params: params });
   }
 
-  userExists(username: string): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + 'user/userExist/' + username)
 
+  userExists(request:any): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'users/'+request.username+'/exists')
+  }
+
+  emailExists(request:any): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'users/'+request.email+'/existemail')
   }
 
   addUser(request: any): Observable<ArrayBuffer> {
-    return this.http.put<ArrayBuffer>(this.baseUrl + 'user', request);
+    return this.http.post<ArrayBuffer>(this.baseUrl + 'users', request);
   }
 
   getPostsByIdWithAuthor(idPost: number): Observable<Response> {
@@ -41,7 +45,7 @@ export class DataService {
   }
 
   addPost(request: any): Observable<HttpResponse<ArrayBuffer>> {
-    return this.http.post<ArrayBuffer>(this.baseUrl + '/posts/', request,{ observe: 'response' });
+    return this.http.post<ArrayBuffer>(this.baseUrl + 'posts/', request,{ observe: 'response' });
   }
 
 }

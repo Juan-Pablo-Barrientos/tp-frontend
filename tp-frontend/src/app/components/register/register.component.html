@@ -8,19 +8,11 @@
         <div class="form-group">
           <label class="form-label fw-bold" for="username">Nombre de usuario</label>
           <input type="text" class="form-control" formControlName="usernameControl" name="username" id="username"
-            placeholder="Nombre de usuario">
+            placeholder="Nombre de usuario" (blur)="onUsernameBlur($event)">
         </div>
-        <!-- <div *ngIf="getUserNameControl().errors?.['required']&& getUserNameControl().dirty">
-            El campo nombre de usuario es requerido.
-        </div>
-        <div *ngIf="getUserNameControl().errors?.['minlength']&& getUserNameControl().dirty">
-            El nombre de usuario debe tener al menos 8 caracteres
-        </div> -->
-        <div *ngIf="getUserNameControl().value!==''">
-          <div *ngIf="getUserNameControl().invalid && getUserNameControl().dirty">
-            <p class="text-danger">Usuario ya existe</p>
+          <div class="mb-2" *ngIf="getFormControl().controls['usernameControl'].errors?.['usernameExist']&& getFormControl().controls['usernameControl'].touched">
+              Este nombre de usuario ya existe
           </div>
-        </div>
         <div class="form-group">
           <label class="form-label fw-bold" for="name">Nombre</label>
           <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre"
@@ -45,9 +37,12 @@
           <p class="text-danger">Contraseñas no coinciden</p>
         </div>
         <div class="form-group">
-          <label class="form-label fw-bold" for="email">Email</label>
+          <label class="form-label fw-bold" for="email" >Email</label>
           <input type="text" formControlName="emailControl" name="email" id="email" type="email" placeholder="Email"
-            class="form-control" />
+            class="form-control"(blur)="onEmailBlur($event)" />
+        </div>
+        <div class="mb-2" *ngIf="getFormControl().controls['emailControl'].errors?.['emailExist']&& getFormControl().controls['emailControl'].touched">
+            Este email ya existe
         </div>
         <div class="form-group">
           <label class="form-label fw-bold" for="phone">Telefono</label>
@@ -63,7 +58,7 @@
         </div>
         <div class="d-flex flex-row justify-content-end">
           <button (click)="reset()" class="btn btn-secondary m-2">Limpiar campos</button>
-          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+          <button type="submit" class="btn btn-primary float-end m-2">Enviar</button>
         </div>
       </form>
     </div>

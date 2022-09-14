@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, subscribeOn } from 'rxjs/operators';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -12,11 +14,12 @@ import { DataService } from 'src/app/shared/services/data.service';
 export class RegisterComponent implements OnInit {
   signUpForm: any;
   usernameControl:any;
+  errors: any[]=[];
 
   ngOnInit(): void {
 
     this.signUpForm = new FormGroup({
-      usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)], asyncValidators: this.validateUser.bind(this), updateOn: 'blur'}),
+      usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(50)]}),
       nameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
       surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
       passwordControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
@@ -29,7 +32,7 @@ export class RegisterComponent implements OnInit {
     this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
   }
 
-  constructor(private dataService : DataService) {
+  constructor(private dataService : DataService, private toastr:ToastrService, private router:Router) {
   }
 
   onSubmit() {
@@ -43,10 +46,22 @@ export class RegisterComponent implements OnInit {
       phoneNumber : this.signUpForm.controls.phoneControl.value,
       subscribedUntil : this.signUpForm.controls.subscribeControl.value,
     }
-
-    this.dataService.addUser(request).subscribe(response => {
-      console.log(response);
-    });
+    this.getFormValidationErrors()
+    console.log(this.errors)
+    if (this.errors.length!==0){
+      console.log(this.errors)
+      this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
+      this.signUpForm.markAllAsTouched();
+  }else{
+  this.dataService.addUser(request).subscribe(async (res:any) => {
+    console.log(res)
+    if (!res.error){
+      this.toastr.success('El registro fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
+      this.router.navigate(['/login']);
+    }else{
+      this.toastr.error('Fallo el registro', '🥺',{positionClass:'toast-bottom-right'});
+    }
+  })};
   }
   reset() {
     this.signUpForm.reset();
@@ -66,8 +81,56 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  onUsernameBlur(event:any){
+    let request={username:event.target.value}
+    const usernameField = this.signUpForm.controls['usernameControl'];
+    this.dataService.userExists(request).subscribe((res:any) => {
+            if(res.exist) {
+              usernameField.setErrors({'usernameExist': true});
+              usernameField.markAsDirty();
+          } else {
+            usernameField.clearValidators();
+            usernameField.markAsPristine();
+          }
+        }
+    );
+  }
+
+
+  getFormControl() {
+    return this.signUpForm;
+  }
+
+  onEmailBlur(event:any){
+    let request={email:event.target.value}
+    const emailField = this.signUpForm.controls['emailControl'];
+    this.dataService.emailExists(request).subscribe((res:any) => {
+            if(res.exist) {
+              emailField.setErrors({'emailExist': true});
+              emailField.markAsDirty();
+          } else {
+            emailField.clearValidators();
+            emailField.markAsPristine();
+          }
+        }
+    );
+  }
+
   getUserNameControl() {
     return this.signUpForm.controls['usernameControl'];
 }
+
+getFormValidationErrors() {
+  this.errors=[]
+  Object.keys(this.signUpForm.controls).forEach(key => {
+    const controlErrors: ValidationErrors = this.signUpForm.get(key).errors;
+    if (controlErrors != null) {
+      Object.keys(controlErrors).forEach(keyError => {
+       this.errors.push(keyError);
+      });
+    }
+  });
+}
+
 
 }
