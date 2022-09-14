@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/services/data.service';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/auth/service/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 export class NavbarComponent implements OnInit {
 
   title: string = "";
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, public authService:AuthService) { }
   ngOnInit(): void {
   }
   search() {
@@ -23,6 +24,9 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  logOut(){
+    this.authService.logout();
+  }
 
 }
 

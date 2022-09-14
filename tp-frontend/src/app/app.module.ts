@@ -14,6 +14,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { CardComponent } from './components/card/card.component';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthModule } from './auth/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,12 +34,16 @@ import { CardComponent } from './components/card/card.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule,
     SharedModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    AuthModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
