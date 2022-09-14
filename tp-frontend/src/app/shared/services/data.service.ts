@@ -17,7 +17,7 @@ export class DataService {
   }
 
   userExists(username: string): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + 'user/userExist/'+username)
+    return this.http.get<Response>(this.baseUrl + 'user/userExist/' + username)
 
   }
 
@@ -26,6 +26,6 @@ export class DataService {
   }
 
   getPostsByIdWithAuthor(idPost: number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + 'posts/withAuthor/' + idPost);
+    return this.http.get<Response>(this.baseUrl +'posts/'+ idPost + '/autor');
   }
 }
