@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
-  selector: 'app-post-author',
-  templateUrl: './post-author.component.html',
-  styleUrls: ['./post-author.component.scss']
+  selector: 'app-post-details',
+  templateUrl: './post-details.component.html',
+  styleUrls: ['./post-details.component.scss']
 })
-export class PostAuthorComponent implements OnInit {
+export class PostDetailsComponent implements OnInit {
 
-  postAuthor: any;
+  postDetails: any;
   idPost : string;
   constructor(private dataService: DataService, private route: ActivatedRoute) {
     this.idPost = this.route.snapshot.paramMap.get("id")!;
@@ -17,8 +17,8 @@ export class PostAuthorComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getPostsByIdWithAuthor(parseInt(this.idPost)).subscribe((response: any) => {
-      this.postAuthor = response.data;
-      console.log(this.postAuthor);
+      this.postDetails = response.data;
+      console.log(this.postDetails);
     });
   }
 

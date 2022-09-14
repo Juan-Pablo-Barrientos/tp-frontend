@@ -11,7 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UsersComponent } from './components/users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
-import { PostAuthorComponent } from './components/post-author/post-author.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { CardComponent } from './components/card/card.component';
 
@@ -21,7 +21,7 @@ import { CardComponent } from './components/card/card.component';
     HomeComponent,
     UsersComponent,
     RegisterComponent,
-    PostAuthorComponent,
+    PostDetailsComponent,
     UserListComponent,
     CardComponent
   ],

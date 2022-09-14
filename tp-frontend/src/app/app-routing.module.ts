@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { faCity } from '@fortawesome/free-solid-svg-icons';
 import { HomeComponent } from './components/home/home.component';
-import { PostAuthorComponent } from './components/post-author/post-author.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UsersComponent } from './components/users/users.component';
 
@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'PostAuthor/:id',
-    component: PostAuthorComponent
+    component: PostDetailsComponent
   },
   {
     path: '**',
