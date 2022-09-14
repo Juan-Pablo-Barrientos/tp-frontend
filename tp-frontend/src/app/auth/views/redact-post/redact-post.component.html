@@ -1,40 +1,71 @@
-<div class="container pt-2">
-  <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <div class="form-floating mb-2">
-      <input type="text" formControlName="titleControl" name="title" id="title" placeholder="Titulo" class="form-control"/>
-      <label for="name">Titulo</label>
-    </div>
-
-    <div class="form-control mb-2">
-      <label class="me-2 mb-2"for="theaters">Categoria </label>
-      <select class="form-select mb-2" formControlName="categoryControl" name="category" id="category" aria-label="Default select example">
-        <option value='' selected>Seleccione categoria</option>
-        <option *ngFor="let category of categories" [value]="category.id" >{{category.name}}</option>
-      </select>
-    </div>
-
-    <div class="form-control mb-2">
-      <label class="me-2 mb-2"for="category">Provincia </label>
-      <select class="form-select mb-2" formControlName="provinceControl" name="province" id="province" aria-label="Default select example">
-        <option value='' selected>Seleccione provincia</option>
-        <option *ngFor="let province of provinces" [value]="province.id" >{{province.name}}</option>
-      </select>
-    </div>
-
-    <div class="form-floating mb-2">
-      <textarea type="text" formControlName="bodyControl" name="body" id="body" placeholder="Cuerpo de la noticia" class="form-control" style="height: 300px"></textarea>
-      <label for="body">Cuerpo de la noticia</label>
-    </div>
-    <div class="form-group">
-      <label for="file">Imagen</label>
-      <input accept=".jpg,.jpeg,.png" formControlName="file"id="file" name="file"type="file" class="form-control" (change)="onFileChange($event)">
-      <div *ngIf="getCreatePostForm['file'].touched && getCreatePostForm.file.invalid" class="alert alert-danger">
-          <div *ngIf="getCreatePostForm['file'].errors['required']">Archivo requerido</div>
+<div class="container my-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-8 shadow-lg rounded-3 py-4 px-5">
+      <div class="mt-3 mb-4">
+        <h1 class="text-center display-6">Redactar Noticia</h1>
       </div>
+      <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <div class="form-group mb-2">
+          <label for="name" class="form-label fw-bold">Titulo</label>
+          <input type="text" formControlName="titleControl" name="title" id="title" placeholder="Titulo"
+            class="form-control" />
+          <div *ngIf="createPostForm.controls.titleControl.touched && createPostForm.controls.titleControl.invalid"
+            class="mt-2 error-label">
+            <span *ngIf="createPostForm.controls.titleControl.errors.required">Título requerido.</span>
+          </div>
+        </div>
+        <div class="form-group mb-2">
+          <label class="form-label fw-bold" for="theaters">Categoria</label>
+          <select class="form-select mb-2" formControlName="categoryControl" name="category" id="category"
+            aria-label="Default select example">
+            <option value='' selected>Seleccione categoria</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+          <div
+            *ngIf="createPostForm.controls.categoryControl.touched && createPostForm.controls.categoryControl.invalid"
+            class="mt-2 error-label">
+            <span *ngIf="createPostForm.controls.categoryControl.errors.required">Categoría requerida.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-2">
+          <label class="form-label fw-bold" for="category">Provincia</label>
+          <select class="form-select mb-2" formControlName="provinceControl" name="province" id="province"
+            aria-label="Default select example">
+            <option value='' selected>Seleccione provincia</option>
+            <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+          </select>
+          <div
+            *ngIf="createPostForm.controls.provinceControl.touched && createPostForm.controls.provinceControl.invalid"
+            class="mt-2 error-label">
+            <span *ngIf="createPostForm.controls.provinceControl.errors.required">Provincia requerida.</span>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <label class="form-label fw-bold" for="body">Cuerpo de la noticia</label>
+          <textarea type="text" formControlName="bodyControl" name="body" id="body" placeholder="Cuerpo de la noticia"
+            class="form-control" style="height: 300px"></textarea>
+          <div *ngIf="createPostForm.controls.bodyControl.touched && createPostForm.controls.bodyControl.invalid"
+            class="mt-2 error-label">
+            <span *ngIf="createPostForm.controls.bodyControl.errors.required">Cuerpo de la noticia requerido.</span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold" for="file">Imagen</label>
+          <input accept=".jpg,.jpeg,.png" formControlName="file" id="file" name="file" type="file" class="form-control"
+            (change)="onFileChange($event)">
+          <div *ngIf="createPostForm.controls.file.touched && createPostForm.controls.file.invalid"
+            class="mt-2 error-label">
+            <span *ngIf="createPostForm.controls.file.errors.required">Archivo requerido.</span>
+          </div>
+        </div>
+        <div class="d-flex flex-row justify-content-end">
+          <button type="button" (click)="resetAddPost()" class="btn btn-secondary m-2">Limpiar campos</button>
+          <button type="submit" [disabled]="!createPostForm.valid"
+            class="btn btn-primary float-end m-2">Guardar</button>
+        </div>
+      </form>
     </div>
-
-    <button type="button"(click)="resetAddPost()"  class="btn btn-secondary m-2">Limpiar campos</button>
-
-    <button type="submit" [disabled]="!createPostForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
-  </form>
+  </div>
 </div>
