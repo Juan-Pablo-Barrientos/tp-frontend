@@ -52,8 +52,8 @@ export class RegisterComponent implements OnInit {
       console.log(this.errors)
       this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
       this.signUpForm.markAllAsTouched();
-  }else{
-  this.dataService.addUser(request).subscribe(async (res:any) => {
+    }else{
+    this.dataService.addUser(request).subscribe(async (res:any) => {
     console.log(res)
     if (!res.error){
       this.toastr.success('El registro fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
