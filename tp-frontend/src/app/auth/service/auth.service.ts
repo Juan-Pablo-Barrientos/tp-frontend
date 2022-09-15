@@ -20,7 +20,7 @@ export class AuthService {
   constructor(private http: HttpClient ,private router:Router) { }
 
   login(user: { username: string, password: string }): Observable<boolean> {
-    return this.http.post<any>(`${environment.apiUrl}/users/login`, user)
+    return this.http.post<any>(`${environment.apiUrl}users/login`, user)
       .pipe(tap((data)=>this.loggedUser=data.data),
         tap((data)=> !!data.data.jwt ?  this.doLoginUser(user.username, data.data.jwt) :throwError(() => new Error('test'))),
         map(()=>true),
@@ -32,7 +32,7 @@ export class AuthService {
   restoreLoggedUser(){
     if(this.getDecodedAccessToken(this.getJwtToken()!).id_user){
       this.loggedUserId = this.getDecodedAccessToken(this.getJwtToken()!).id_user
-      this.http.get<Response>(`${environment.apiUrl}/users/` + this.loggedUserId).subscribe( (response: any) => {
+      this.http.get<Response>(`${environment.apiUrl}users/` + this.loggedUserId).subscribe( (response: any) => {
         this.loggedUser = response;
       })} else{
       this.logout();
