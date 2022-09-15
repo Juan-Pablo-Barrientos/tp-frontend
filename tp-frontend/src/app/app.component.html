@@ -5,7 +5,7 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="col-12 col-lg-9">
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="refreshMostClicked()"></router-outlet>
     </div>
     <div class="push"></div>
   </div>

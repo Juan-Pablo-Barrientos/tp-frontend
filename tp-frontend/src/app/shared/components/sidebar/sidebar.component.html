@@ -1,9 +1,6 @@
 <div  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100">
   <div *ngIf='this.authService.isLoggedIn() == true'>
-    <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span  class="fs-4">Panel de usuario</span>
-    </a>
+      <h4  class="h4 text-center">Panel de usuario</h4>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
@@ -20,6 +17,20 @@
       </li>
     </ul>
     <hr>
+    <h4 class="h4 text-center">Más popular</h4>
+    <hr>
+    <div *ngFor="let post of this.dataService.mostClickedPosts.slice(0, 5);let i=index">
+
+        <figure class="fit-picture ">
+          <a class="sidebarText"[routerLink]="['/PostAuthor', post.id]">
+            <p class="lead text-center">#{{i+1}} {{post.title}}</p>
+          <img  [src]="post.path_img" alt="Image">
+        </a>
+        </figure>
+      <hr>
+    </div>
+
+
     </div>
   </div>
 

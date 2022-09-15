@@ -9,11 +9,15 @@ import { environment } from 'src/environments/environment';
 export class DataService {
   private baseUrl = environment.apiUrl;
   posts: any = [];
+  mostClickedPosts:any=[]
   constructor(private http: HttpClient) { }
 
   getPosts(title: string): Observable<Response> {
     let params = new HttpParams().set('title', title);
     return this.http.get<Response>(this.baseUrl + 'posts', { params: params });
+  }
+  getMostClickedPosts(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'posts/mostClicked');
   }
   getProvinces(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'provinces');
