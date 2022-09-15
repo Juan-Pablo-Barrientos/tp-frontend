@@ -14,15 +14,20 @@ export class PostDetailsComponent implements OnInit {
 
   postDetails: any;
   idPost : string;
+  routeSubscription: any;
   constructor(private dataService: DataService, private router:Router, private route: ActivatedRoute, public authService:AuthService, private toastr:ToastrService) {
-    this.idPost = this.route.snapshot.paramMap.get("id")!;
+  this.idPost = this.route.snapshot.paramMap.get("id")!;
   }
 
   ngOnInit(): void {
-    this.dataService.getPostsByIdWithAuthor(parseInt(this.idPost)).subscribe((response: any) => {
-      this.postDetails = response.data;
-      console.log(this.postDetails);
-    });
+
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
+      this.idPost = this.route.snapshot.paramMap.get("id")!;
+      this.dataService.getPostsByIdWithAuthor(parseInt(this.idPost)).subscribe((response: any) => {
+        console.log("asd")
+        this.postDetails = response.data;
+      });
+      });
   }
 
   onClickDeleteButton(){
