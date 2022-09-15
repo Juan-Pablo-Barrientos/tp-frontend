@@ -10,7 +10,7 @@
         </a>
       </li>
       <li>
-        <a *ngIf="this.authService.getUserRole()==='Author' && this.authService.isLoggedIn()" [routerLinkActive]="['text-white', 'active']" [routerLink]="'/redactPost'" class="nav-link sidebarText">
+        <a *ngIf="(this.authService.getUserRole()==='Author'||this.authService.getUserRole()==='Admin') && this.authService.isLoggedIn()" [routerLinkActive]="['text-white', 'active']" [routerLink]="'/redactPost'" class="nav-link sidebarText">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
           Redactar noticia
         </a>
