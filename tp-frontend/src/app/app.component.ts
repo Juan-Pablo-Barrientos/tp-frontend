@@ -7,11 +7,18 @@ import { DataService } from './shared/services/data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'tp-frontend';
 
   constructor(private router:Router, private dataService:DataService){}
 
+  ngOnInit(): void {
+    if (this.router.url== '/'||this.router.url== '/home'){
+      this.dataService.getMostClickedPosts().subscribe((response: any) => {
+        this.dataService.mostClickedPosts = response.data;
+      });
+    }
+  }
 
 
   refreshMostClicked(){

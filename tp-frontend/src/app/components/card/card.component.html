@@ -1,9 +1,16 @@
 <div class="card w-100">
   <img [src]="post.path_img" class="card-img-top">
   <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
+    <h4 class="card-title">{{post.title}}</h4>
     <p class="card-text">{{post.body}}
     </p>
-    <button [routerLink]="['/PostAuthor', post.id]" class="btn btn-primary">Read more</button>
+    <div class="row">
+      <div class="col ">
+        <button [routerLink]="['/PostAuthor', post.id]" class="btn btn-primary ">Leer más</button>
+      </div>
+      <div class="col">
+        <h5 class="card-title float-end fst-italic mt-2">{{post.category.name}}</h5>
+      </div>
+    </div>
   </div>
 </div>
