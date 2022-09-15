@@ -34,6 +34,11 @@ export class DataService {
     return this.http.get<Response>(this.baseUrl + 'users/'+request.username+'/exists')
   }
 
+  getMoneyExchange(): Observable<Response>{
+    return this.http.get<Response>('https://api.bluelytics.com.ar/v2/latest')
+
+  }
+
   emailExists(request:any): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'users/'+request.email+'/existemail')
   }

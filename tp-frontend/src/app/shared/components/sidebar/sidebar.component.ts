@@ -8,12 +8,22 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  legalDollar: any;
+  illegalDollar: any;
+  legalEuro: any;
+  illegalEuro: any;
 
   constructor(public authService:AuthService, public dataService:DataService) { }
 
   ngOnInit(): void {
 
-
+    this.dataService.getMoneyExchange().subscribe((res:any)=>{
+      this.legalDollar=res.oficial
+      this.illegalDollar=res.blue
+      this.legalEuro=res.oficial_euro
+      this.illegalEuro=res.blue_euro
+    })
+    }
   }
 
-}
+
