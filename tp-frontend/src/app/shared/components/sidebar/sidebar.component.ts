@@ -12,10 +12,15 @@ export class SidebarComponent implements OnInit {
   illegalDollar: any;
   legalEuro: any;
   illegalEuro: any;
+  mostClickedPosts : any[] = [];
 
   constructor(public authService:AuthService, public dataService:DataService) { }
 
   ngOnInit(): void {
+
+    this.dataService.mostClickedPosts$.subscribe((response) => {
+      this.mostClickedPosts = response.data.slice(0,5);
+    });
 
     this.dataService.getMoneyExchange().subscribe((res:any)=>{
       this.legalDollar=res.oficial

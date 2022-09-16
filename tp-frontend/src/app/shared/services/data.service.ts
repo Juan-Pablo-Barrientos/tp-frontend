@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,8 +9,14 @@ import { environment } from 'src/environments/environment';
 export class DataService {
   private baseUrl = environment.apiUrl;
   posts: any = [];
-  mostClickedPosts:any=[]
+  mostClickedPosts$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   constructor(private http: HttpClient) { }
+
+  reloadMostClickedPosts() {
+    this.getMostClickedPosts().subscribe((response: any) => {
+      this.mostClickedPosts$.next(response);
+    });
+  }
 
   getPosts(title: string): Observable<Response> {
     let params = new HttpParams().set('title', title);

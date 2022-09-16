@@ -21,7 +21,7 @@
   <div>
     <h4 class="h4 text-center">Más popular</h4>
     <hr>
-    <div *ngFor="let post of this.dataService.mostClickedPosts.slice(0, 5);let i=index">
+    <div *ngFor="let post of this.mostClickedPosts;let i=index">
 
           <figure class="fit-picture ">
             <a class="sidebarText"[routerLink]="['/PostAuthor', post.id]">
