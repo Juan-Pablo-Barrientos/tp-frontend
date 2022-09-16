@@ -23,18 +23,18 @@
     <hr>
     <div *ngFor="let post of this.dataService.mostClickedPosts.slice(0, 5);let i=index">
 
-        <figure class="fit-picture ">
-          <a class="sidebarText"[routerLink]="['/PostAuthor', post.id]">
-            <p class="lead text-center">#{{i+1}} {{post.title}}</p>
-          <img  [src]="post.path_img" alt="Image">
-        </a>
-        </figure>
-      <hr>
-    </div>
+          <figure class="fit-picture ">
+            <a class="sidebarText"[routerLink]="['/PostAuthor', post.id]">
+              <p class="lead text-center">#{{i+1}} {{post.title}}</p>
+            <img  [src]="post.path_img" alt="Image">
+          </a>
+          </figure>
+        <hr>
+      </div>
 
 
   </div>
-  <div>
+  <div *ngIf="this.legalDollar && this.illegalDollar && this.legalEuro && this.illegalEuro">
     <h4 class="h4 text-center">Cotizaciones</h4>
     <hr>
     <h4 class="h4 text-center">Dolar</h4>
