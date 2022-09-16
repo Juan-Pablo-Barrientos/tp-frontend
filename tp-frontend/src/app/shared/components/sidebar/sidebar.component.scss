@@ -1,7 +1,23 @@
-.sidebarText{
-  color:white !important
+.sidebarText {
+  color: white !important;
+  text-decoration: none;
 }
 figure {
-  width: 100%; }
-  figure img {
-    width: 100%; }
+  width: 100%;
+}
+figure img {
+  width: 100%;
+}
+
+.post-title {
+  font-size: 18px;
+}
+
+.currency-title {
+  font-size: 18px;
+}
+
+.post-photo:hover {
+  border: solid 3px;
+  border-color: #0d6efd;
+}

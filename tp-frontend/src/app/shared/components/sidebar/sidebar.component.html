@@ -1,17 +1,21 @@
-<div  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100">
   <div *ngIf='this.authService.isLoggedIn() == true'>
-      <h4  class="h4 text-center">Panel de usuario</h4>
+    <h4 class="h4 text-center">Panel de usuario</h4>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a [routerLink]="'/'" [routerLinkActive]="['text-white', 'active']" [routerLinkActiveOptions]="{exact: true}"class="nav-link text-white sidebarText">
+        <a [routerLink]="'/'" [routerLinkActive]="['text-white', 'active']" [routerLinkActiveOptions]="{exact: true}"
+          class="nav-link text-white sidebarText">
           <svg class="bi me-2" width="16" height="16"></svg>
-          Home
+          Inicio
         </a>
       </li>
       <li>
-        <a *ngIf="(this.authService.getUserRole()==='Author'||this.authService.getUserRole()==='Admin') && this.authService.isLoggedIn()" [routerLinkActive]="['text-white', 'active']" [routerLink]="'/redactPost'" class="nav-link sidebarText">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+        <a *ngIf="(this.authService.getUserRole()==='Author'||this.authService.getUserRole()==='Admin') && this.authService.isLoggedIn()"
+          [routerLinkActive]="['text-white', 'active']" [routerLink]="'/redactPost'" class="nav-link sidebarText">
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#speedometer2"></use>
+          </svg>
           Redactar noticia
         </a>
       </li>
@@ -19,50 +23,57 @@
     <hr>
   </div>
   <div>
-    <h4 class="h4 text-center">Más popular</h4>
+    <h5 class="h5 text-center">Más popular 🔥</h5>
     <hr>
     <div *ngFor="let post of this.mostClickedPosts;let i=index">
 
-          <figure class="fit-picture ">
-            <a class="sidebarText"[routerLink]="['/PostAuthor', post.id]">
-              <p class="lead text-center">#{{i+1}} {{post.title}}</p>
-            <img  [src]="post.path_img" alt="Image">
-          </a>
-          </figure>
-        <hr>
-      </div>
+      <figure class="fit-picture ">
+        <a class="sidebarText" [routerLink]="['/PostAuthor', post.id]">
+          <p class="lead post-title text-center">#{{i+1}} - {{post.title}}</p>
+          <img class="post-photo rounded" [src]="post.path_img" alt="Image">
+        </a>
+      </figure>
+      <hr>
+    </div>
 
 
   </div>
   <div *ngIf="this.legalDollar && this.illegalDollar && this.legalEuro && this.illegalEuro">
-    <h4 class="h4 text-center">Cotizaciones</h4>
+    <h5 class="h5 text-center">Cotizaciones</h5>
     <hr>
-    <h4 class="h4 text-center">Dolar</h4>
-    <hr>
-    <h4 class="h4">Promedio del dia ${{legalDollar.value_avg}}</h4>
-    <h4 class="h4">Venta ${{legalDollar.value_sell}}</h4>
-    <h4 class="h4" >Compra ${{legalDollar.value_buy}}</h4>
-    <hr>
-    <h4 class="h4 text-center">Dolar Blue</h4>
-    <hr>
-    <h4 class="h4">Promedio del dia ${{illegalDollar.value_avg}}</h4>
-    <h4 class="h4">Venta ${{illegalDollar.value_sell}}</h4>
-    <h4 class="h4">Compra ${{illegalDollar.value_buy}}</h4>
-    <hr>
-    <h4 class="h4 text-center">Euro</h4>
-    <hr>
-    <h4 class="h4">Promedio del dia ${{legalEuro.value_avg}}</h4>
-    <h4 class="h4">Venta ${{legalEuro.value_sell}}</h4>
-    <h4 class="h4">Compra ${{legalEuro.value_buy}}</h4>
-    <hr>
-    <h4 class="h4 text-center">Euro Blue</h4>
-    <hr>
-    <h4 class="h4">Promedio del dia ${{illegalEuro.value_avg}}</h4>
-    <h4 class="h4">Venta ${{illegalEuro.value_sell}}</h4>
-    <h4 class="h4">Compra ${{illegalEuro.value_buy}}</h4>
+    <div class="ps-1">
+      <h5 class="currency-title text-center">Dólar 💵</h5>
+      <hr class="w-50 mx-auto">
+      <p class="currency-item">Promedio del día: ${{legalDollar.value_avg}}</p>
+      <p class="currency-item">Venta: ${{legalDollar.value_sell}}</p>
+      <p class="currency-item">Compra: ${{legalDollar.value_buy}}</p>
+    </div>
+    <hr class="w-50 mx-auto">
+    <div class="ps-1">
+      <h5 class="currency-title text-center">Dólar Blue 💵</h5>
+      <hr class="w-50 mx-auto">
+      <p class="currency-item">Promedio del día: ${{illegalDollar.value_avg}}</p>
+      <p class="currency-item">Venta: ${{illegalDollar.value_sell}}</p>
+      <p class="currency-item">Compra: ${{illegalDollar.value_buy}}</p>
+    </div>
+    <hr class="w-50 mx-auto">
+    <div class="ps-1">
+      <h5 class="currency-title text-center">Euro 💶</h5>
+      <hr class="w-50 mx-auto">
+      <p class="currency-item">Promedio del día: ${{legalEuro.value_avg}}</p>
+      <p class="currency-item">Venta: ${{legalEuro.value_sell}}</p>
+      <p class="currency-item">Compra: ${{legalEuro.value_buy}}</p>
+    </div>
+    <hr class="w-50 mx-auto">
+    <div class="ps-1">
+      <h5 class="currency-title text-center">Euro Blue 💶</h5>
+      <hr class="w-50 mx-auto">
+      <p class="currency-item">Promedio del día: ${{illegalEuro.value_avg}}</p>
+      <p class="currency-item">Venta: ${{illegalEuro.value_sell}}</p>
+      <p class="currency-item">Compra: ${{illegalEuro.value_buy}}</p>
+    </div>
     <hr>
 
 
   </div>
 </div>
-
