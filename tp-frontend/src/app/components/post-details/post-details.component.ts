@@ -24,7 +24,6 @@ export class PostDetailsComponent implements OnInit {
     this.routeSubscription = this.route.params.subscribe((param: any) => {
       this.idPost = this.route.snapshot.paramMap.get("id")!;
       this.dataService.getPostsByIdWithAuthor(parseInt(this.idPost)).subscribe((response: any) => {
-        console.log("asd")
         this.postDetails = response.data;
       });
       });
@@ -32,7 +31,6 @@ export class PostDetailsComponent implements OnInit {
 
   onClickDeleteButton(){
     this.dataService.deletePost(this.idPost).subscribe(async (res:any) => {
-      console.log(res)
       if (!res.error){
         this.toastr.success('La noticia fue borrada', 'Éxito',{positionClass:'toast-bottom-right'});
         this.router.navigate(['/home']);

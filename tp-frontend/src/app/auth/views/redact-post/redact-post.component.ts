@@ -36,7 +36,6 @@ export class RedactPostComponent implements OnInit {
     })
 
     this.dataService.getProvinces().subscribe((response:any)=>{
-      console.log(response.data)
       this.provinces=response.data;
     })
 
@@ -79,7 +78,6 @@ export class RedactPostComponent implements OnInit {
     this.dataService.addPost(formData).subscribe({
       next : (res:any)=>{
         this.toastr.success('Se ha añadido la noticia', 'Éxito',{positionClass:'toast-bottom-right'});
-        console.log(res)
         this.router.navigate(['/PostAuthor', res.body.id])
       },
       error: (error: HttpErrorResponse) => {
