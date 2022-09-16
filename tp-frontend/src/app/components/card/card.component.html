@@ -8,8 +8,8 @@
       <div class="col ">
         <button [routerLink]="['/PostAuthor', post.id]" class="btn btn-primary ">Leer más</button>
       </div>
-      <div class="col">
-        <h6 class="card-title float-end fst-italic mt-2">{{post.category.name}}</h6>
+      <div class="col d-flex flex-col justify-content-end align-items-end">
+          <span class="d-block badge bg-info text-pill">{{post.category.name}}</span>
       </div>
     </div>
   </div>
