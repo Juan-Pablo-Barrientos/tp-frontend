@@ -19,7 +19,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
 
     this.dataService.mostClickedPosts$.subscribe((response) => {
-      this.mostClickedPosts = response.data.slice(0,5);
+      if (response.data) {
+        this.mostClickedPosts = response.data.slice(0,5);
+      }
     });
 
     this.dataService.getMoneyExchange().subscribe((res:any)=>{

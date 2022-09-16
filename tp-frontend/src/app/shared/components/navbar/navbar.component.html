@@ -11,29 +11,46 @@
           <a class="nav-link" [routerLink]="'/home'" routerLinkActive="text-white" href="#">Inicio</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Iniciar sesión</a>
+          <a class="nav-link" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+            routerLinkActive="text-white">Iniciar sesión</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link" [routerLink]="'/register'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Registrarse</a>
+          <a class="nav-link" [routerLink]="'/register'" data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse.show" routerLinkActive="text-white">Registrarse</a>
         </li>
         <li class="nav-item dropdown" *ngIf='this.authService.isLoggedIn() == true'>
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Usuario
           </a>
-          <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#"  >Perfil</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#"  >Test</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#" (click)="logOut()">Salir</a></li>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+                href="#">Perfil</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+                href="#">Test</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#"
+                (click)="logOut()">Salir</a></li>
+          </ul>
+        </li>
+        <!-- Panel de Usuario -->
+        <li class="nav-item dropdown d-lg-none">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Más populares 🔥
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li *ngFor="let post of this.mostClickedPosts;let i=index">
+              <a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+                [routerLink]="['/PostAuthor', post.id]">#{{i+1}} - {{post.title}}</a>
+            </li>
           </ul>
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" name="searchbar" id="searchbar"
+        <input class="form-control me-2" type="search" placeholder="Buscar noticia" name="searchbar" id="searchbar"
           [(ngModel)]="title" (keyup)="inputChange()">
-        <button (click)="search()" class="btn btn-outline-success" type="submit">Search </button>
+        <button (click)="search()" class="btn btn-success" type="submit">Buscar</button>
       </form>
     </div>
   </div>
 </nav>
-
-
