@@ -1,3 +1,5 @@
+@use '../../../styles.scss' as *;
+
 img{
   width: 100%;
 }
@@ -30,7 +32,7 @@ img{
 }
 
 .text-pill {
-  color: #212529;
+  color: white;
   font-weight: 400;
   font-size: 14px;
 }
