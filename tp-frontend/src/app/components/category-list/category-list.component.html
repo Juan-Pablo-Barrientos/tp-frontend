@@ -1,1 +1,142 @@
-<p>category-list works!</p>
+<div class="container mt-5">
+  <div class="m-2"><h1 class="display-1 text-center">Listado de provincias</h1></div>
+  <hr class="bg-secondary border-2 border-top border-secondary">
+  <div class="text-center">
+    <button type="button" (click)="openCreate(modalCreate)" class="btn-success btn btn-lg mt-2">
+      Nueva provincia
+    </button>
+  </div>
+  <div class="form-floating mt-3">
+    <input type="text" name="nameSearch" id="searchGenre" placeholder="Nombre" (keyup)="searchProvince()" class="form-control"/>
+    <label for="name">Buscar por provincia</label>
+  </div>
+  <table class="table align-middle mb-0 bg-white mt-5" id="genreList">
+    <thead class="bg-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+      <tr *ngFor="let province of provinces">
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{province.name}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+
+          <button type="button" (click)="openShow(modalShow)" class="btn btn-primary btn-sm btn-rounded m-1">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </button>
+          <button type="button" (click)="openEdit(modalEdit, province.id)" class="btn btn-success btn-sm btn-rounded m-1">
+            <fa-icon [icon]="faPencil"></fa-icon>
+          </button>
+          <button type="button" (click)="openDelete(modalDelete)" class="btn btn-danger btn-sm btn-rounded m-1">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+
+        <!--Modal show-->
+
+        <ng-template #modalShow let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalShow">Provincia: {{province.name}}</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body lead">
+              <div class="mb-3">
+                <label for="">Id: {{province.id}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Nombre: {{province.name}}</label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+          </div>
+        </ng-template>
+
+
+
+        <!--Modal delete-->
+
+        <ng-template #modalDelete let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalDelete">Borrar provincia</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body lead">
+            <form>
+              <div class="mb-3">
+                <label for="dateOfBirth">Está seguro de que quiere borrar la provincia {{province.name}}</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="deleteProvince(province.id);modal.close('Confirm click')">Si</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancelar</button>
+          </div>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!--Modal edit-->
+
+  <ng-template #modalEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalEdit">Editar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editProvinceForm" (ngSubmit)="onSubmitEdit()">
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="idControl" name="id" id="id" placeholder="id">
+          <label for="id">Id</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="nameControl" name="name" id="name" placeholder="nombre">
+          <label for="name">Nombre</label>
+        </div>
+          <button type="submit" [disabled]="!editProvinceForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <!--Modal create-->
+
+  <ng-template #modalCreate let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalCreate">Crear provincia</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="createProvinceForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-floating mb-2">
+          <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
+          <label for="name">Nombre</label>
+        </div>
+
+        <button type="button"(click)="resetCreate()"  class="btn btn-secondary m-2">Limpiar campos</button>
+
+        <button type="submit" [disabled]="!createProvinceForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+  </ng-template>
