@@ -17,42 +17,42 @@ export class CategoryListComponent implements OnInit {
   faPencil = faPencil;
   faEye = faEye;
   closeResult = '';
-  provinces:any;
-  editProvinceForm: any;
-  createProvinceForm:any
+  categories:any;
+  editCategoryForm: any;
+  createCategoryForm:any
 
   constructor(private modalService: NgbModal, private dataService: DataService, private router:Router, private toastr:ToastrService) { }
 
 
  ngOnInit(): void {
 
-   this.dataService.getProvinces().subscribe((response:any)=>{
-     this.provinces=response.data;
+   this.dataService.getCategories().subscribe((response:any)=>{
+     this.categories=response.data;
    })
 
 
-   this.createProvinceForm=new FormGroup({
+   this.createCategoryForm=new FormGroup({
      nameControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
    });
  }
 
  onSubmit(){
    let request = {
-     name : this.createProvinceForm.controls.nameControl.value,
+     name : this.createCategoryForm.controls.nameControl.value,
    }
-   this.dataService.addProvince(request).subscribe({
+   this.dataService.addCategory(request).subscribe({
      next : (res:any)=>{
-       this.toastr.success('Se ha creado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha creado la categoría', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.provinces.unshift(res.data);
+       this.categories.unshift(res.data);
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==201){
-       this.toastr.success('Se ha creado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha creado la categoría', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshCategoryList();
      }else {
-       this.toastr.error('Fallo el crear de la provincia', '🥺',{positionClass:'toast-bottom-right'})
+       this.toastr.error('Fallo el crear de la categoría', '🥺',{positionClass:'toast-bottom-right'})
      }}
     });
  }
@@ -63,27 +63,27 @@ export class CategoryListComponent implements OnInit {
  }
 
  resetCreate() {
-   this.createProvinceForm.reset();
+   this.createCategoryForm.reset();
  }
 
  onSubmitEdit() {
    let request = {
-     id : this.editProvinceForm.controls.idControl.value,
-     name : this.editProvinceForm.controls.nameControl.value,
+     id : this.editCategoryForm.controls.idControl.value,
+     name : this.editCategoryForm.controls.nameControl.value,
    }
-   this.dataService.editProvinces(request,this.editProvinceForm.controls.idControl.value).subscribe({
+   this.dataService.editCategory(request,this.editCategoryForm.controls.idControl.value).subscribe({
      next : ()=>{
-       this.toastr.success('Se ha editado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha editado la categoría', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshCategoryList();
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==200){
-       this.toastr.success('Se ha editado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha editado la categoría', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshCategoryList();
      }else {
-       this.toastr.error('Error al editar la provincia', '🥺',{positionClass:'toast-bottom-right'})
+       this.toastr.error('Error al editar la categoría', '🥺',{positionClass:'toast-bottom-right'})
      }}
     })
  }
@@ -92,11 +92,11 @@ openShow(content: any) {
    this.modalService.open(content, {ariaLabelledBy: 'modalShow'}).result
  }
 
-openEdit(content: any, idProvince:number) {
-   const province = this.provinces.find((province: { id: number; }) =>province.id===idProvince)
-   this.editProvinceForm = new FormGroup({
-     idControl:new FormControl({value:province.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
-     nameControl:new FormControl(province.name,{validators: [Validators.required,Validators.maxLength(50)]}),
+openEdit(content: any, idCategory:number) {
+   const category = this.categories.find((category: { id: number; }) =>category.id===idCategory)
+   this.editCategoryForm = new FormGroup({
+     idControl:new FormControl({value:category.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
+     nameControl:new FormControl(category.name,{validators: [Validators.required,Validators.maxLength(50)]}),
    })
    this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
  }
@@ -105,31 +105,31 @@ openDelete(content: any) {
    this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
  }
 
-deleteProvince(idProvince:any){
-   this.dataService.delProvinces(idProvince).subscribe({
+deleteCategory(idCategory:any){
+   this.dataService.delCategory(idCategory).subscribe({
      next : ()=>{
-       this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha borrado la categoria', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshCategoryList();
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==200){
-       this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha borrado la categoria', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshCategoryList();
      }else {
-      this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
+      this.toastr.success('Se ha borrado la categoria', 'Éxito',{positionClass:'toast-bottom-right'})
       this.modalService.dismissAll();
-      this.refreshPronviceList();
+      this.refreshCategoryList();
      }}
     })
  }
 
- searchProvince() {
-   let searchProvince:any, filter:any, table:any, tr:any, td, i, txtValue;
-   searchProvince = document.getElementById("searchProvince");
-   filter = searchProvince.value.toUpperCase();
-   table = document.getElementById("provinceList");
+ searchCategory() {
+   let searchCategory:any, filter:any, table:any, tr:any, td, i, txtValue;
+   searchCategory = document.getElementById("searchCategory");
+   filter = searchCategory.value.toUpperCase();
+   table = document.getElementById("categoryList");
    tr = table.getElementsByTagName("tr");
    for (i = 0; i < tr.length; i++) {
      td = tr[i].getElementsByTagName("td")[0];
@@ -144,9 +144,9 @@ deleteProvince(idProvince:any){
    }
  }
 
- refreshPronviceList(){
-   this.dataService.getProvinces().subscribe((response:any)=>{
-     this.provinces=response.data;
+ refreshCategoryList(){
+   this.dataService.getCategories().subscribe((response:any)=>{
+     this.categories=response.data;
  })}
 }
 

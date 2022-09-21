@@ -52,7 +52,7 @@ export class ProvinceListComponent implements OnInit {
      if (error.status==201){
        this.toastr.success('Se ha creado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshProvinceList();
      }else {
        this.toastr.error('Fallo el crear de la provincia', '🥺',{positionClass:'toast-bottom-right'})
      }}
@@ -77,13 +77,13 @@ export class ProvinceListComponent implements OnInit {
      next : ()=>{
        this.toastr.success('Se ha editado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshProvinceList();
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==200){
        this.toastr.success('Se ha editado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshProvinceList();
      }else {
        this.toastr.error('Error al editar la provincia', '🥺',{positionClass:'toast-bottom-right'})
      }}
@@ -112,17 +112,17 @@ deleteProvince(idProvince:any){
      next : ()=>{
        this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshProvinceList();
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==200){
        this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
-       this.refreshPronviceList();
+       this.refreshProvinceList();
      }else {
       this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
       this.modalService.dismissAll();
-      this.refreshPronviceList();
+      this.refreshProvinceList();
      }}
     })
  }
@@ -146,7 +146,7 @@ deleteProvince(idProvince:any){
    }
  }
 
- refreshPronviceList(){
+ refreshProvinceList(){
    this.dataService.getProvinces().subscribe((response:any)=>{
      this.provinces=response.data;
  })}
