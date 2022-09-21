@@ -9,6 +9,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthorGuard } from './auth/guards/author.guard';
 import { UserListComponent } from './components/user-list/user-list.component'
+import { ProvinceListComponent } from './components/province-list/province-list.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,18 @@ const routes: Routes = [
   {
     path: 'userList',
     component: UserListComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard],
+  },
+  {
+    path: 'provinceList',
+    component: ProvinceListComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard],
+  },
+  {
+    path: 'categoryList',
+    component: CategoryListComponent,
     canActivate:[AuthGuard],
     canLoad:[AuthGuard],
   },

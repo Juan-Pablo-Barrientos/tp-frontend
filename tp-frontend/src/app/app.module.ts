@@ -19,6 +19,8 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorGuard } from './auth/guards/author.guard';
+import { ProvinceListComponent } from './components/province-list/province-list.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AuthorGuard } from './auth/guards/author.guard';
     RegisterComponent,
     PostDetailsComponent,
     UserListComponent,
-    CardComponent
+    CardComponent,
+    ProvinceListComponent,
+    CategoryListComponent
   ],
   imports: [
     FormsModule,
