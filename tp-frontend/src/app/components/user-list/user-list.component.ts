@@ -17,8 +17,9 @@ export class UserListComponent implements OnInit {
   faPencil = faPencil;
   faEye = faEye;
   closeResult = '';
-  users:any;
+  users:any[]=[];
   editUserForm: any;
+  user:any;
 
 
   constructor(private modalService: NgbModal, private dataService: DataService, private router:Router, private toastr:ToastrService) {
@@ -27,32 +28,33 @@ export class UserListComponent implements OnInit {
 
    refreshUserList(){
     this.dataService.getUsers().subscribe((response:any)=>{
-      this.users=response;
-      this.users.sort(this.GetSortOrder('rol'))
+      this.users=response.data;
+      this.users.sort(this.GetSortOrder('role'))
     })
   }
 
   ngOnInit(): void {
 
     this.dataService.getUsers().subscribe((response:any)=>{
-      this.users=response;
-      this.users.sort(this.GetSortOrder('rol'))
+      this.users=response.data;
+      this.users.sort(this.GetSortOrder('role'))
     })
 
   }
 
   onSubmit() {
-    let request = {
+    let request:any
+    request= {
       id : this.editUserForm.controls.idControl.value,
       username : this.editUserForm.controls.usernameControl.value,
-      name : this.editUserForm.controls.name.value,
-      surname : this.editUserForm.controls.lastnameControl.value,
+      name : this.editUserForm.controls.nameControl.value,
+      surname : this.editUserForm.controls.surnameControl.value,
       email : this.editUserForm.controls.emailControl.value,
-      dni : this.editUserForm.controls.dniControl.value,
       role: this.editUserForm.controls.role.value,
-      postPermission: false ,//checkbox
-      bio: this.editUserForm.controls.bio.value
+      phoneNumber: this.editUserForm.controls.phoneNumberControl.value
     }
+    if (this.user.role==="Author") { request.bio= this.editUserForm.controls.bioControl.value}
+
     this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe({
       next : ()=>{
         this.toastr.success('El editado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
@@ -75,17 +77,19 @@ export class UserListComponent implements OnInit {
   }
 
   openEdit(content: any, idUser:number) {
-    const user = this.users.find((user: { id: number; }) =>user.id===idUser)
-    const role = user.rol ? "Admin":"Client"
+
+    this.user = this.users.find((user: { id: number; }) =>user.id===idUser)
     this.editUserForm = new FormGroup({
-      idControl:new FormControl({value:user.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
-      usernameControl:new FormControl(user.username,{validators: [Validators.required,Validators.maxLength(50)],/* asyncValidators: this.validateUser.bind(this), updateOn: 'blur'*/}),
-      firstnameControl:new FormControl(user.firstname,[Validators.required,Validators.maxLength(50)]),
-      lastnameControl:new FormControl(user.lastname,[Validators.required,Validators.maxLength(50)]),
-      emailControl:new FormControl(user.email,[Validators.required,Validators.maxLength(50),Validators.email]),
-      dniControl:new FormControl(user.dni,[Validators.required,Validators.maxLength(50)]),
-      role:new FormControl(role,[Validators.required]),
+      idControl:new FormControl({value:this.user.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
+      usernameControl:new FormControl(this.user.username,{validators: [Validators.required,Validators.maxLength(50)]}),
+      nameControl:new FormControl(this.user.name,[Validators.required,Validators.maxLength(50)]),
+      surnameControl:new FormControl(this.user.surname,[Validators.required,Validators.maxLength(50)]),
+      bioControl:new FormControl(this.user.bio,[Validators.maxLength(50)]),
+      emailControl:new FormControl(this.user.email,[Validators.required,Validators.maxLength(50),Validators.email]),
+      phoneNumberControl:new FormControl(this.user.phoneNumber,[Validators.required,Validators.maxLength(50)]),
+      role:new FormControl(this.user.role,[Validators.required]),
     })
+
     this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
   }
 
@@ -129,12 +133,13 @@ export class UserListComponent implements OnInit {
       }
     }
   }
+
   GetSortOrder(prop:any) {
     return function(a:any, b:any) {
         if (a[prop] > b[prop]) {
-            return -1;
-        } else if (a[prop] < b[prop]) {
             return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
         }
         return 0;
     }

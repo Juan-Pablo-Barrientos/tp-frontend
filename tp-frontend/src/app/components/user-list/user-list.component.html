@@ -17,12 +17,13 @@
         <td>
           <div class="d-flex align-items-center">
             <div class="ms-3">
-              <p class="text-muted mb-1">{{user.firstname}} {{user.lastname}}</p>
+              <p class="text-muted mb-1">{{user.name}} {{user.surname}}</p>
               <p class="text-muted mb-1">{{user.email}}</p>
               <div class="d-flex">
                 <div class="">
-                  <p class="fw-bold mb-1" *ngIf="user.rol==1">Rol: Admin</p>
-                  <p class="fw-bold mb-1" *ngIf="user.rol==0">Rol: Cliente</p>
+                  <p class="fw-bold mb-1" *ngIf="user.role=='Admin'">Rol: Admin</p>
+                  <p class="fw-bold mb-1" *ngIf="user.role=='Client'">Rol: Cliente</p>
+                  <p class="fw-bold mb-1" *ngIf="user.role=='Author'">Rol: Autor</p>
                 </div>
               </div>
             </div>
@@ -45,7 +46,7 @@
 
         <ng-template #modalShow let-modal>
           <div class="modal-header">
-            <h4 class="modal-title" id="modalShow">Usuario: {{user.firstname}} {{user.lastname}}</h4>
+            <h4 class="modal-title" id="modalShow">Usuario: {{user.name}} {{user.surname}}</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
           </div>
           <div class="modal-body lead">
@@ -56,13 +57,16 @@
                 <label for="">Username: {{user.username}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Nombre: {{user.firstname}}</label>
+                <label for="">Nombre: {{user.name}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Dni: {{user.dni}}</label>
+                <label for="">Apellido:  {{user.surname}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Apellido:  {{user.lastname}}</label>
+                <label for="">Telefono: {{user.phoneNumber}}</label>
+              </div>
+              <div class="mb-3" *ngIf="(user.role)=='Author'">
+                <label for="">Bio:  {{user.bio}}</label>
               </div>
               <div class="mb-3">
                 <label for="">Email:  {{user.email}}</label>
@@ -71,8 +75,9 @@
                 <label for="">Nombre de usuario:  {{user.username}}</label>
               </div>
               <div class="mb-3">
-                <label *ngIf="(user.rol)==1" for="">Rol:  Admin</label>
-                <label *ngIf="(user.rol)==0" for="">Rol:  Cliente</label>
+                <label *ngIf="(user.role)=='Admin'" for="">Rol:  Admin</label>
+                <label *ngIf="(user.role)=='Author'" for="">Rol:  Autor</label>
+                <label *ngIf="(user.role)=='Client'" for="">Rol:  Cliente</label>
               </div>
           </div>
           <div class="modal-footer">
@@ -92,7 +97,7 @@
           <div class="modal-body lead">
             <form>
               <div class="mb-3">
-                <label for="dateOfBirth">Esta seguro de que quiere borrar al usuario {{user.firstname}} {{user.lastname}}</label>
+                <label for="">Esta seguro de que quiere borrar al usuario {{user.name}} {{user.surname}}</label>
               </div>
             </form>
           </div>
@@ -103,9 +108,7 @@
             <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancelar</button>
           </div>
         </ng-template>
-
       </tr>
-
     </tbody>
   </table>
   </div>
@@ -120,7 +123,7 @@
     <div class="modal-body">
       <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
         <div class="form-floating mb-2">
-          <input type="text" value="" class="form-control" formControlName="idControl" name="id" id="id" placeholder="Nombre de usuario">
+          <input type="text" value="" class="form-control" formControlName="idControl" name="id" id="id" placeholder="Id de usuario">
           <label for="id">Id</label>
         </div>
 
@@ -130,12 +133,12 @@
         </div>
 
         <div class="form-floating mb-2">
-          <input type="text" formControlName="firstnameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
+          <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
           <label for="name">Nombre</label>
         </div>
 
         <div class="form-floating mb-2">
-          <input type="text" formControlName="lastnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
+          <input type="text" formControlName="surnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
           <label for="surname">Apellido</label>
         </div>
 
@@ -145,8 +148,13 @@
         </div>
 
         <div class="form-floating mb-2">
-          <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control"/>
-          <label for="phone">DNI</label>
+          <input formControlName="phoneNumberControl" name="phoneNumber" id="phoneNumber" placeholder="phoneNumber" type="text"class="form-control"/>
+          <label for="phone">Telefono</label>
+        </div>
+
+        <div class="form-floating mb-2" *ngIf="user.role==='Author'">
+          <textarea type="text" formControlName="bioControl" name="bio" id="bio" placeholder="Bio" class="form-control" style="height: 300px"></textarea>
+          <label for="bio">Bio</label>
         </div>
 
         <div class="form-check form-check-inline lead">
@@ -154,8 +162,12 @@
           <label class="form-check-label" for="Admin">Admin</label>
         </div>
         <div class="form-check form-check-inline lead">
-          <input class="form-check-input" type="radio" formControlName="role" name="role" id="client" value="Client">
-          <label class="form-check-label" for="client">Cliente</label>
+          <input class="form-check-input" type="radio" formControlName="role" name="role" id="Author" value="Author">
+          <label class="form-check-label" for="Author">Autor</label>
+        </div>
+        <div class="form-check form-check-inline lead">
+          <input class="form-check-input" type="radio" formControlName="role" name="role" id="Client" value="Client">
+          <label class="form-check-label" for="Client">Cliente</label>
         </div>
 
           <button type="submit" [disabled]="!editUserForm.valid" class="btn btn-primary float-end m-2">Enviar</button>

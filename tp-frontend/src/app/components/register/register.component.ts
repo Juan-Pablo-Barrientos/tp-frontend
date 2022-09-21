@@ -26,7 +26,6 @@ export class RegisterComponent implements OnInit {
       passwordConfirmControl:new FormControl('',[Validators.maxLength(20),Validators.required]),
       emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
       phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-      subscribeControl:new FormControl(false),
     },{validators: [this.checkPasswords]})
 
     this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
@@ -44,7 +43,6 @@ export class RegisterComponent implements OnInit {
       email : this.signUpForm.controls.emailControl.value,
       role: 'client',
       phoneNumber : this.signUpForm.controls.phoneControl.value,
-      subscribedUntil : this.signUpForm.controls.subscribeControl.value,
     }
     this.getFormValidationErrors()
     console.log(this.errors)
@@ -52,7 +50,7 @@ export class RegisterComponent implements OnInit {
       console.log(this.errors)
       this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
       this.signUpForm.markAllAsTouched();
-    }else{
+    }else {
     this.dataService.addUser(request).subscribe(async (res:any) => {
     console.log(res)
     if (!res.error){
