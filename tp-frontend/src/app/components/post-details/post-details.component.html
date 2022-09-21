@@ -1,6 +1,6 @@
 <div class="row my-3 px-3 py-4 shadow-lg rounded-3">
   <div class="col-12 col-sm-6">
-    <img [src]="postDetails?.path_img" alt="">
+    <img class="rounded-3" [src]="postDetails?.path_img" alt="">
   </div>
   <div class="col-12 col-sm-6 d-flex flex-column justify-content-between">
     <div class="row mb-3">
@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-12 col-sm-7 mb-2 mb-sm-0">
-        <button routerLink="/" class="btn btn-primary w-100">Go back</button>
+        <button routerLink="/" class="btn btn-primary text-white w-100">Go back</button>
       </div>
       <div class="col-12 col-sm-5" *ngIf="this.authService.getUserRole()==='Author' && this.authService.isLoggedIn()">
         <button (click)="onClickDeleteButton()" class="btn btn-danger w-100">Delete</button>
