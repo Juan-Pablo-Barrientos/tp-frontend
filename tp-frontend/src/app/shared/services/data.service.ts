@@ -25,6 +25,12 @@ export class DataService {
   getUsers(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'users');
   }
+  editUser(request:any,idUser:number): Observable<Response> {
+    return this.http.put<Response>(this.baseUrl + 'users/'+idUser, request);
+  }
+  delUser(idUser:number): Observable<Response> {
+    return this.http.delete<Response>(this.baseUrl + 'users/'+idUser);
+  }
   getMostClickedPosts(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'posts/mostClicked');
   }
