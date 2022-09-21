@@ -28,6 +28,9 @@ export class DataService {
   editUser(request:any,idUser:number): Observable<Response> {
     return this.http.put<Response>(this.baseUrl + 'users/'+idUser, request);
   }
+  editCategory(request:any,idCategory:number): Observable<Response> {
+    return this.http.put<Response>(this.baseUrl + 'categories/'+idCategory, request);
+  }
   editProvinces(request:any,idProvince:number): Observable<Response> {
     return this.http.put<Response>(this.baseUrl + 'provinces/'+idProvince, request);
   }
@@ -52,6 +55,10 @@ export class DataService {
     return this.http.delete<Response>(this.baseUrl + 'provinces/' + id);
   }
 
+  delCategory(id: string) : Observable<Response> {
+    return this.http.delete<Response>(this.baseUrl + 'categories/' + id);
+  }
+
   userExists(request:any): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'users/'+request.username+'/exists')
   }
@@ -71,6 +78,10 @@ export class DataService {
 
   addProvince(request: any): Observable<ArrayBuffer> {
     return this.http.post<ArrayBuffer>(this.baseUrl + 'provinces', request);
+  }
+
+  addCategory(request: any): Observable<ArrayBuffer> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + 'categories', request);
   }
 
   getPostsByIdWithAuthor(idPost: number): Observable<Response> {
