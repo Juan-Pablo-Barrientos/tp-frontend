@@ -22,6 +22,9 @@ export class DataService {
     let params = new HttpParams().set('title', title);
     return this.http.get<Response>(this.baseUrl + 'posts', { params: params });
   }
+  getUsers(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'users');
+  }
   getMostClickedPosts(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'posts/mostClicked');
   }

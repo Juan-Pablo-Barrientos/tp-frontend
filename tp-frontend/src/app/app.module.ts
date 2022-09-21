@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthorGuard } from './auth/guards/author.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,AuthorGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

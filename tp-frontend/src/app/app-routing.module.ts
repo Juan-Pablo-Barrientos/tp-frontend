@@ -6,7 +6,9 @@ import { RedactPostComponent } from './auth/views/redact-post/redact-post.compon
 import { HomeComponent } from './components/home/home.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UsersComponent } from './components/users/users.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthorGuard } from './auth/guards/author.guard';
+import { UserListComponent } from './components/user-list/user-list.component'
 
 const routes: Routes = [
   {
@@ -18,8 +20,10 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'users',
-    component: UsersComponent
+    path: 'userList',
+    component: UserListComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard],
   },
   {
     path: 'register',
@@ -35,7 +39,9 @@ const routes: Routes = [
   },
   {
     path: 'redactPost',
-    component: RedactPostComponent
+    component: RedactPostComponent,
+    canActivate:[AuthorGuard],
+    canLoad:[AuthorGuard],
   },
   {
     path: '**',

@@ -1,42 +1,167 @@
-<div class="container">
+<div class="container mt-5">
   <div class="m-2"><h1 class="display-1 text-center">Listado de usuarios</h1></div>
   <hr class="bg-secondary border-2 border-top border-secondary">
-  <table class="table align-middle mb-0 bg-white mt-5">
+  <div class="form-floating mt-3">
+    <input type="text" name="nameSearch" id="searchUser" placeholder="Nombre" (keyup)="searchUser()" class="form-control"/>
+    <label for="name">Buscar por nombre o por rol</label>
+  </div>
+  <table class="table align-middle mb-0 bg-white mt-5" id="userList">
     <thead class="bg-light">
       <tr>
-        <th>Name</th>
-        <th>Actions</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-
-  <!-- aca arranca el ngFor-->
-
-      <tr>
+      <tr *ngFor="let user of users">
         <td>
           <div class="d-flex align-items-center">
             <div class="ms-3">
-              <p class="fw-bold mb-1">John Doe</p>
-              <p class="text-muted mb-0">john.doe@gmail.com</p>
+              <p class="text-muted mb-1">{{user.firstname}} {{user.lastname}}</p>
+              <p class="text-muted mb-1">{{user.email}}</p>
+              <div class="d-flex">
+                <div class="">
+                  <p class="fw-bold mb-1" *ngIf="user.rol==1">Rol: Admin</p>
+                  <p class="fw-bold mb-1" *ngIf="user.rol==0">Rol: Cliente</p>
+                </div>
+              </div>
             </div>
           </div>
         </td>
+
         <td>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
-            Ver
+          <button type="button" (click)="openShow(modalShow)" class="btn btn-primary btn-sm btn-rounded m-1">
+            <fa-icon [icon]="faEye"></fa-icon>
           </button>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
-            Editar
+          <button type="button" (click)="openEdit(modalEdit, user.id)" class="btn btn-success btn-sm btn-rounded m-1">
+            <fa-icon [icon]="faPencil"></fa-icon>
           </button>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
-            Borrar
+          <button type="button" (click)="openDelete(modalDelete)" class="btn btn-danger btn-sm btn-rounded m-1">
+            <fa-icon [icon]="faTrash"></fa-icon>
           </button>
         </td>
-      </tr>
 
-  <!--aca termina el ngFor-->
+        <!--Modal show-->
+
+        <ng-template #modalShow let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalShow">Usuario: {{user.firstname}} {{user.lastname}}</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body lead">
+              <div class="mb-3">
+                <label for="">Id: {{user.id}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Username: {{user.username}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Nombre: {{user.firstname}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Dni: {{user.dni}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Apellido:  {{user.lastname}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Email:  {{user.email}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Nombre de usuario:  {{user.username}}</label>
+              </div>
+              <div class="mb-3">
+                <label *ngIf="(user.rol)==1" for="">Rol:  Admin</label>
+                <label *ngIf="(user.rol)==0" for="">Rol:  Cliente</label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+          </div>
+        </ng-template>
+
+
+
+        <!--Modal delete-->
+
+        <ng-template #modalDelete let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalDelete">Borrar usuario</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body lead">
+            <form>
+              <div class="mb-3">
+                <label for="dateOfBirth">Esta seguro de que quiere borrar al usuario {{user.firstname}} {{user.lastname}}</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="deleteUser(user.id);modal.close('Confirm click')">Si</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancelar</button>
+          </div>
+        </ng-template>
+
+      </tr>
 
     </tbody>
   </table>
   </div>
 
+  <!--Modal edit-->
+
+  <ng-template #modalEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalEdit">Editar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="idControl" name="id" id="id" placeholder="Nombre de usuario">
+          <label for="id">Id</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="usernameControl" name="username" id="username" placeholder="Nombre de usuario">
+          <label for="username">Nombre de usuario</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text" formControlName="firstnameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
+          <label for="name">Nombre</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text" formControlName="lastnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
+          <label for="surname">Apellido</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control"/>
+          <label for="email">Email</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control"/>
+          <label for="phone">DNI</label>
+        </div>
+
+        <div class="form-check form-check-inline lead">
+          <input class="form-check-input" type="radio" formControlName="role" name="role" id="Admin" value="Admin">
+          <label class="form-check-label" for="Admin">Admin</label>
+        </div>
+        <div class="form-check form-check-inline lead">
+          <input class="form-check-input" type="radio" formControlName="role" name="role" id="client" value="Client">
+          <label class="form-check-label" for="client">Cliente</label>
+        </div>
+
+          <button type="submit" [disabled]="!editUserForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+  </ng-template>

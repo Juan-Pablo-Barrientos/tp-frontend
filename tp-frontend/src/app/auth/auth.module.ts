@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RedactPostComponent } from './views/redact-post/redact-post.component';
+import { AuthorGuard } from './guards/author.guard';
 
 
 
@@ -15,7 +16,8 @@ import { RedactPostComponent } from './views/redact-post/redact-post.component';
     RedactPostComponent
   ],
   providers:[
-    AuthGuard
+    AuthGuard,
+    AuthorGuard
   ],
   imports: [
     CommonModule,
