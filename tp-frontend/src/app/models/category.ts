@@ -3,10 +3,10 @@ import { Poll } from "./poll";
 
 interface ICategory extends IBaseClass {
     name: string;
-    Polls : Poll[];
+    Polls: Poll[];
 }
 
 export class Category extends BaseClass implements ICategory {
     name: string = "";
-    Polls : Poll[] = new Array();
+    Polls: Poll[] = new Array();
 }

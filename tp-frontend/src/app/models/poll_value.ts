@@ -2,14 +2,14 @@ import { BaseClass, IBaseClass } from "./baseClass";
 import { Poll } from "./poll";
 import { UserVotes } from "./user_votes";
 
-interface IPollValue extends IBaseClass{
-    description : string;
-    Poll : Poll;
-    UserVotes : UserVotes[];
+interface IPollValue extends IBaseClass {
+    description: string;
+    Poll: Poll;
+    UserVotes: UserVotes[];
 }
 
-export class PollValue extends BaseClass implements IPollValue{
+export class PollValue extends BaseClass implements IPollValue {
     description: string = "";
-    Poll : Poll = new Poll();
-    UserVotes : UserVotes[] = new Array();
+    Poll: Poll = new Poll();
+    UserVotes: UserVotes[] = new Array();
 } 

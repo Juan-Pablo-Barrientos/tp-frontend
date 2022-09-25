@@ -6,12 +6,12 @@ interface IProvince extends IBaseClass {
     name: string;
     destroyTime: Date;
     Cities: City[];
-    Polls : Poll[];
+    Polls: Poll[];
 }
 
 export class Province extends BaseClass implements IProvince {
     name: string = "";
     destroyTime: Date = new Date();
     Cities: City[] = new Array();
-    Polls : Poll[] = new Array();
+    Polls: Poll[] = new Array();
 }

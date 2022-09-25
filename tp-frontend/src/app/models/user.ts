@@ -10,7 +10,7 @@ export interface IUser extends IBaseClass {
     Bio: string,
     email: string,
     jwt: string,
-    UserVotes : UserVotes[]
+    UserVotes: UserVotes[]
 }
 
 export class User extends BaseClass implements IUser {
@@ -22,5 +22,5 @@ export class User extends BaseClass implements IUser {
     Bio: string = "";
     email: string = "";
     jwt: string = "";
-    UserVotes : UserVotes[] = new Array();
+    UserVotes: UserVotes[] = new Array();
 }
