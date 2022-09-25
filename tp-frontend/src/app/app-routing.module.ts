@@ -11,6 +11,7 @@ import { AuthorGuard } from './auth/guards/author.guard';
 import { UserListComponent } from './components/user-list/user-list.component'
 import { ProvinceListComponent } from './components/province-list/province-list.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { AuthorComponent } from './components/author/author.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
     component: RedactPostComponent,
     canActivate:[AuthorGuard],
     canLoad:[AuthorGuard],
+  },
+  {
+    path: 'author/:id',
+    component: AuthorComponent
   },
   {
     path: '**',

@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorGuard } from './auth/guards/author.guard';
 import { ProvinceListComponent } from './components/province-list/province-list.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { AuthorComponent } from './components/author/author.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
     UserListComponent,
     CardComponent,
     ProvinceListComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    AuthorComponent
   ],
   imports: [
     FormsModule,
