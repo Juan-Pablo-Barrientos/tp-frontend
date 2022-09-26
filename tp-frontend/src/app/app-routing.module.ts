@@ -17,54 +17,65 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    title: 'Fake News'
   },
   {
     path: 'Home/:titulo',
     component: HomeComponent,
+    title: 'Fake News'
   },
   {
     path: 'userList',
     component: UserListComponent,
     canActivate:[AuthGuard],
     canLoad:[AuthGuard],
+    title: 'Listado de usuarios'
   },
   {
     path: 'provinceList',
     component: ProvinceListComponent,
     canActivate:[AuthGuard],
     canLoad:[AuthGuard],
+    title: 'Listado de provincias'
   },
   {
     path: 'categoryList',
     component: CategoryListComponent,
     canActivate:[AuthGuard],
     canLoad:[AuthGuard],
+    title: 'Listado de categorias'
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    title: 'Registro'
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    title: 'Iniciar sesión'
   },
   {
     path: 'PostAuthor/:id',
-    component: PostDetailsComponent
+    component: PostDetailsComponent,
+    title: 'Fake News'
   },
   {
     path: 'redactPost',
     component: RedactPostComponent,
     canActivate:[AuthorGuard],
     canLoad:[AuthorGuard],
+    title: 'Redactar noticia'
   },
   {
     path: 'author/:id',
-    component: AuthorComponent
+    component: AuthorComponent,
+    title: 'Fake News'
   },
   {
     path: '**',
     redirectTo: '',
+    title: 'Fake News'
   },
 
 ];
