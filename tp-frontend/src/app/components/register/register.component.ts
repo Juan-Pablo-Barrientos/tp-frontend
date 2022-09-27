@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, subscribeOn } from 'rxjs/operators';
+import { ResponseExists } from 'src/app/models/Responses/responseExists';
+import { User } from 'src/app/models/user';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -35,15 +37,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    let request = {
-      name : this.signUpForm.controls.nameControl.value,
-      surname : this.signUpForm.controls.surnameControl.value,
-      username : this.signUpForm.controls.usernameControl.value,
-      password : this.signUpForm.controls.passwordControl.value,
-      email : this.signUpForm.controls.emailControl.value,
-      role: 'client',
-      phoneNumber : this.signUpForm.controls.phoneControl.value,
-    }
+    let user = new User();
+    user.name = this.signUpForm.controls.nameControl.value;
+    user.surname = this.signUpForm.controls.surnameControl.value;
+    user.username = this.signUpForm.controls.usernameControl.value;
+    user.password = this.signUpForm.controls.passwordControl.value;
+    user.email = this.signUpForm.controls.emailControl.value;
+    user.role = "client";
+    user.phoneNumber = this.signUpForm.controls.phoneControl.value;
     this.getFormValidationErrors()
     console.log(this.errors)
     if (this.errors.length!==0){
@@ -51,7 +52,7 @@ export class RegisterComponent implements OnInit {
       this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
       this.signUpForm.markAllAsTouched();
     }else {
-    this.dataService.addUser(request).subscribe(async (res:any) => {
+    this.dataService.addUser(user).subscribe(async (res:any) => {
     console.log(res)
     if (!res.error){
       this.toastr.success('El registro fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
@@ -61,6 +62,7 @@ export class RegisterComponent implements OnInit {
     }
   })};
   }
+
   reset() {
     this.signUpForm.reset();
   }
@@ -80,9 +82,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onUsernameBlur(event:any){
-    let request={username:event.target.value}
+    let user = new User();
+    user.username = event.target.value;
     const usernameField = this.signUpForm.controls['usernameControl'];
-    this.dataService.userExists(request).subscribe((res:any) => {
+    this.dataService.userExists(user).subscribe((res:any) => {
             if(res.exist) {
               usernameField.setErrors({'usernameExist': true});
               usernameField.markAsDirty();
@@ -94,15 +97,15 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-
   getFormControl() {
     return this.signUpForm;
   }
 
   onEmailBlur(event:any){
-    let request={email:event.target.value}
+    let user = new User();
+    user.email = event.target.value;
     const emailField = this.signUpForm.controls['emailControl'];
-    this.dataService.emailExists(request).subscribe((res:any) => {
+    this.dataService.emailExists(user).subscribe((res:ResponseExists<User>) => {
             if(res.exist) {
               emailField.setErrors({'emailExist': true});
               emailField.markAsDirty();
@@ -116,19 +119,17 @@ export class RegisterComponent implements OnInit {
 
   getUserNameControl() {
     return this.signUpForm.controls['usernameControl'];
-}
+  }
 
-getFormValidationErrors() {
-  this.errors=[]
-  Object.keys(this.signUpForm.controls).forEach(key => {
-    const controlErrors: ValidationErrors = this.signUpForm.get(key).errors;
-    if (controlErrors != null) {
-      Object.keys(controlErrors).forEach(keyError => {
-       this.errors.push(keyError);
-      });
-    }
-  });
-}
-
-
+  getFormValidationErrors() {
+    this.errors=[]
+    Object.keys(this.signUpForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.signUpForm.get(key).errors;
+      if(controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+          this.errors.push(keyError);
+        });}
+      }
+    );
+  }
 }

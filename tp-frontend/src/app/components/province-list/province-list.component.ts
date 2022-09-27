@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { faTrash, faPencil, faEye } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { Province } from 'src/app/models/province';
+import { RequestResponse } from 'src/app/models/Responses/requestResponse';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class ProvinceListComponent implements OnInit {
   faPencil = faPencil;
   faEye = faEye;
   closeResult = '';
-  provinces:any;
+  provinces: Province[] = new Array();
   editProvinceForm: any;
   createProvinceForm:any
 
@@ -28,7 +30,7 @@ export class ProvinceListComponent implements OnInit {
 
  ngOnInit(): void {
 
-   this.dataService.getProvinces().subscribe((response:any)=>{
+   this.dataService.getProvinces().subscribe((response:RequestResponse<Province[]>)=>{
      this.provinces=response.data;
    })
 
@@ -39,6 +41,7 @@ export class ProvinceListComponent implements OnInit {
  }
 
  onSubmit(){
+  console.log("entra");
    let request = {
      name : this.createProvinceForm.controls.nameControl.value,
    }
@@ -95,7 +98,7 @@ openShow(content: any) {
  }
 
 openEdit(content: any, idProvince:number) {
-   const province = this.provinces.find((province: { id: number; }) =>province.id===idProvince)
+   const province = this.provinces.find((province: { id: number; }) =>province.id===idProvince) ?? new Province();
    this.editProvinceForm = new FormGroup({
      idControl:new FormControl({value:province.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
      nameControl:new FormControl(province.name,{validators: [Validators.required,Validators.maxLength(50)]}),
@@ -107,7 +110,7 @@ openDelete(content: any) {
    this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
  }
 
-deleteProvince(idProvince:any){
+deleteProvince(idProvince: number){
    this.dataService.delProvinces(idProvince).subscribe({
      next : ()=>{
        this.toastr.success('Se ha borrado la provincia', 'Éxito',{positionClass:'toast-bottom-right'})
@@ -147,7 +150,7 @@ deleteProvince(idProvince:any){
  }
 
  refreshProvinceList(){
-   this.dataService.getProvinces().subscribe((response:any)=>{
+   this.dataService.getProvinces().subscribe((response:RequestResponse<Province[]>)=>{
      this.provinces=response.data;
  })}
 }

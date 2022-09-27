@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/services/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { RequestResponse } from 'src/app/models/Responses/requestResponse';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  posts: any;
+  posts: Post[] = new Array();
   constructor(public dataService: DataService, private route: ActivatedRoute) { }
   titleSearch: any = "";
 
@@ -16,7 +18,8 @@ export class HomeComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.titleSearch = params["searchbar"]
     })
-    this.dataService.getPosts(this.titleSearch ??= "").subscribe((response: any) => {
+    this.dataService.getPosts(this.titleSearch ??= "").subscribe((response: RequestResponse<Post[]>) => {
+      console.log(response);
       this.dataService.posts = response.data;
     });
   }

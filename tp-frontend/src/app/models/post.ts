@@ -1,5 +1,7 @@
 import { BaseClass, IBaseClass } from "./baseClass";
+import { Category } from "./category";
 import { Province } from "./province";
+import { User } from "./user";
 
 interface IPost extends IBaseClass {
     title: string,
@@ -12,7 +14,9 @@ interface IPost extends IBaseClass {
     categoryId: number,
     provinceId: number,
     userId: number,
-    province: Province
+    province: Province,
+    category : Category,
+    user : User,
 }
 
 export class Post extends BaseClass implements IPost {
@@ -26,5 +30,7 @@ export class Post extends BaseClass implements IPost {
     categoryId: number = 0;
     provinceId: number = 0;
     userId: number = 0;
-    province: Province = new Province()
+    province: Province = new Province();
+    category: Category = new Category();
+    user: User = new User();
 }

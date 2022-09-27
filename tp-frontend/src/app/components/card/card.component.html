@@ -9,7 +9,7 @@
         <button [routerLink]="['/PostAuthor', post.id]" class="btn btn-primary text-white">Leer más</button>
       </div>
       <div class="col d-flex flex-col justify-content-end align-items-end">
-          <span class="d-block badge bg-info text-pill">{{post.category.name}}</span>
+          <span class="d-block badge bg-info text-pill">{{post.category != null ? post.category.name : "Sin categoria"}}</span>
       </div>
     </div>
   </div>

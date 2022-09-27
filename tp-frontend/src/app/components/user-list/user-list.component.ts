@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { faTrash, faPencil, faEye } from '@fortawesome/free-solid-svg-icons';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { Author } from 'src/app/models/author';
+import { RequestResponse } from 'src/app/models/Responses/requestResponse';
+import { User } from 'src/app/models/user';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -17,7 +20,7 @@ export class UserListComponent implements OnInit {
   faPencil = faPencil;
   faEye = faEye;
   closeResult = '';
-  users:any[]=[];
+  users:Author[]= new Array();
   editUserForm: any;
   user:any;
 
@@ -27,7 +30,7 @@ export class UserListComponent implements OnInit {
    }
 
    refreshUserList(){
-    this.dataService.getUsers().subscribe((response:any)=>{
+    this.dataService.getUsers().subscribe((response:RequestResponse<Author[]>)=>{
       this.users=response.data;
       this.users.sort(this.GetSortOrder('role'))
     })

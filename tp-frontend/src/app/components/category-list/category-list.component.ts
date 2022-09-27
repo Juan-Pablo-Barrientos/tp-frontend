@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { faTrash, faPencil, faEye } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { Category } from 'src/app/models/category';
+import { RequestResponse } from 'src/app/models/Responses/requestResponse';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class CategoryListComponent implements OnInit {
   faPencil = faPencil;
   faEye = faEye;
   closeResult = '';
-  categories:any;
+  categories:Category[] = new Array();
   editCategoryForm: any;
   createCategoryForm:any
 
@@ -26,7 +28,7 @@ export class CategoryListComponent implements OnInit {
 
  ngOnInit(): void {
 
-   this.dataService.getCategories().subscribe((response:any)=>{
+   this.dataService.getCategories().subscribe((response:RequestResponse<Category[]>)=>{
      this.categories=response.data;
    })
 
@@ -37,10 +39,9 @@ export class CategoryListComponent implements OnInit {
  }
 
  onSubmit(){
-   let request = {
-     name : this.createCategoryForm.controls.nameControl.value,
-   }
-   this.dataService.addCategory(request).subscribe({
+  let category = new Category();
+  category.name = this.createCategoryForm.controls.nameControl.value;
+   this.dataService.addCategory(category).subscribe({
      next : (res:any)=>{
        this.toastr.success('Se ha creado la categoría', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
@@ -67,11 +68,10 @@ export class CategoryListComponent implements OnInit {
  }
 
  onSubmitEdit() {
-   let request = {
-     id : this.editCategoryForm.controls.idControl.value,
-     name : this.editCategoryForm.controls.nameControl.value,
-   }
-   this.dataService.editCategory(request,this.editCategoryForm.controls.idControl.value).subscribe({
+   let category = new Category();
+   category.id = this.editCategoryForm.controls.idControl.value;
+   category.name = this.editCategoryForm.controls.nameControl.value;
+   this.dataService.editCategory(category,this.editCategoryForm.controls.idControl.value).subscribe({
      next : ()=>{
        this.toastr.success('Se ha editado la categoría', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
@@ -93,7 +93,7 @@ openShow(content: any) {
  }
 
 openEdit(content: any, idCategory:number) {
-   const category = this.categories.find((category: { id: number; }) =>category.id===idCategory)
+   const category = this.categories.find((category: { id: number; }) =>category.id===idCategory) ?? new Category()
    this.editCategoryForm = new FormGroup({
      idControl:new FormControl({value:category.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
      nameControl:new FormControl(category.name,{validators: [Validators.required,Validators.maxLength(50)]}),
@@ -105,7 +105,7 @@ openDelete(content: any) {
    this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
  }
 
-deleteCategory(idCategory:any){
+deleteCategory(idCategory:number){
    this.dataService.delCategory(idCategory).subscribe({
      next : ()=>{
        this.toastr.success('Se ha borrado la categoria', 'Éxito',{positionClass:'toast-bottom-right'})
@@ -145,7 +145,7 @@ deleteCategory(idCategory:any){
  }
 
  refreshCategoryList(){
-   this.dataService.getCategories().subscribe((response:any)=>{
+   this.dataService.getCategories().subscribe((response:RequestResponse<Category[]>)=>{
      this.categories=response.data;
  })}
 }
