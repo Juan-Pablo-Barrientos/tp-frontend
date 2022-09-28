@@ -110,4 +110,9 @@ export class DataService {
   getUserWithPosts(idUser: number): Observable<RequestResponse<Author>> {
     return this.http.get<RequestResponse<Author>>(this.baseUrl + "users/" + idUser + "/posts");
   }
+
+  editUserPassword(request: any): Observable<ArrayBuffer> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/users/changepassword', request);
+  }
+
 }

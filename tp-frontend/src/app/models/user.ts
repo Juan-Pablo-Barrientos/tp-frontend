@@ -9,7 +9,7 @@ export interface IUser extends IBaseClass {
     role: string,
     phoneNumber: number,
     subscribedUntil: Date,
-    Bio: string,
+    bio: string,
     email: string,
     jwt: string,
     UserVotes: UserVotes[]
@@ -23,7 +23,7 @@ export class User extends BaseClass implements IUser {
     role: string = "";
     phoneNumber: number = 0;
     subscribedUntil: Date = new Date();
-    Bio: string = "";
+    bio: string = "";
     email: string = "";
     jwt: string = "";
     UserVotes: UserVotes[] = new Array();

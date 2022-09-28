@@ -1,0 +1,51 @@
+<div class="row my-3 px-3 py-4 shadow-lg rounded-3">
+    <div class="col-12 col-sm-6">
+      <img *ngIf="0" class="rounded-3 img-fluid" [src]="" alt="acá va la foto más adelante">
+    </div>
+    <div class="col-12 col-sm-6 d-flex flex-column justify-content-between">
+      <div class="row mb-3">
+        <h1>{{user.name}} <small class="text-muted">({{user.surname}})</small></h1>
+        <p>{{user.role}}</p>
+        <p>{{user.bio}}</p>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-7 mb-2 mb-sm-0">
+          <button routerLink="/" class="btn btn-primary text-white w-100">Volver</button>
+          <button *ngIf="this.authService.loggedUser?.id===idUser" (click)="openPasswordChange(changePasswordModal)"  class="float-end btn btn-primary m-2 lead">
+          <fa-icon [icon]="faPencil"></fa-icon> Cambiar contraseña</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-3">
+  <div class="row">
+    <app-card class="col-12 col-sm-6 mb-4" *ngFor="let post of posts" [post]="post"></app-card>
+  </div>
+</div>
+
+<ng-template #changePasswordModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="changePasswordModal">Cambiar contraseña</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="passwordChangeForm" (ngSubmit)="onSubmitPassword()">
+      <div class="form-floating mb-2">
+        <input type="text"  formControlName="oldPasswordControl" name="oldPassword" id="oldPassword" placeholder="Contraseña"  type="password"class="form-control"/>
+        <label for="password">Contraseña vieja</label>
+      </div>
+      <div class="form-floating mb-2">
+        <input type="text"  formControlName="newPasswordControl" name="newPassword" id="newPassword" placeholder="Contraseña"  type="password"class="form-control"/>
+        <label for="password">Contraseña nueva</label>
+      </div>
+      <div class="form-floating mb-2">
+        <input type="text"  formControlName="newConfirmPasswordControl" name="newConfirmPassword" id="newConfirmPassword" placeholder="Contraseña"  type="password"class="form-control"/>
+        <label for="password">Confirmar contraseña nueva</label>
+      </div>
+      <button type="submit" [disabled]="!passwordChangeForm.valid" class="btn btn-primary m-2" >Cambiar contraseña</button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cerrar</button>
+  </div>
+</ng-template>

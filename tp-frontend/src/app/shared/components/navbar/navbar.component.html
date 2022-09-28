@@ -25,9 +25,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
-                href="#">Perfil</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
-                href="#">Test</a></li>
+              href="#" [routerLink]="['/user', this.authService.loggedUser?.id]" >Perfil</a></li>
             <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#"
                 (click)="logOut()">Salir</a></li>
           </ul>
@@ -47,7 +45,6 @@
           </ul>
         </li>
 
-        <!-- Panel de Usuario -->
         <li class="nav-item dropdown d-lg-none">
           <a class="nav-link ps-3 ps-lg-2 text-white dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
