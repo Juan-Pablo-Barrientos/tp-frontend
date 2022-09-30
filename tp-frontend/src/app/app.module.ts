@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -22,6 +21,7 @@ import { AuthorGuard } from './auth/guards/author.guard';
 import { ProvinceListComponent } from './components/province-list/province-list.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { UserComponent } from './components/user/user.component';
+import { DisqusModule } from 'ngx-disqus';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { UserComponent } from './components/user/user.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule,
     NgbModule,
     SharedModule,
     FontAwesomeModule,
@@ -49,6 +48,8 @@ import { UserComponent } from './components/user/user.component';
     AuthModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    DisqusModule.forRoot('fakenews-4'),
+    HttpClientJsonpModule
   ],
   providers: [AuthGuard,AuthorGuard],
   bootstrap: [AppComponent]

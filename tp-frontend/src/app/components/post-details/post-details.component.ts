@@ -13,7 +13,6 @@ import { ResponseWithMessage } from 'src/app/models/Responses/responseWithMessag
   styleUrls: ['./post-details.component.scss']
 })
 export class PostDetailsComponent implements OnInit {
-
   postDetails: Post = new Post();
   idPost : string;
   routeSubscription: any;

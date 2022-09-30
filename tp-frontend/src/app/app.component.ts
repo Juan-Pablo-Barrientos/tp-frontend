@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth/service/auth.service';
 import { DataService } from './shared/services/data.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
