@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Author } from 'src/app/models/author';
 import { Category } from 'src/app/models/category';
+import { Poll } from 'src/app/models/poll';
 import { Post } from 'src/app/models/post';
 import { Province } from 'src/app/models/province';
 import { RequestResponse } from 'src/app/models/Responses/requestResponse';
@@ -47,6 +48,10 @@ export class DataService {
     return this.http.put<Response>(this.baseUrl + 'provinces/' + idProvince, request);
   }
 
+  editPoll(request: any, idPoll: number): Observable<Response> {
+    return this.http.put<Response>(this.baseUrl + 'polls/' + idPoll, request);
+  }
+
   delUser(idUser: number): Observable<Response> {
     return this.http.delete<Response>(this.baseUrl + 'users/' + idUser);
   }
@@ -59,6 +64,10 @@ export class DataService {
     return this.http.get<RequestResponse<Province[]>>(this.baseUrl + 'provinces');
   }
 
+  getPolls(): Observable<RequestResponse<Poll[]>> {
+    return this.http.get<RequestResponse<Poll[]>>(this.baseUrl + 'polls');
+  }
+
   getCategories(): Observable<RequestResponse<Category[]>> {
     return this.http.get<RequestResponse<Category[]>>(this.baseUrl + 'categories');
   }
@@ -69,6 +78,10 @@ export class DataService {
 
   delProvinces(id: number): Observable<ResponseWithMessage<Province>> {
     return this.http.delete<ResponseWithMessage<Province>>(this.baseUrl + 'provinces/' + id);
+  }
+
+  delPoll(id: number): Observable<ResponseWithMessage<Poll>> {
+    return this.http.delete<ResponseWithMessage<Poll>>(this.baseUrl + 'polls/' + id);
   }
 
   delCategory(id: number): Observable<ResponseWithMessage<Category>> {
@@ -89,6 +102,10 @@ export class DataService {
 
   addUser(request: User): Observable<ArrayBuffer> {
     return this.http.post<ArrayBuffer>(this.baseUrl + 'users', request);
+  }
+
+  addPoll(request: Poll): Observable<ArrayBuffer> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + 'polls', request);
   }
 
   addProvince(request: any): Observable<ArrayBuffer> {
@@ -112,7 +129,11 @@ export class DataService {
   }
 
   editUserPassword(request: any): Observable<ArrayBuffer> {
-    return this.http.post<ArrayBuffer>(this.baseUrl + '/users/changepassword', request);
+    return this.http.put<ArrayBuffer>(this.baseUrl + 'users/password/change', request);
+  }
+
+  editPost(request: any,idPost:any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + 'posts/'+idPost, request,{ observe: 'response' });
   }
 
 }

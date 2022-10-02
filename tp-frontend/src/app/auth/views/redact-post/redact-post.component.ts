@@ -26,7 +26,6 @@ export class RedactPostComponent implements OnInit {
       categoryControl: new FormControl('',[Validators.required]),
       provinceControl: new FormControl('',[Validators.required]),
       bodyControl: new FormControl('',[Validators.required]),
-      requireSubscriptionControl: new FormControl(''),
       file: new FormControl('', [Validators.required]),
       fileSource: new FormControl('', [Validators.required]),
     });

@@ -5,7 +5,8 @@
   <div class="col-12 col-sm-6 d-flex flex-column justify-content-between">
     <div class="row mb-3">
       <h6 class="fst-italic mt-2">{{postDetails.category.name}}</h6>
-      <h1>{{postDetails.title}}</h1>
+      <h1>{{postDetails.title}} <a *ngIf="this.authService.loggedUser?.role==='Admin' || this.authService.loggedUser?.id===postDetails.userId" [routerLink]="['/editPost', postDetails.id]"><fa-icon [icon]="faPencil" size="xs"></fa-icon></a></h1>
+
       <div class="mb-5">
         <h6 class="d-inline">Author: </h6>
         <a [routerLink]="['/user', postDetails.userId]"><p class="d-inline">{{postDetails.user.name+" "+postDetails.user.surname}}</p></a>
@@ -13,13 +14,35 @@
       <p>{{postDetails.body}}</p>
     </div>
     <div class="row">
-      <div class="col-12 col-sm-7 mb-2 mb-sm-0">
+      <div class="col">
         <button routerLink="/" class="btn btn-primary text-white w-100">Volver</button>
       </div>
-      <div class="col-12 col-sm-5" *ngIf="this.authService.getUserRole()==='Author' && this.authService.isLoggedIn()">
-        <button (click)="onClickDeleteButton()" class="btn btn-danger w-100">Delete</button>
+      <div class="col" *ngIf="this.authService.loggedUser?.role==='Admin' || this.authService.loggedUser?.id===postDetails.userId">
+        <button type="button" (click)="openDelete(modalDelete)" class="btn btn-danger btn-rounded w-100">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
       </div>
     </div>
   </div>
 </div>
 <disqus [identifier]="'PostAuthor/'+idPost" [language]="'spanish'" ></disqus>
+
+<ng-template #modalDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modalDelete">Borrar Noticia</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body lead">
+    <form>
+      <div class="mb-3">
+        <label for="dateOfBirth">Está seguro de que quiere borrar la noticia {{postDetails.title}}</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="onClickDeleteButton(postDetails.id.toString());modal.close('Confirm click')">Sí</button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancelar</button>
+  </div>
+</ng-template>

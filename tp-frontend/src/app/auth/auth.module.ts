@@ -7,13 +7,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RedactPostComponent } from './views/redact-post/redact-post.component';
 import { AuthorGuard } from './guards/author.guard';
+import { EditPostComponent } from './views/edit-post/edit-post.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RedactPostComponent
+    RedactPostComponent,
+    EditPostComponent
   ],
   providers:[
     AuthGuard,

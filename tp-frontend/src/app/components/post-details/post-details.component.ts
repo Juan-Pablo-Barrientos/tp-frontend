@@ -7,16 +7,20 @@ import { Post } from 'src/app/models/post';
 import { DataService } from 'src/app/shared/services/data.service';
 import { RequestResponse } from 'src/app/models/Responses/requestResponse';
 import { ResponseWithMessage } from 'src/app/models/Responses/responseWithMessage';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.scss']
 })
 export class PostDetailsComponent implements OnInit {
+  faTrash=faTrash
+  faPencil=faPencil
   postDetails: Post = new Post();
   idPost : string;
   routeSubscription: any;
-  constructor(private dataService: DataService, private router:Router, private route: ActivatedRoute, public authService:AuthService, private toastr:ToastrService) {
+  constructor(private dataService: DataService, private router:Router, private route: ActivatedRoute, public authService:AuthService, private toastr:ToastrService, private modalService:NgbModal) {
   this.idPost = this.route.snapshot.paramMap.get("id")!;
   }
 
@@ -30,8 +34,8 @@ export class PostDetailsComponent implements OnInit {
       });
   }
 
-  onClickDeleteButton(){
-    this.dataService.deletePost(this.idPost).subscribe(async (res:ResponseWithMessage<Post>) => {
+  onClickDeleteButton(idPost:string){
+    this.dataService.deletePost(idPost).subscribe(async (res:ResponseWithMessage<Post>) => {
       if (!res.error){
         this.toastr.success('La noticia fue borrada', 'Éxito',{positionClass:'toast-bottom-right'});
         this.router.navigate(['/home']);
@@ -40,4 +44,9 @@ export class PostDetailsComponent implements OnInit {
       }
     })
   }
+
+openDelete(content: any) {
+  this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
+}
+
 }

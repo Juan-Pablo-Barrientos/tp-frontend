@@ -2,19 +2,28 @@ import { BaseClass, IBaseClass } from "./baseClass";
 import { Category } from "./category";
 import { Province } from "./province";
 import { UserVotes } from "./user_votes";
+import {PollValue} from "./poll_value"
 
 interface IPoll extends IBaseClass {
     description: string;
-    Polls: Poll[];
-    Category: Category;
-    Province: Province;
-    UserVotes: UserVotes[];
+    polls: Poll[];
+    categoryId:string;
+    category: Category;
+    province: Province;
+    userVotes: UserVotes[];
+    pollDate:string;
+    pollValueArray:string[];
+    poll_values:PollValue[];
 }
 
 export class Poll extends BaseClass implements IPoll {
     description: string = "";
-    Polls: Poll[] = new Array();
-    Category: Category = new Category();
-    Province: Province = new Province();
-    UserVotes: UserVotes[] = new Array();
+    categoryId:string="";
+    polls: Poll[] = new Array();
+    category: Category = new Category();
+    province: Province = new Province();
+    userVotes: UserVotes[] = new Array();
+    pollDate:string="";
+    pollValueArray:string[]=new Array();
+    poll_values:PollValue[]= new Array();
 }

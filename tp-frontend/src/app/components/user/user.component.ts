@@ -51,17 +51,18 @@ export class UserComponent implements OnInit {
 
   onSubmitPassword(){
     let request = {
-      old : this.passwordChangeForm.controls.oldPasswordControl.value,
-      new : this.passwordChangeForm.controls.newPasswordControl.value,
-      id: this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).id_user
+      oldPassword : this.passwordChangeForm.controls.oldPasswordControl.value,
+      newPassword : this.passwordChangeForm.controls.newPasswordControl.value,
+      userId: this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).id_user
     }
     this.passwordChangeForm.reset()
     this.dataService.editUserPassword(request).subscribe({
+      next : (res:any)=>{
+      this.toastr.success('Se ha cambiado la contraseña', 'Éxito',{positionClass:'toast-bottom-right'})
+    },
       error: (error: HttpErrorResponse) => {
-        if (error.status==200){
-          this.toastr.success('La contraseña ha sido cambiada', 'Éxito',{positionClass:'toast-bottom-right'});
-        }else if (error.status==400){
-          this.toastr.error('La contraseña no coincide', '🥺',{positionClass:'toast-bottom-right'});
+        if (error.status==404){
+          this.toastr.error('Contraseña erronea', '🥺',{positionClass:'toast-bottom-right'});
         }}
     });
   }

@@ -12,6 +12,8 @@ import { UserListComponent } from './components/user-list/user-list.component'
 import { ProvinceListComponent } from './components/province-list/province-list.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { UserComponent } from './components/user/user.component';
+import { PollListComponent } from './components/poll-list/poll-list.component';
+import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
 
 const routes: Routes = [
   {
@@ -46,6 +48,13 @@ const routes: Routes = [
     title: 'Listado de categorias'
   },
   {
+    path: 'pollList',
+    component: PollListComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard],
+    title: 'Listado de encuestas'
+  },
+  {
     path: 'register',
     component: RegisterComponent,
     title: 'Registro'
@@ -66,6 +75,13 @@ const routes: Routes = [
     canActivate:[AuthorGuard],
     canLoad:[AuthorGuard],
     title: 'Redactar noticia'
+  },
+  {
+    path: 'editPost/:id',
+    component: EditPostComponent,
+    canActivate:[AuthorGuard],
+    canLoad:[AuthorGuard],
+    title: 'Editar noticia'
   },
   {
     path: 'user/:id',

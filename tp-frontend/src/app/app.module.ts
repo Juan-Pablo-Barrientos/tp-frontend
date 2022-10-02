@@ -22,6 +22,8 @@ import { ProvinceListComponent } from './components/province-list/province-list.
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { UserComponent } from './components/user/user.component';
 import { DisqusModule } from 'ngx-disqus';
+import { PollListComponent } from './components/poll-list/poll-list.component';
+import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { DisqusModule } from 'ngx-disqus';
     CardComponent,
     ProvinceListComponent,
     CategoryListComponent,
-    UserComponent
+    UserComponent,
+    PollListComponent,
   ],
   imports: [
     FormsModule,
