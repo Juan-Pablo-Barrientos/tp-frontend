@@ -1,12 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-// Setting Bootstrap SASS variables before importing
-$primary: #f15a08;
-$secondary: #2a324b;
-$info: #9C0D38;
-$light: #fefeff;
 
 /* Importing Bootstrap SCSS file. */
+@import "./variables.scss";
 @import "~bootstrap/scss/bootstrap";
 @import "~ngx-toastr/toastr";
 

@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
   mostClickedPosts : any[] = [];
   todayPoll:Poll= new Poll()
 
-  constructor(public authService:AuthService, public dataService:DataService) { }
+  constructor(public authService:AuthService, private dataService:DataService) { }
 
   ngOnInit(): void {
 
