@@ -28,11 +28,11 @@
     <h6 class="h6">{{todayPoll.description}}</h6>
     <form [formGroup]="pollRadioForm">
       <div *ngFor="let poll_value of todayPoll.poll_values" class="lead form-check">
-        <input type="radio" class="me-2 form-check-input" [id]="poll_value.description" formControlName="poll_values" name="poll_values" [value]="poll_value.id"  (change)="votePoll()"/>
+        <input type="radio" class="me-2 form-check-input" [id]="poll_value.description" formControlName="poll_values" name="poll_values" [value]="poll_value.id"  (change)="votePoll()" *ngIf="this.authService.loggedUser"/>
           <div class=" rounded d-flex" >
             <label class="fs-6 m-1"[for]="poll_value.description">{{poll_value.description}}</label>
             <div class="ms-auto"style="width:60%">
-              <div class="bg-success rounded" [ngStyle]="{'width': (poll_value.votesByUsers/todayPoll.totalVotes)*100 + '%'}"><label class="fs-6 m-1">{{(poll_value.votesByUsers/todayPoll.totalVotes)*100}}%</label>
+              <div class="bg-success rounded" [ngStyle]="{'width': (poll_value.votesByUsers/todayPoll.totalVotes)*100 + '%'}"><label class="fs-6 m-1">{{((poll_value.votesByUsers/todayPoll.totalVotes)*100)| number:'1.0-0'}}%</label>
               </div>
             </div>
           </div>

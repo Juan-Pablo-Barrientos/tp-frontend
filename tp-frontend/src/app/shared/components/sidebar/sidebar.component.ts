@@ -21,11 +21,23 @@ export class SidebarComponent implements OnInit {
     this.pollRadioForm = new FormGroup({
       poll_values: new FormControl('')
     })
-
     this.dataService.todayPoll$.subscribe((response)=>{
       if(response.data){
-      this.todayPoll=response.data}
+      this.todayPoll=response.data
+      if(this.authService.loggedUser){
+      let request:any={
+      userId: this.authService.loggedUser.id,
+      pollId: response.data.id
+      }
+      this.dataService.getLoggedUserVote(request).subscribe((response)=>{
+        console.log(response)
+        this.pollRadioForm.controls.poll_values.setValue(response.data.pollValueId)
+      })
+    }
+    }
     })
+
+
 
     this.dataService.mostClickedPosts$.subscribe((response) => {
       if (response.data) {

@@ -63,6 +63,7 @@ export class AuthService {
   logout() {
     this.doLogoutUser();
     if (this.router.url!== '/login') {this.router.navigate(['/home']);}
+    this.loggedUser=null
   }
 
   isLoggedIn() {

@@ -10,6 +10,7 @@ import { RequestResponse } from 'src/app/models/Responses/requestResponse';
 import { ResponseExists } from 'src/app/models/Responses/responseExists';
 import { ResponseWithMessage } from 'src/app/models/Responses/responseWithMessage';
 import { User } from 'src/app/models/user';
+import { UserVotes } from 'src/app/models/user_votes';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -148,6 +149,10 @@ export class DataService {
 
   votePoll(request: any): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + 'user_votes', request,{ observe: 'response' });
+  }
+
+  getLoggedUserVote(request:any): Observable<RequestResponse<UserVotes>> {
+    return this.http.post<RequestResponse<UserVotes>>(this.baseUrl + "user_votes/getOne", request);
   }
 
 }

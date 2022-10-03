@@ -140,6 +140,11 @@ openEdit(content: any, idPoll:number) {
      option3EditControl: new FormControl(poll.poll_values[2] ? poll.poll_values[2].description : ''),
      option4EditControl: new FormControl(poll.poll_values[3] ? poll.poll_values[3].description : ''),
      option5EditControl: new FormControl(poll.poll_values[4] ? poll.poll_values[4].description : ''),
+     option1EditId: new FormControl(poll.poll_values[0].id,[Validators.required]),
+     option2EditId: new FormControl(poll.poll_values[1].id,[Validators.required]),
+     option3EditId: new FormControl(poll.poll_values[2] ? poll.poll_values[2].id : ''),
+     option4EditId: new FormControl(poll.poll_values[3] ? poll.poll_values[3].id : ''),
+     option5EditId: new FormControl(poll.poll_values[4] ? poll.poll_values[4].id : ''),
    })
    this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
  }
