@@ -5,13 +5,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrenciesComponent } from './components/currencies/currencies.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [NavbarComponent, FooterComponent, SidebarComponent, CurrenciesComponent],
-  imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule, NgbModule,],
+  imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule, NgbModule,FormsModule,ReactiveFormsModule],
   exports: [FooterComponent, NavbarComponent, SidebarComponent, CurrenciesComponent],
 })
 export class SharedModule { }

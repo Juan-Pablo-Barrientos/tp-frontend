@@ -23,3 +23,7 @@ figure img {
   outline: solid 5px;
   outline-color: $secondary;
 }
+
+input[type='radio'] {
+  filter: grayscale(100%) contrast(200%);
+}

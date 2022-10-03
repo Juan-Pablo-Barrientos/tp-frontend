@@ -19,11 +19,17 @@ export class DataService {
   private baseUrl = environment.apiUrl;
   posts: any = [];
   mostClickedPosts$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  todayPoll$:BehaviorSubject<any> = new BehaviorSubject<any>([])
   constructor(private http: HttpClient) { }
 
   reloadMostClickedPosts() {
     this.getMostClickedPosts().subscribe((response: any) => {
       this.mostClickedPosts$.next(response);
+    });
+  }
+  reloadtodayPoll() {
+    this.getTodayPoll().subscribe((response: any) => {
+      this.todayPoll$.next(response);
     });
   }
 
@@ -138,6 +144,10 @@ export class DataService {
 
   getTodayPoll(): Observable<RequestResponse<Poll>> {
     return this.http.get<RequestResponse<Poll>>(this.baseUrl + "polls/today/poll");
+  }
+
+  votePoll(request: any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + 'user_votes', request,{ observe: 'response' });
   }
 
 }

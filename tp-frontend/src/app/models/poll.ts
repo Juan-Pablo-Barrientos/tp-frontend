@@ -14,6 +14,7 @@ interface IPoll extends IBaseClass {
     pollDate:string;
     pollValueArray:string[];
     poll_values:PollValue[];
+    totalVotes:number;
 }
 
 export class Poll extends BaseClass implements IPoll {
@@ -26,4 +27,5 @@ export class Poll extends BaseClass implements IPoll {
     pollDate:string="";
     pollValueArray:string[]=new Array();
     poll_values:PollValue[]= new Array();
+    totalVotes:number=0;
 }

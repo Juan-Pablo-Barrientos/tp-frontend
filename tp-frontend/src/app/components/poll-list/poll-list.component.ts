@@ -81,11 +81,11 @@ export class PollListComponent implements OnInit {
     descriptionControl: new FormControl('',[Validators.required]),
     dateControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
     categoryControl: new FormControl('',[Validators.required]),
-    option1Control: new FormControl('',[Validators.required]),
-    option2Control: new FormControl('',[Validators.required]),
-    option3Control: new FormControl('',[]),
-    option4Control: new FormControl('',[]),
-    option5Control: new FormControl('',[]),
+    option1Control: new FormControl('',[Validators.required,Validators.maxLength(5)]),
+    option2Control: new FormControl('',[Validators.required,Validators.maxLength(5)]),
+    option3Control: new FormControl('',[Validators.maxLength(5)]),
+    option4Control: new FormControl('',[Validators.maxLength(5)]),
+    option5Control: new FormControl('',[Validators.maxLength(5)]),
    });
    this.modalService.open(content, {ariaLabelledBy: 'modalCreate'}).result
  }

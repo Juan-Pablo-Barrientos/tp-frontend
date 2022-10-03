@@ -22,11 +22,22 @@
     </ul>
     <hr>
   </div>
-
   <div *ngIf="todayPoll.description">
     <h4 class="h4 text-center" >Encuesta del dia</h4>
     <hr>
     <h6 class="h6">{{todayPoll.description}}</h6>
+    <form [formGroup]="pollRadioForm">
+      <div *ngFor="let poll_value of todayPoll.poll_values" class="lead form-check">
+        <input type="radio" class="me-2 form-check-input" [id]="poll_value.description" formControlName="poll_values" name="poll_values" [value]="poll_value.id"  (change)="votePoll()"/>
+          <div class=" rounded d-flex" >
+            <label class="fs-6 m-1"[for]="poll_value.description">{{poll_value.description}}</label>
+            <div class="ms-auto"style="width:60%">
+              <div class="bg-success rounded" [ngStyle]="{'width': (poll_value.votesByUsers/todayPoll.totalVotes)*100 + '%'}"><label class="fs-6 m-1">{{(poll_value.votesByUsers/todayPoll.totalVotes)*100}}%</label>
+              </div>
+            </div>
+          </div>
+      </div>
+    </form>
     <hr>
   </div>
 
@@ -35,7 +46,6 @@
     <h5 class="h5 text-center">Más popular 🔥</h5>
     <hr>
     <div *ngFor="let post of this.mostClickedPosts;let i=index">
-
       <figure class="fit-picture ">
         <a class="sidebarText" [routerLink]="['/PostAuthor', post.id]">
           <p class="lead post-title text-center">#{{i+1}} - {{post.title}}</p>
@@ -44,44 +54,6 @@
       </figure>
       <hr>
     </div>
-
-
-  </div>
-  <div *ngIf="this.legalDollar && this.illegalDollar && this.legalEuro && this.illegalEuro">
-    <h5 class="h5 text-center">Cotizaciones</h5>
-    <hr>
-    <div class="ps-1">
-      <h5 class="currency-title text-center">Dólar 💵</h5>
-      <hr class="w-50 mx-auto">
-      <p class="currency-item">Promedio del día: ${{legalDollar.value_avg}}</p>
-      <p class="currency-item">Venta: ${{legalDollar.value_sell}}</p>
-      <p class="currency-item">Compra: ${{legalDollar.value_buy}}</p>
-    </div>
-    <hr class="w-50 mx-auto">
-    <div class="ps-1">
-      <h5 class="currency-title text-center">Dólar Blue 💵</h5>
-      <hr class="w-50 mx-auto">
-      <p class="currency-item">Promedio del día: ${{illegalDollar.value_avg}}</p>
-      <p class="currency-item">Venta: ${{illegalDollar.value_sell}}</p>
-      <p class="currency-item">Compra: ${{illegalDollar.value_buy}}</p>
-    </div>
-    <hr class="w-50 mx-auto">
-    <div class="ps-1">
-      <h5 class="currency-title text-center">Euro 💶</h5>
-      <hr class="w-50 mx-auto">
-      <p class="currency-item">Promedio del día: ${{legalEuro.value_avg}}</p>
-      <p class="currency-item">Venta: ${{legalEuro.value_sell}}</p>
-      <p class="currency-item">Compra: ${{legalEuro.value_buy}}</p>
-    </div>
-    <hr class="w-50 mx-auto">
-    <div class="ps-1">
-      <h5 class="currency-title text-center">Euro Blue 💶</h5>
-      <hr class="w-50 mx-auto">
-      <p class="currency-item">Promedio del día: ${{illegalEuro.value_avg}}</p>
-      <p class="currency-item">Venta: ${{illegalEuro.value_sell}}</p>
-      <p class="currency-item">Compra: ${{illegalEuro.value_buy}}</p>
-    </div>
-    <hr>
 
 
   </div>
