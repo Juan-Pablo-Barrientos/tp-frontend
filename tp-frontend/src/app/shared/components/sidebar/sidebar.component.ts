@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import { Poll } from 'src/app/models/poll';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -13,10 +14,15 @@ export class SidebarComponent implements OnInit {
   legalEuro: any;
   illegalEuro: any;
   mostClickedPosts : any[] = [];
+  todayPoll:Poll= new Poll()
 
   constructor(public authService:AuthService, public dataService:DataService) { }
 
   ngOnInit(): void {
+
+    this.dataService.getTodayPoll().subscribe((response)=>{
+      this.todayPoll=response.data
+    })
 
     this.dataService.mostClickedPosts$.subscribe((response) => {
       if (response.data) {

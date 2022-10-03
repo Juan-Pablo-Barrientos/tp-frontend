@@ -136,4 +136,8 @@ export class DataService {
     return this.http.put<ArrayBuffer>(this.baseUrl + 'posts/'+idPost, request,{ observe: 'response' });
   }
 
+  getTodayPoll(): Observable<RequestResponse<Poll>> {
+    return this.http.get<RequestResponse<Poll>>(this.baseUrl + "polls/today/poll");
+  }
+
 }

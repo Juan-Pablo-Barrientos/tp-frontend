@@ -22,6 +22,15 @@
     </ul>
     <hr>
   </div>
+
+  <div *ngIf="todayPoll.description">
+    <h4 class="h4 text-center" >Encuesta del dia</h4>
+    <hr>
+    <h6 class="h6">{{todayPoll.description}}</h6>
+    <hr>
+  </div>
+
+
   <div>
     <h5 class="h5 text-center">Más popular 🔥</h5>
     <hr>
