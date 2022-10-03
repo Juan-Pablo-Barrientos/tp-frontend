@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   illegalEuro: any;
   mostClickedPosts : any[] = [];
 
-  constructor(public authService:AuthService, public dataService:DataService) { }
+  constructor(public authService:AuthService, private dataService:DataService) { }
 
   ngOnInit(): void {
 
