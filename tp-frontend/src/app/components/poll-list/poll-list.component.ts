@@ -53,12 +53,12 @@ export class PollListComponent implements OnInit {
   poll.description = this.createPollForm.controls.descriptionControl.value;
   poll.pollDate = this.createPollForm.controls.dateControl.value;
   poll.categoryId = this.createPollForm.controls.categoryControl.value;
-  poll.pollValueArray= new Array()
-  poll.pollValueArray.push({description:this.createPollForm.controls.option1Control.value})
-  poll.pollValueArray.push({description:this.createPollForm.controls.option2Control.value})
-  this.createPollForm.controls.option3Control.value ? poll.pollValueArray.push({description:this.createPollForm.controls.option3Control.value}): null
-  this.createPollForm.controls.option4Control.value ? poll.pollValueArray.push({description:this.createPollForm.controls.option4Control.value}): null
-  this.createPollForm.controls.option5Control.value ? poll.pollValueArray.push({description:this.createPollForm.controls.option5Control.value}): null
+  poll.poll_values= new Array()
+  poll.poll_values.push({description:this.createPollForm.controls.option1Control.value})
+  poll.poll_values.push({description:this.createPollForm.controls.option2Control.value})
+  this.createPollForm.controls.option3Control.value ? poll.poll_values.push({description:this.createPollForm.controls.option3Control.value}): null
+  this.createPollForm.controls.option4Control.value ? poll.poll_values.push({description:this.createPollForm.controls.option4Control.value}): null
+  this.createPollForm.controls.option5Control.value ? poll.poll_values.push({description:this.createPollForm.controls.option5Control.value}): null
    this.dataService.addPoll(poll).subscribe({
      next : (res:any)=>{
        this.toastr.success('Se ha creado la encuesta', 'Éxito',{positionClass:'toast-bottom-right'})
@@ -81,11 +81,11 @@ export class PollListComponent implements OnInit {
     descriptionControl: new FormControl('',[Validators.required]),
     dateControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
     categoryControl: new FormControl('',[Validators.required]),
-    option1Control: new FormControl('',[Validators.required,Validators.maxLength(5)]),
-    option2Control: new FormControl('',[Validators.required,Validators.maxLength(5)]),
-    option3Control: new FormControl('',[Validators.maxLength(5)]),
-    option4Control: new FormControl('',[Validators.maxLength(5)]),
-    option5Control: new FormControl('',[Validators.maxLength(5)]),
+    option1Control: new FormControl('',[Validators.required, Validators.maxLength(15)]),
+    option2Control: new FormControl('',[Validators.required, Validators.maxLength(15)]),
+    option3Control: new FormControl('',[Validators.maxLength(15)]),
+    option4Control: new FormControl('',[Validators.maxLength(15)]),
+    option5Control: new FormControl('',[Validators.maxLength(15)]),
    });
    this.modalService.open(content, {ariaLabelledBy: 'modalCreate'}).result
  }
@@ -101,27 +101,30 @@ export class PollListComponent implements OnInit {
    poll.description = this.editPollForm.controls.descriptionEditControl.value;
    poll.pollDate = this.editPollForm.controls.dateEditControl.value;
    poll.categoryId = this.editPollForm.controls.categoryEditControl.value;
-   poll.pollValueArray= new Array()
-   poll.pollValueArray.push({
+   poll.poll_values= new Array()
+   poll.poll_values.push({
     description:this.editPollForm.controls.option1EditControl.value,
     id:this.editPollForm.controls.option1EditId.value
   })
-   poll.pollValueArray.push({
+   poll.poll_values.push({
     description:this.editPollForm.controls.option2EditControl.value,
     id:this.editPollForm.controls.option2EditId.value
   })
-   this.editPollForm.controls.option3EditControl.value ? poll.pollValueArray.push({
+   this.editPollForm.controls.option3EditControl.value ? poll.poll_values.push({
     description:this.editPollForm.controls.option3EditControl.value,
     id:this.editPollForm.controls.option3EditId.value
   }): null
-   this.editPollForm.controls.option4EditControl.value ? poll.pollValueArray.push({
+   this.editPollForm.controls.option4EditControl.value ? poll.poll_values.push({
     description:this.editPollForm.controls.option4EditControl.value,
     id:this.editPollForm.controls.option4EditId.value
   }): null
-   this.editPollForm.controls.option5EditControl.value ? poll.pollValueArray.push({
+   this.editPollForm.controls.option5EditControl.value ? poll.poll_values.push({
     description:this.editPollForm.controls.option5EditControl.value,
     id:this.editPollForm.controls.option5EditId.value
   }): null
+  poll.poll_values.forEach((poll_value)=>{
+    if(poll_value.description!=='') poll_value.PollId=poll.id
+  })
    this.dataService.editPoll(poll,this.editPollForm.controls.idControl.value).subscribe({
      next : ()=>{
        this.toastr.success('Se ha editado la encuesta', 'Éxito',{positionClass:'toast-bottom-right'})
@@ -150,11 +153,11 @@ openEdit(content: any, idPoll:number) {
      descriptionEditControl: new FormControl(poll.description,[Validators.required]),
      dateEditControl: new FormControl(poll.pollDate,[Validators.required, Validators.maxLength(50)]),
      categoryEditControl: new FormControl(poll.categoryId,[Validators.required]),
-     option1EditControl: new FormControl(poll.poll_values[0].description,[Validators.required]),
-     option2EditControl: new FormControl(poll.poll_values[1].description,[Validators.required]),
-     option3EditControl: new FormControl(poll.poll_values[2] ? poll.poll_values[2].description : ''),
-     option4EditControl: new FormControl(poll.poll_values[3] ? poll.poll_values[3].description : ''),
-     option5EditControl: new FormControl(poll.poll_values[4] ? poll.poll_values[4].description : ''),
+     option1EditControl: new FormControl(poll.poll_values[0].description,[Validators.required, Validators.maxLength(15)]),
+     option2EditControl: new FormControl(poll.poll_values[1].description,[Validators.required, Validators.maxLength(15)]),
+     option3EditControl: new FormControl(poll.poll_values[2] ? poll.poll_values[2].description : '',[ Validators.maxLength(15)]),
+     option4EditControl: new FormControl(poll.poll_values[3] ? poll.poll_values[3].description : '',[ Validators.maxLength(15)]),
+     option5EditControl: new FormControl(poll.poll_values[4] ? poll.poll_values[4].description : '',[ Validators.maxLength(15)]),
      option1EditId: new FormControl(poll.poll_values[0].id,[Validators.required]),
      option2EditId: new FormControl(poll.poll_values[1].id,[Validators.required]),
      option3EditId: new FormControl(poll.poll_values[2] ? poll.poll_values[2].id : ''),

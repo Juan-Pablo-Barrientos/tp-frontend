@@ -35,7 +35,6 @@ export class EditPostComponent implements OnInit {
 
     this.dataService.getCategories().subscribe((response:any)=>{
       this.categories=response.data;
-      console.log(response.data)
     })
 
     this.dataService.getProvinces().subscribe((response:any)=>{

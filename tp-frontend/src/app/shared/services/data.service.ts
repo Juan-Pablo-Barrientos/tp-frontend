@@ -30,7 +30,9 @@ export class DataService {
   }
   reloadtodayPoll() {
     this.getTodayPoll().subscribe((response: any) => {
+      if (response){
       this.todayPoll$.next(response);
+      }
     });
   }
 

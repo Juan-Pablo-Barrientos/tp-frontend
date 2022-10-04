@@ -13,7 +13,7 @@ interface IPoll extends IBaseClass {
     userVotes: UserVotes[];
     pollDate:string;
     pollValueArray:any[];
-    poll_values:PollValue[];
+    poll_values:any[];
     totalVotes:number;
 }
 
@@ -26,6 +26,6 @@ export class Poll extends BaseClass implements IPoll {
     userVotes: UserVotes[] = new Array();
     pollDate:string="";
     pollValueArray:any[]=new Array();
-    poll_values:PollValue[]= new Array();
+    poll_values:any[]= new Array();
     totalVotes:number=0;
 }

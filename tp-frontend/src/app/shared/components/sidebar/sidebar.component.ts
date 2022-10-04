@@ -29,8 +29,8 @@ export class SidebarComponent implements OnInit {
       userId: this.authService.loggedUser.id,
       pollId: response.data.id
       }
+      this.pollRadioForm.controls.poll_values.setValue('')
       this.dataService.getLoggedUserVote(request).subscribe((response)=>{
-        console.log(response)
         this.pollRadioForm.controls.poll_values.setValue(response.data.pollValueId)
       })
     }
@@ -55,7 +55,6 @@ export class SidebarComponent implements OnInit {
     this.dataService.votePoll(voteRequest).subscribe(()=>{
       this.dataService.getTodayPoll().subscribe((response)=>{
         this.todayPoll=response.data
-        console.log(this.todayPoll)
       })})
   }
 

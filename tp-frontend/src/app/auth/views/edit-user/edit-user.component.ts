@@ -20,7 +20,7 @@ export class EditUserComponent implements OnInit {
 editUserForm: any;
 usernameControl:any;
 errors: any[]=[];
-user:User=new User()
+user:any={};
 
 constructor(private dataService : DataService, private toastr:ToastrService, private router:Router, private route:ActivatedRoute) {
 }
@@ -37,9 +37,8 @@ ngOnInit(): void {
   })
 
 
-  this.dataService.getUserWithPosts(parseInt(this.route.snapshot.paramMap.get("id")!)).subscribe((response:RequestResponse<User>)=>{
+  this.dataService.getUserWithPosts(parseInt(this.route.snapshot.paramMap.get("id")!)).subscribe((response:RequestResponse<User>)=>{console.log(response)
     this.user=response.data
-    console.log(this.user)
     this.editUserForm.controls['usernameControl'].setValue(this.user.username)
     this.editUserForm.controls['nameControl'].setValue(this.user.name)
     this.editUserForm.controls['surnameControl'].setValue(this.user.surname)
@@ -51,7 +50,7 @@ ngOnInit(): void {
 
 
 onSubmit() {
-  let user = new User();
+  let user:any={};
   user.name = this.editUserForm.controls.nameControl.value;
   user.surname = this.editUserForm.controls.surnameControl.value;
   user.username = this.editUserForm.controls.usernameControl.value;
@@ -62,12 +61,10 @@ onSubmit() {
   }
   this.getFormValidationErrors()
   if (this.errors.length!==0){
-    console.log(this.errors)
     this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
     this.editUserForm.markAllAsTouched();
   }else {
-  this.dataService.editUser(user,this.user.id).subscribe(async (res:any) => {
-  console.log(res)
+  this.dataService.editUser(user,parseInt(this.route.snapshot.paramMap.get("id")!)).subscribe(async (res:any) => {
   if (!res.error){
     this.toastr.success('El editado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
     this.router.navigate(['/user', this.user.id])

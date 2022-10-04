@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
       phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     },{validators: [this.checkPasswords]})
 
-    this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
   }
 
   constructor(private dataService : DataService, private toastr:ToastrService, private router:Router) {
@@ -46,14 +45,11 @@ export class RegisterComponent implements OnInit {
     user.role = "Client";
     user.phoneNumber = this.signUpForm.controls.phoneControl.value;
     this.getFormValidationErrors()
-    console.log(this.errors)
     if (this.errors.length!==0){
-      console.log(this.errors)
       this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
       this.signUpForm.markAllAsTouched();
     }else {
     this.dataService.addUser(user).subscribe(async (res:any) => {
-    console.log(res)
     if (!res.error){
       this.toastr.success('El registro fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
       this.router.navigate(['/login']);
@@ -75,7 +71,7 @@ export class RegisterComponent implements OnInit {
 
   validateUser(control: AbstractControl) {
     return this.dataService.userExists(control.value).pipe(
-        map((res:any) => {console.log(res);
+        map((res:any) => {;
             return res.exist ? { 'usernameExists': true }:null ;
         })
     );

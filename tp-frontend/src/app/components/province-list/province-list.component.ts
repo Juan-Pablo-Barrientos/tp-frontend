@@ -41,7 +41,6 @@ export class ProvinceListComponent implements OnInit {
  }
 
  onSubmit(){
-  console.log("entra");
    let request = {
      name : this.createProvinceForm.controls.nameControl.value,
    }
