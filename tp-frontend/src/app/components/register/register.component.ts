@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     user.username = this.signUpForm.controls.usernameControl.value;
     user.password = this.signUpForm.controls.passwordControl.value;
     user.email = this.signUpForm.controls.emailControl.value;
-    user.role = "client";
+    user.role = "Client";
     user.phoneNumber = this.signUpForm.controls.phoneControl.value;
     this.getFormValidationErrors()
     console.log(this.errors)

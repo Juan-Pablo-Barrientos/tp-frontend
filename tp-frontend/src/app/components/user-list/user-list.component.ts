@@ -56,7 +56,7 @@ export class UserListComponent implements OnInit {
       role: this.editUserForm.controls.role.value,
       phoneNumber: this.editUserForm.controls.phoneNumberControl.value
     }
-    if (this.user.role==="Author") { request.bio= this.editUserForm.controls.bioControl.value}
+    if (this.user.role==="Author"||this.user.role==="Admin") { request.bio= this.editUserForm.controls.bioControl.value}
 
     this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe({
       next : ()=>{

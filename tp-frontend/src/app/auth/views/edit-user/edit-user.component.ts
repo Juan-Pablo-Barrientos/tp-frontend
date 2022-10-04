@@ -33,16 +33,19 @@ ngOnInit(): void {
     surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+    bioControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
   })
 
 
   this.dataService.getUserWithPosts(parseInt(this.route.snapshot.paramMap.get("id")!)).subscribe((response:RequestResponse<User>)=>{
     this.user=response.data
+    console.log(this.user)
     this.editUserForm.controls['usernameControl'].setValue(this.user.username)
     this.editUserForm.controls['nameControl'].setValue(this.user.name)
     this.editUserForm.controls['surnameControl'].setValue(this.user.surname)
     this.editUserForm.controls['emailControl'].setValue(this.user.email)
     this.editUserForm.controls['phoneControl'].setValue(this.user.phoneNumber)
+    this.editUserForm.controls['bioControl'].setValue(this.user.bio)
   })
 }
 
@@ -53,8 +56,10 @@ onSubmit() {
   user.surname = this.editUserForm.controls.surnameControl.value;
   user.username = this.editUserForm.controls.usernameControl.value;
   user.email = this.editUserForm.controls.emailControl.value;
-  user.role = "client";
   user.phoneNumber = this.editUserForm.controls.phoneControl.value;
+  if (this.editUserForm.controls.bioControl.value!==''){
+    user.bio=this.editUserForm.controls.bioControl.value
+  }
   this.getFormValidationErrors()
   if (this.errors.length!==0){
     console.log(this.errors)
@@ -78,6 +83,9 @@ reset() {
   this.editUserForm.controls['surnameControl'].setValue(this.user.surname)
   this.editUserForm.controls['emailControl'].setValue(this.user.email)
   this.editUserForm.controls['phoneControl'].setValue(this.user.phoneNumber)
+  if (this.editUserForm.controls.bioControl.value!==''){
+    this.editUserForm.controls['bioControl'].setValue(this.user.bio)
+  }
 }
 
 getFormControl() {

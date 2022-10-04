@@ -36,6 +36,10 @@
           <input type="text" formControlName="phoneControl" name="phone" id="phone" placeholder="Telefono" type="tel"
             class="form-control" />
         </div>
+        <div class="form-floating mb-2" *ngIf="user.role==='Author'||user.role==='Admin'">
+          <textarea type="text" formControlName="bioControl" name="bio" id="bio" placeholder="Bio" class="form-control" style="height: 300px"></textarea>
+          <label for="bio">Bio</label>
+        </div>
         <div class="d-flex flex-row justify-content-end">
           <button (click)="reset()" class="btn btn-secondary m-2">Reestablecer campos</button>
           <button type="submit" class="btn btn-primary text-white float-end m-2">Enviar</button>

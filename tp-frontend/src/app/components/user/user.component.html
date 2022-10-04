@@ -5,7 +5,8 @@
     <div class="col-12 col-sm-6 d-flex flex-column justify-content-between">
       <div class="row mb-3">
         <h1>{{user.name}} <small class="text-muted">({{user.surname}})</small><a *ngIf="this.authService.loggedUser?.role==='Admin' || this.authService.loggedUser?.id===user.id" [routerLink]="['/editUser', user.id]"><fa-icon [icon]="faPencil" size="xs"></fa-icon></a></h1>
-        <p>{{user.role}}</p>
+        <p *ngIf="user.role==='Client'">Cliente</p>
+        <p *ngIf="user.role==='Admin'||user.role==='Author'">Autor</p>
         <p>{{user.bio}}</p>
       </div>
       <div class="row">

@@ -152,7 +152,7 @@
           <label for="phone">Telefono</label>
         </div>
 
-        <div class="form-floating mb-2" *ngIf="user.role==='Author'">
+        <div class="form-floating mb-2" *ngIf="user.role==='Author'||user.role==='Admin'">
           <textarea type="text" formControlName="bioControl" name="bio" id="bio" placeholder="Bio" class="form-control" style="height: 300px"></textarea>
           <label for="bio">Bio</label>
         </div>
