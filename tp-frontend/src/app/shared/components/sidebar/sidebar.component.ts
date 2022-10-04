@@ -53,6 +53,8 @@ export class SidebarComponent implements OnInit {
       userId:this.authService.loggedUser.id
     }
     this.dataService.votePoll(voteRequest).subscribe(()=>{
+      console.log(this.todayPoll)
+
       this.dataService.getTodayPoll().subscribe((response)=>{
         this.todayPoll=response.data
       })})
