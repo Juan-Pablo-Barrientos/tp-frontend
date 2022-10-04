@@ -36,8 +36,10 @@ export class DataService {
     });
   }
 
-  getPosts(title: string): Observable<RequestResponse<Post[]>> {
-    let params = new HttpParams().set('title', title);
+  getPosts(title: any, categoryId:any, provinceId:any): Observable<RequestResponse<Post[]>> {
+    let params = new HttpParams().set('title',title);
+    if (categoryId) {params = params.append('categoryId', categoryId)}
+    if (provinceId) {params = params.append('provinceId',provinceId)}
     return this.http.get<RequestResponse<Post[]>>(this.baseUrl + 'posts', { params: params });
   }
 

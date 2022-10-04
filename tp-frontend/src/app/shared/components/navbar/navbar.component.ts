@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   }
 
   search() {
-    this.dataService.getPosts(this.title).subscribe((response: any) => {
+    this.dataService.getPosts(this.title,null,null).subscribe((response: any) => {
       this.dataService.posts = response.data;
     });
   }

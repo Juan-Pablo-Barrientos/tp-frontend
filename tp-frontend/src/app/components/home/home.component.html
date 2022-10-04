@@ -1,4 +1,29 @@
 <div class="container-fluid">
+  <div class="row mb-2">
+    <ngb-accordion #acc="ngbAccordion">
+      <ngb-panel class="lead"title="Filtros">
+        <ng-template ngbPanelContent>
+          <label class="lead">Categorias</label>
+          <form [formGroup]="filterForm">
+            <div class="d-block">
+              <div *ngFor="let category of categories" class="lead form-check form-check-inline">
+                  <input type="radio" class="me-2 form-check-input" formControlName="category" [id]="category.name" name="category" [value]="category.id"  (ngModelChange)="filter()">
+                  <label class="form-check-label"[for]="category.name">{{category.name}}</label>
+              </div>
+              <div>
+                <label class="lead " for="province">Provincia</label>
+                <select class="form-select mb-2" formControlName="province" name="province" id="province" aria-label="Default select example" (ngModelChange)="filter()">
+                  <option value='' selected>Seleccione provincia</option>
+                  <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <button type="button" class="btn btn-secondary m-2" (click)="cleanFilter()">Limpiar filtros</button>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
   <div class="row">
     <app-card class="col-12 col-sm-6 mb-4 px-0" *ngFor="let post of dataService.posts; even as even" [post]="post" [ngClass]="{'pe-3': even}"></app-card>
   </div>
