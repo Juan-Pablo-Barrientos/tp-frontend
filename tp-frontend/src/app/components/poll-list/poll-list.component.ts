@@ -54,11 +54,11 @@ export class PollListComponent implements OnInit {
   poll.pollDate = this.createPollForm.controls.dateControl.value;
   poll.categoryId = this.createPollForm.controls.categoryControl.value;
   poll.pollValueArray= new Array()
-  this.createPollForm.controls.option1Control.value ? poll.pollValueArray.push(this.createPollForm.controls.option1Control.value): null
-  this.createPollForm.controls.option2Control.value ? poll.pollValueArray.push(this.createPollForm.controls.option2Control.value): null
-  this.createPollForm.controls.option3Control.value ? poll.pollValueArray.push(this.createPollForm.controls.option3Control.value): null
-  this.createPollForm.controls.option4Control.value ? poll.pollValueArray.push(this.createPollForm.controls.option4Control.value): null
-  this.createPollForm.controls.option5Control.value ? poll.pollValueArray.push(this.createPollForm.controls.option5Control.value): null
+  poll.pollValueArray.push({description:this.createPollForm.controls.option1Control.value})
+  poll.pollValueArray.push({description:this.createPollForm.controls.option2Control.value})
+  this.createPollForm.controls.option3Control.value ? poll.pollValueArray.push({description:this.createPollForm.controls.option3Control.value}): null
+  this.createPollForm.controls.option4Control.value ? poll.pollValueArray.push({description:this.createPollForm.controls.option4Control.value}): null
+  this.createPollForm.controls.option5Control.value ? poll.pollValueArray.push({description:this.createPollForm.controls.option5Control.value}): null
    this.dataService.addPoll(poll).subscribe({
      next : (res:any)=>{
        this.toastr.success('Se ha creado la encuesta', 'Éxito',{positionClass:'toast-bottom-right'})
@@ -102,11 +102,26 @@ export class PollListComponent implements OnInit {
    poll.pollDate = this.editPollForm.controls.dateEditControl.value;
    poll.categoryId = this.editPollForm.controls.categoryEditControl.value;
    poll.pollValueArray= new Array()
-   this.editPollForm.controls.option1EditControl.value ? poll.pollValueArray.push(this.editPollForm.controls.option1EditControl.value): null
-   this.editPollForm.controls.option2EditControl.value ? poll.pollValueArray.push(this.editPollForm.controls.option2EditControl.value): null
-   this.editPollForm.controls.option3EditControl.value ? poll.pollValueArray.push(this.editPollForm.controls.option3EditControl.value): null
-   this.editPollForm.controls.option4EditControl.value ? poll.pollValueArray.push(this.editPollForm.controls.option4EditControl.value): null
-   this.editPollForm.controls.option5EditControl.value ? poll.pollValueArray.push(this.editPollForm.controls.option5EditControl.value): null
+   poll.pollValueArray.push({
+    description:this.editPollForm.controls.option1EditControl.value,
+    id:this.editPollForm.controls.option1EditId.value
+  })
+   poll.pollValueArray.push({
+    description:this.editPollForm.controls.option2EditControl.value,
+    id:this.editPollForm.controls.option2EditId.value
+  })
+   this.editPollForm.controls.option3EditControl.value ? poll.pollValueArray.push({
+    description:this.editPollForm.controls.option3EditControl.value,
+    id:this.editPollForm.controls.option3EditId.value
+  }): null
+   this.editPollForm.controls.option4EditControl.value ? poll.pollValueArray.push({
+    description:this.editPollForm.controls.option4EditControl.value,
+    id:this.editPollForm.controls.option4EditId.value
+  }): null
+   this.editPollForm.controls.option5EditControl.value ? poll.pollValueArray.push({
+    description:this.editPollForm.controls.option5EditControl.value,
+    id:this.editPollForm.controls.option5EditId.value
+  }): null
    this.dataService.editPoll(poll,this.editPollForm.controls.idControl.value).subscribe({
      next : ()=>{
        this.toastr.success('Se ha editado la encuesta', 'Éxito',{positionClass:'toast-bottom-right'})

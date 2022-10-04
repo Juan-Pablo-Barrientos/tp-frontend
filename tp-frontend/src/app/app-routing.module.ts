@@ -14,6 +14,7 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { UserComponent } from './components/user/user.component';
 import { PollListComponent } from './components/poll-list/poll-list.component';
 import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
+import { EditUserComponent } from './auth/views/edit-user/edit-user.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,11 @@ const routes: Routes = [
     path: 'user/:id',
     component: UserComponent,
     title: 'Fake News'
+  },
+  {
+  path: 'editUser/:id',
+  component: EditUserComponent,
+  title: 'Fake News'
   },
   {
     path: '**',

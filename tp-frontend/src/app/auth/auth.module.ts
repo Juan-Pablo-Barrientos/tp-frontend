@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RedactPostComponent } from './views/redact-post/redact-post.component';
 import { AuthorGuard } from './guards/author.guard';
 import { EditPostComponent } from './views/edit-post/edit-post.component';
+import { EditUserComponent } from './views/edit-user/edit-user.component';
 
 
 
@@ -15,7 +16,8 @@ import { EditPostComponent } from './views/edit-post/edit-post.component';
   declarations: [
     LoginComponent,
     RedactPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    EditUserComponent
   ],
   providers:[
     AuthGuard,

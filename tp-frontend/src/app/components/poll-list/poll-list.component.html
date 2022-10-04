@@ -154,10 +154,19 @@
           <input type="text" formControlName="option1EditControl" name="option1" id="option1" placeholder="Opcion 1" class="form-control"/>
           <label for="name">Opcion 1 (Requerida)</label>
         </div>
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="option1EditId" name="option1id" id="option1id" placeholder="id" hidden>
+          <label for="id">Id</label>
+        </div>
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="option2EditControl" name="option2" id="option2" placeholder="Opcion 2" class="form-control"/>
           <label for="name">Opcion 2 (Requerida)</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="option2EditId" name="option2id" id="option2id" placeholder="id" hidden>
+          <label for="id">Id</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -166,8 +175,18 @@
         </div>
 
         <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="option3EditId" name="option3id" id="option3id" placeholder="id" hidden>
+          <label for="id">Id</label>
+        </div>
+
+        <div class="form-floating mb-2">
           <input type="text" formControlName="option4EditControl" name="option4" id="option4" placeholder="Opcion 4" class="form-control"/>
           <label for="name">Opcion 4 (Opcional)</label>
+        </div>
+
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="option4EditId" name="option4id" id="option4id" placeholder="id" hidden>
+          <label for="id">Id</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -175,7 +194,12 @@
           <label for="name">Opcion 5 (Opcional)</label>
         </div>
 
-          <button type="submit" [disabled]="!editPollForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+        <div class="form-floating mb-2">
+          <input type="text" value="" class="form-control" formControlName="option5EditId" name="option5id" id="option5id" placeholder="id" hidden>
+          <label for="id">Id</label>
+        </div>
+
+        <button type="submit" [disabled]="!editPollForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
       </form>
     </div>
     <div class="modal-footer">
