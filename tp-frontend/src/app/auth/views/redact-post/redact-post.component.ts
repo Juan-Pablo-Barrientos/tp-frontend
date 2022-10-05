@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -15,6 +15,7 @@ export class RedactPostComponent implements OnInit {
   createPostForm: any;
   categories: any;
   provinces: any;
+  errors: any[]=[];
 
   constructor(private dataService:DataService, private authService:AuthService, private toastr:ToastrService, private router:Router) { }
 
@@ -64,6 +65,18 @@ export class RedactPostComponent implements OnInit {
     }
   }
 
+  getFormValidationErrors() {
+    this.errors=[]
+    Object.keys(this.createPostForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.createPostForm.get(key).errors;
+      if(controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+          this.errors.push(keyError);
+        });}
+      }
+    );
+  }
+
   onSubmit(){
     const formData = new FormData()
     formData.append('myImage',this.createPostForm.get('fileSource').value);
@@ -73,7 +86,11 @@ export class RedactPostComponent implements OnInit {
     formData.append('categoryId',this.createPostForm.controls['categoryControl'].value );
     formData.append('provinceId',this.createPostForm.controls['provinceControl'].value );
     formData.append('requiresSubscription',"0");
-
+    this.getFormValidationErrors()
+    if (this.errors.length!==0){
+      this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
+      this.createPostForm.markAllAsTouched();
+    }else {
     this.dataService.addPost(formData).subscribe({
       next : (res:any)=>{
         this.toastr.success('Se ha añadido la noticia', 'Éxito',{positionClass:'toast-bottom-right'});
@@ -85,7 +102,7 @@ export class RedactPostComponent implements OnInit {
       }else {
         this.toastr.error('Error al crear la noticia' , '🥺' , {positionClass:'toast-bottom-right'});
       }}
-     });
+     });}
   }
 
 }
