@@ -7,12 +7,12 @@
           <form [formGroup]="filterForm">
             <div class="d-block">
               <div *ngFor="let category of categories" class="form-check form-check-inline">
-                  <input type="radio" class="me-2 form-check-input" formControlName="category" [id]="category.name" name="category" [value]="category.id"  (ngModelChange)="filter()">
+                  <input type="radio" class="me-2 form-check-input" formControlName="category" [id]="category.name" name="category" [value]="category.id"  (change)="filter()">
                   <label class="fs-6 form-check-label"[for]="category.name">{{category.name}}</label>
               </div>
               <div>
                 <label class="lead " for="province">Provincia</label>
-                <select class="form-select mb-2" formControlName="province" name="province" id="province" aria-label="Default select example" (ngModelChange)="filter()">
+                <select class="form-select mb-2" formControlName="province" name="province" id="province" aria-label="Default select example" (change)="filter()">
                   <option value='' selected>Seleccione provincia</option>
                   <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
                 </select>
