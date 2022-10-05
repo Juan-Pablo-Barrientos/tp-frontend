@@ -8,15 +8,15 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link ps-3 ps-lg-2 text-white" [routerLink]="'/'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="bg-secondary rounded-3" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+          <a class="nav-link ps-3 ps-lg-2 text-white rounded-3" [routerLink]="'/'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="bg-secondary" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link ps-3 ps-lg-2 text-white" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
-            routerLinkActive="bg-secondary rounded-3">Iniciar sesión</a>
+          <a class="nav-link ps-3 ps-lg-2 text-white rounded-3" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+            routerLinkActive="bg-secondary">Iniciar sesión</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link ps-3 ps-lg-2 text-white" [routerLink]="'/register'" data-bs-toggle="collapse"
-            data-bs-target=".navbar-collapse.show" routerLinkActive="bg-secondary rounded-3">Registrarse</a>
+          <a class="nav-link ps-3 ps-lg-2 text-white rounded-3" [routerLink]="'/register'" data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse.show" routerLinkActive="bg-secondary">Registrarse</a>
         </li>
 
         <li class="nav-item dropdown d-lg-none">
