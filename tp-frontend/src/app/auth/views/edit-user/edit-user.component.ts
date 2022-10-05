@@ -33,7 +33,7 @@ ngOnInit(): void {
     surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    bioControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+    bioControl:new FormControl('',[Validators.maxLength(50)]),
     subscribedControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     file: new FormControl(''),
     fileSource: new FormControl(''),
@@ -66,6 +66,7 @@ onSubmit() {
   if (this.editUserForm.controls.bioControl.value!==''){
     formData.append('bio',this.editUserForm.controls['bioControl'].value );
   }
+  console.log(this.errors)
   if (this.errors.length!==0){
     this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
     this.editUserForm.markAllAsTouched();
