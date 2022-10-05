@@ -28,6 +28,9 @@ export class SidebarComponent implements OnInit {
     this.dataService.todayPoll$.subscribe((response)=>{
       if(response.data){
       this.todayPoll=response.data
+      if(!this.authService.loggedUser){
+        this.pollRadioForm.controls.poll_values.setValue('')
+      }
       if (this.pollRadioForm.controls.poll_values.value===''){
         let request:any={
           userId: this.authService.loggedUser.id,
