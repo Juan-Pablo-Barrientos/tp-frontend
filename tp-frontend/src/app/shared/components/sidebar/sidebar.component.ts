@@ -60,7 +60,6 @@ export class SidebarComponent implements OnInit {
           userId: this.authService.loggedUser.id,
           pollId: response.data.id
           }
-          this.pollRadioForm.controls.poll_values.setValue('')
           this.dataService.getLoggedUserVote(request).subscribe((response)=>{
             this.pollRadioForm.controls.poll_values.setValue(response.data.pollValueId)
           })
