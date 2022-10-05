@@ -54,7 +54,8 @@ export class UserListComponent implements OnInit {
       surname : this.editUserForm.controls.surnameControl.value,
       email : this.editUserForm.controls.emailControl.value,
       role: this.editUserForm.controls.role.value,
-      phoneNumber: this.editUserForm.controls.phoneNumberControl.value
+      phoneNumber: this.editUserForm.controls.phoneNumberControl.value,
+      subscribed: this.editUserForm.controls.subscribedControl.value
     }
     if (this.user.role==="Author"||this.user.role==="Admin") { request.bio= this.editUserForm.controls.bioControl.value}
 
@@ -90,7 +91,7 @@ export class UserListComponent implements OnInit {
       bioControl:new FormControl(this.user.bio,[Validators.maxLength(50)]),
       emailControl:new FormControl(this.user.email,[Validators.required,Validators.maxLength(50),Validators.email]),
       phoneNumberControl:new FormControl(this.user.phoneNumber,[Validators.required,Validators.maxLength(50)]),
-      role:new FormControl(this.user.role,[Validators.required]),
+      role:new FormControl(this.user.role,[Validators.required])
     })
 
     this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result

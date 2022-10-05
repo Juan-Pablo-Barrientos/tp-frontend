@@ -34,6 +34,7 @@ ngOnInit(): void {
     emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     bioControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+    subscribedControl:new FormControl('',[Validators.required,Validators.maxLength(50)])
   })
 
 
@@ -45,6 +46,7 @@ ngOnInit(): void {
     this.editUserForm.controls['emailControl'].setValue(this.user.email)
     this.editUserForm.controls['phoneControl'].setValue(this.user.phoneNumber)
     this.editUserForm.controls['bioControl'].setValue(this.user.bio)
+    this.editUserForm.controls['subscribedControl'].setValue(this.user.subscribed)
   })
 }
 
@@ -56,6 +58,7 @@ onSubmit() {
   user.username = this.editUserForm.controls.usernameControl.value;
   user.email = this.editUserForm.controls.emailControl.value;
   user.phoneNumber = this.editUserForm.controls.phoneControl.value;
+  user.subscribed=this.editUserForm.controls.subscribedControl.value;
   if (this.editUserForm.controls.bioControl.value!==''){
     user.bio=this.editUserForm.controls.bioControl.value
   }
@@ -80,6 +83,7 @@ reset() {
   this.editUserForm.controls['surnameControl'].setValue(this.user.surname)
   this.editUserForm.controls['emailControl'].setValue(this.user.email)
   this.editUserForm.controls['phoneControl'].setValue(this.user.phoneNumber)
+  this.editUserForm.controls['subscribed'].setValue(this.user.subscribed)
   if (this.editUserForm.controls.bioControl.value!==''){
     this.editUserForm.controls['bioControl'].setValue(this.user.bio)
   }

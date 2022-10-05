@@ -8,7 +8,7 @@ export interface IUser extends IBaseClass {
     password : string,
     role: string,
     phoneNumber: number,
-    subscribedUntil: Date,
+    subscribed: Boolean,
     bio: string,
     email: string,
     jwt: string,
@@ -22,7 +22,7 @@ export class User extends BaseClass implements IUser {
     password : string = "";
     role: string = "";
     phoneNumber: number = 0;
-    subscribedUntil: Date = new Date();
+    subscribed: Boolean = false;
     bio: string = "";
     email: string = "";
     jwt: string = "";

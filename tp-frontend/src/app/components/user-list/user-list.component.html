@@ -72,7 +72,8 @@
                 <label for="">Email:  {{user.email}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Nombre de usuario:  {{user.username}}</label>
+                <label for="" *ngIf="user.subscribed">Suscripto:  ¡Si!</label>
+                <label for="" *ngIf="!user.subscribed">Suscripto:  No :(</label>
               </div>
               <div class="mb-3">
                 <label *ngIf="(user.role)=='Admin'" for="">Rol:  Admin</label>
@@ -156,7 +157,6 @@
           <textarea type="text" formControlName="bioControl" name="bio" id="bio" placeholder="Bio" class="form-control" style="height: 300px"></textarea>
           <label for="bio">Bio</label>
         </div>
-
         <div class="form-check form-check-inline lead">
           <input class="form-check-input" type="radio" formControlName="role" name="role" id="Admin" value="Admin">
           <label class="form-check-label" for="Admin">Admin</label>
@@ -169,7 +169,6 @@
           <input class="form-check-input" type="radio" formControlName="role" name="role" id="Client" value="Client">
           <label class="form-check-label" for="Client">Cliente</label>
         </div>
-
           <button type="submit" [disabled]="!editUserForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
       </form>
     </div>

@@ -28,8 +28,8 @@ export class RegisterComponent implements OnInit {
       passwordConfirmControl:new FormControl('',[Validators.maxLength(20),Validators.required]),
       emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
       phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+      subscribedControl:new FormControl(false,[]),
     },{validators: [this.checkPasswords]})
-
   }
 
   constructor(private dataService : DataService, private toastr:ToastrService, private router:Router) {
@@ -44,6 +44,7 @@ export class RegisterComponent implements OnInit {
     user.email = this.signUpForm.controls.emailControl.value;
     user.role = "Client";
     user.phoneNumber = this.signUpForm.controls.phoneControl.value;
+    user.subscribed = this.signUpForm.controls.subscribedControl.value;
     this.getFormValidationErrors()
     if (this.errors.length!==0){
       this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
