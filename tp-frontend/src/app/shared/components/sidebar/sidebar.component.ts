@@ -28,8 +28,7 @@ export class SidebarComponent implements OnInit {
     this.dataService.todayPoll$.subscribe((response)=>{
       if(response.data){
       this.todayPoll=response.data
-      if (this.router.url==='/'){
-        console.log("sda")
+      if (this.pollRadioForm.controls.poll_values.value===''){
         let request:any={
           userId: this.authService.loggedUser.id,
           pollId: response.data.id
