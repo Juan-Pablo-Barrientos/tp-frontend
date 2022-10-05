@@ -8,12 +8,12 @@
   </div>
   <div class="form-floating mt-3">
     <input type="text" name="searchPoll" id="searchPoll" placeholder="Nombre" (keyup)="searchPoll()" class="form-control"/>
-    <label for="name">Buscar por descripcion</label>
+    <label for="name">Buscar por descripción</label>
   </div>
   <table class="table align-middle mb-0 bg-white mt-5" id="pollList">
     <thead class="bg-light">
       <tr>
-        <th>Descripcion</th>
+        <th>Descripción</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -63,19 +63,19 @@
                 <label for="">Fecha: {{poll.pollDate}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Opcion 1: {{poll.poll_values[0].description}}</label>
+                <label for="">Opción 1: {{poll.poll_values[0].description}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Opcion 2: {{poll.poll_values[1].description}}</label>
+                <label for="">Opción 2: {{poll.poll_values[1].description}}</label>
               </div>
               <div class="mb-3" *ngIf="poll.poll_values[2]">
-                <label for="">Opcion 3: {{poll.poll_values[2].description}}</label>
+                <label for="">Opción 3: {{poll.poll_values[2].description}}</label>
               </div>
               <div class="mb-3" *ngIf="poll.poll_values[3]">
-                <label for="">Opcion 4: {{poll.poll_values[3].description}}</label>
+                <label for="">Opción 4: {{poll.poll_values[3].description}}</label>
               </div>
               <div class="mb-3" *ngIf="poll.poll_values[4]">
-                <label for="">Opcion 5: {{poll.poll_values[4].description}}</label>
+                <label for="">Opción 5: {{poll.poll_values[4].description}}</label>
               </div>
 
           </div>
@@ -152,7 +152,7 @@
         <label class="form-label fw-bold">Opciones</label>
         <div class="form-floating mb-2">
           <input type="text" formControlName="option1EditControl" name="option1" id="option1" placeholder="Opcion 1" class="form-control"/>
-          <label for="name">Opcion 1 (Requerida)</label>
+          <label for="name">Opción 1 (Requerida)</label>
         </div>
         <div class="form-floating mb-2">
           <input type="text" value="" class="form-control" formControlName="option1EditId" name="option1id" id="option1id" placeholder="id" hidden>
@@ -161,7 +161,7 @@
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="option2EditControl" name="option2" id="option2" placeholder="Opcion 2" class="form-control"/>
-          <label for="name">Opcion 2 (Requerida)</label>
+          <label for="name">Opción 2 (Requerida)</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -171,7 +171,7 @@
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="option3EditControl" name="option3" id="option3" placeholder="Opcion 3" class="form-control"/>
-          <label for="name">Opcion 3 (Opcional)</label>
+          <label for="name">Opción 3 (Opcional)</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -181,7 +181,7 @@
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="option4EditControl" name="option4" id="option4" placeholder="Opcion 4" class="form-control"/>
-          <label for="name">Opcion 4 (Opcional)</label>
+          <label for="name">Opción 4 (Opcional)</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -191,7 +191,7 @@
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="option5EditControl" name="option5" id="option5" placeholder="Opcion 5" class="form-control"/>
-          <label for="name">Opcion 5 (Opcional)</label>
+          <label for="name">Opción 5 (Opcional)</label>
         </div>
 
         <div class="form-floating mb-2">

@@ -63,7 +63,7 @@
                 <label for="">Apellido:  {{user.surname}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Telefono: {{user.phoneNumber}}</label>
+                <label for="">Teléfono: {{user.phoneNumber}}</label>
               </div>
               <div class="mb-3" *ngIf="(user.role)=='Author'">
                 <label for="">Bio:  {{user.bio}}</label>
@@ -150,7 +150,7 @@
 
         <div class="form-floating mb-2">
           <input formControlName="phoneNumberControl" name="phoneNumber" id="phoneNumber" placeholder="phoneNumber" type="text"class="form-control"/>
-          <label for="phone">Telefono</label>
+          <label for="phone">Teléfono</label>
         </div>
 
         <div class="form-floating mb-2" *ngIf="user.role==='Author'||user.role==='Admin'">
