@@ -67,8 +67,7 @@ export class PollListComponent implements OnInit {
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==409){
-       this.toastr.success('Ya existe una encuesta en esa fecha', 'Éxito',{positionClass:'toast-bottom-right'})
-       this.modalService.dismissAll();
+       this.toastr.error('Ya existe una encuesta en esa fecha', 'Fallo',{positionClass:'toast-bottom-right'})
        this.refreshPollList();
      }else {
        this.toastr.error('Ya existe una encuesta en esa fecha', '🥺',{positionClass:'toast-bottom-right'})
@@ -133,9 +132,7 @@ export class PollListComponent implements OnInit {
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==409){
-       this.toastr.success('Ya existe una encuesta en esa fecha', 'Éxito',{positionClass:'toast-bottom-right'})
-       this.modalService.dismissAll();
-       this.refreshPollList();
+       this.toastr.error('Ya existe una encuesta en esa fecha', 'Fallo',{positionClass:'toast-bottom-right'})
      }else {
        this.toastr.error('Ya existe una encuesta en esa fecha', '🥺',{positionClass:'toast-bottom-right'})
      }}
