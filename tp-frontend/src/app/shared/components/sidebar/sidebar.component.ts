@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faHouse, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { Poll } from 'src/app/models/poll';
 import { DataService } from '../../services/data.service';
@@ -14,6 +15,8 @@ export class SidebarComponent implements OnInit {
   mostClickedPosts : any[] = [];
   todayPoll:Poll= new Poll()
   pollRadioForm:any
+  faPencil=faPencil
+  faHouse=faHouse
 
   constructor(public authService:AuthService, private dataService:DataService, private router:Router) { }
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/services/data.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import { faBullhorn, faPencil } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,7 +11,8 @@ import { AuthService } from 'src/app/auth/service/auth.service';
 export class NavbarComponent implements OnInit {
   title: string = '';
   mostClickedPosts: any[] = [];
-
+  faPencil=faPencil
+  faBullhorn=faBullhorn
   constructor(private dataService: DataService, public authService: AuthService) {}
 
   ngOnInit(): void {

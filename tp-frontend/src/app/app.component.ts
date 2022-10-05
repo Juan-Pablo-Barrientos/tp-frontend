@@ -12,7 +12,7 @@ import { DataService } from './shared/services/data.service';
 export class AppComponent implements OnInit {
   title = 'tp-frontend';
 
-  constructor(private router: Router, private dataService: DataService, private authService: AuthService) {}
+  constructor(public router: Router, private dataService: DataService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.dataService.reloadMostClickedPosts();

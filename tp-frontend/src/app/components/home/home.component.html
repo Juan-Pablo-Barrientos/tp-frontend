@@ -6,9 +6,9 @@
           <label class="lead">Categorias</label>
           <form [formGroup]="filterForm">
             <div class="d-block">
-              <div *ngFor="let category of categories" class="lead form-check form-check-inline">
+              <div *ngFor="let category of categories" class="form-check form-check-inline">
                   <input type="radio" class="me-2 form-check-input" formControlName="category" [id]="category.name" name="category" [value]="category.id"  (ngModelChange)="filter()">
-                  <label class="form-check-label"[for]="category.name">{{category.name}}</label>
+                  <label class="fs-6 form-check-label"[for]="category.name">{{category.name}}</label>
               </div>
               <div>
                 <label class="lead " for="province">Provincia</label>

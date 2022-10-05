@@ -1,14 +1,14 @@
-<app-navbar></app-navbar>
+<app-navbar ></app-navbar>
 <!-- Currencies -->
-<app-currencies class="container-fluid pt-4"></app-currencies>
-<div id="wrap" class="container-fluid pt-4 px-4">
+<app-currencies class="container-fluid" *ngIf="this.router.url==='/'"></app-currencies>
+<div id="wrap" class="container-fluid  px-4">
   <!-- Main - Sidebar and Content -->
   <div>
-    <div class="row">
-      <div class="col-3 pb-3 d-none d-lg-block">
+    <div class="row pt-2">
+      <div class="col-3 d-none d-lg-block">
         <app-sidebar></app-sidebar>
       </div>
-      <div class="col-12 col-lg-9">
+      <div class="col-12 col-lg-9 ">
         <router-outlet (activate)="refreshMostClicked()"></router-outlet>
       </div>
     </div>

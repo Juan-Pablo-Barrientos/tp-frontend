@@ -1,74 +1,38 @@
-<div class="container-fluid px-4 pt-3">
-
-  <ngb-accordion #a="ngbAccordion">
-    <ngb-panel id="custom-panel-1">
-      <ng-template ngbPanelHeader>
-        <button ngbPanelToggle class="accordion-button">Default-looking "custom" panel</button>
-      </ng-template>
-      <ng-template ngbPanelContent>
-
-        <div class="row">
-          <!-- Dólar -->
-          <div class="col-12 col-md-3 border border-danger">
-            <div class="row text-center">
-              <h5 class="py-3 mb-0 currency-title">Dólar 💵</h5>
-              <hr class="w-50 mx-auto">
-            </div>
-            <div class="row flex-column">
-              <span class="py-1 currency-item">Promedio del día: ${{legalDollar?.value_avg}}</span>
-              <span class="py-1 currency-item">Venta: ${{legalDollar?.value_sell}}</span>
-              <span class="pt-1 pb-2 currency-item">Compra: ${{legalDollar?.value_buy}}</span>
-            </div>
-          </div>
-          <!-- Dólar Blue -->
-          <div class="col-12 col-md-3 border border-danger">
-            <div class="row text-center">
-              <h5 class="py-3 mb-0 currency-title">Dólar 💵</h5>
-              <hr class="w-50 mx-auto">
-            </div>
-            <div class="row flex-column">
-              <span class="py-1 currency-item">Promedio del día: ${{legalDollar?.value_avg}}</span>
-              <span class="py-1 currency-item">Venta: ${{legalDollar?.value_sell}}</span>
-              <span class="pt-1 pb-2 currency-item">Compra: ${{legalDollar?.value_buy}}</span>
-            </div>
-          </div>
-          <!-- Euro -->
-          <div class="col-12 col-md-3 border border-danger">
-            <div class="row text-center">
-              <h5 class="py-3 mb-0 currency-title">Dólar 💵</h5>
-              <hr class="w-50 mx-auto">
-            </div>
-            <div class="row flex-column">
-              <span class="py-1 currency-item">Promedio del día: ${{legalDollar?.value_avg}}</span>
-              <span class="py-1 currency-item">Venta: ${{legalDollar?.value_sell}}</span>
-              <span class="pt-1 pb-2 currency-item">Compra: ${{legalDollar?.value_buy}}</span>
-            </div>
-          </div>
-          <!-- Euro Blue -->
-          <div class="col-12 col-md-3 border border-danger">
-            <div class="row text-center">
-              <h5 class="py-3 mb-0 currency-title">Dólar 💵</h5>
-              <hr class="w-50 mx-auto">
-            </div>
-            <div class="row flex-column">
-              <span class="py-1 currency-item">Promedio del día: ${{legalDollar?.value_avg}}</span>
-              <span class="py-1 currency-item">Venta: ${{legalDollar?.value_sell}}</span>
-              <span class="pt-1 pb-2 currency-item">Compra: ${{legalDollar?.value_buy}}</span>
-            </div>
-          </div>
-        </div>
-
-      </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
-
-
-
-
-
-
-
-
-
-
+<div class="container-fluid shadow ">
+  <div class="border border-danger ">
+    <div class="row text-center border-danger mx-auto" >
+      <div class="col border-end border-bottom border-dark dollar">
+        <p class="m-1 currency-title fst-italic">Dolar oficial compra</p>
+        <div class="currency-item fw-bolder">${{legalDollar?.value_buy}}</div>
+      </div>
+      <div class="col border-end border-bottom border-dark dollar">
+        <p class="m-1 currency-title fst-italic">Dolar oficial venta</p>
+        <div class="currency-item fw-bolder">${{legalDollar?.value_sell}}</div>
+      </div>
+      <div class="col border-end border-bottom border-dark dollar">
+        <p class="m-1 currency-title fst-italic">Dolar blue compra</p>
+        <div class="currency-item fw-bolder">${{illegalDollar?.value_buy}}</div>
+      </div>
+      <div class="col border-end border-bottom border-dark dollar">
+        <p class="m-1 currency-title fst-italic">Dolar blue venta</p>
+        <div class="currency-item fw-bolder">${{illegalDollar?.value_sell}}</div>
+      </div>
+      <div class="col border-end border-bottom border-dark euro">
+        <p class="m-1 currency-title fst-italic">Euro oficial compra</p>
+        <p class="currency-item fw-bolder">${{legalEuro?.value_buy}}</p>
+      </div>
+      <div class="col border-end border-bottom border-dark euro">
+        <p class="m-1 currency-title fst-italic">Euro oficial venta</p>
+        <p class="currency-item fw-bolder">${{legalEuro?.value_sell}}</p>
+      </div>
+      <div class="col border-end border-bottom border-dark euro">
+        <p class="m-1 currency-title fst-italic">Euro blue compra</p>
+        <p class="currency-item fw-bolder">${{illegalEuro?.value_buy}}</p>
+      </div>
+      <div class="col border-end border-bottom border-dark euro">
+        <p class="m-1 currency-title fst-italic">Euro blue venta</p>
+        <p class="currency-item fw-bolder">${{illegalEuro?.value_sell}}</p>
+      </div>
+    </div>
+  </div>
 </div>

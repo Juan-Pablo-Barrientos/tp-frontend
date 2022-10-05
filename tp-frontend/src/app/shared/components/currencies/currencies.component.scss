@@ -1,13 +1,15 @@
-// @use '../../../../styles.scss' as *;
 
-// .currency-title {
-//   font-size: 14px;
-// }
 
-// .currency-item {
-//   font-size: 12px;
-// }
+.currency-title {
+  font-size: 12px;
+}
 
-// .custom-header {
-//   background-color: $primary !important;
-// }
+.currency-item {
+  font-size: 20px;
+}
+.dollar{
+  background-color:forestgreen
+}
+.euro{
+  background-color:lightseagreen
+}

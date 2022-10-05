@@ -6,16 +6,18 @@
       <li>
         <a [routerLink]="'/'" [routerLinkActive]="['text-white', 'bg-secondary']" [routerLinkActiveOptions]="{exact: true}"
           class="nav-link text-white sidebarText">
-          <svg class="bi me-2" width="16" height="16"></svg>
+          <svg class="bi me-2" width="10" height="16"></svg>
+          <fa-icon [icon]="faHouse" ></fa-icon>
           Inicio
         </a>
       </li>
       <li>
         <a *ngIf="(this.authService.getUserRole()==='Author'||this.authService.getUserRole()==='Admin') && this.authService.isLoggedIn()"
           [routerLinkActive]="['text-white', 'bg-secondary']" [routerLink]="'/redactPost'" class="nav-link sidebarText">
-          <svg class="bi me-2" width="16" height="16">
+          <svg class="bi me-2" width="10" height="16">
             <use xlink:href="#speedometer2"></use>
           </svg>
+          <fa-icon [icon]="faPencil" ></fa-icon>
           Redactar noticia
         </a>
       </li>
