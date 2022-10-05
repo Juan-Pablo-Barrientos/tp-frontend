@@ -6,8 +6,8 @@
       </div>
       <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <div class="form-group mb-2">
-          <label for="name" class="form-label fw-bold">Titulo</label>
-          <input type="text" formControlName="titleControl" name="title" id="title" placeholder="Titulo"
+          <label for="name" class="form-label fw-bold">Título</label>
+          <input type="text" formControlName="titleControl" name="title" id="title" placeholder="Título"
             class="form-control" />
           <div *ngIf="createPostForm.controls.titleControl.touched && createPostForm.controls.titleControl.invalid"
             class="mt-2 error-label">
