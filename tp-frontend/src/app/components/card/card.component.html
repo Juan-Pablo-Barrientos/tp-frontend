@@ -2,16 +2,14 @@
   <img [src]="post.path_img" class="card-img-top">
   <div class="card-body px-4">
     <h4 class="card-title">{{post.title}}</h4>
-    <p class="card-text " style="height: 20px;overflow: hidden;">{{post.body}}
-    </p>
+    <div class="">
+    <p class="card-text " style="height: 20px; overflow: hidden;">{{post.body}}</p>
     <p>...</p>
+    </div>
     <div class="row">
-      <div class="col ">
+      <div class="col d-flex flex-col justify-content-between align-items-end">
         <button [routerLink]="['/PostAuthor', post.id]" class="btn btn-primary text-white " >Leer más</button>
-      </div>
-      <span [id]="post.id" class="disqus-comment-count" data-disqus-identifier=""></span>
-      <div class="col d-flex flex-col justify-content-end align-items-end">
-          <span class="d-block badge bg-info text-pill">{{post.category != null ? post.category.name : "Sin categoria"}}</span>
+          <span class="d-block badge bg-info text-pill m-2">{{post.category != null ? post.category.name : "Sin categoria"}}</span>
       </div>
     </div>
   </div>
