@@ -34,7 +34,9 @@ ngOnInit(): void {
     emailControl:new FormControl('',[Validators.required,Validators.maxLength(50),Validators.email]),
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     bioControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    subscribedControl:new FormControl('',[Validators.required,Validators.maxLength(50)])
+    subscribedControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
+    file: new FormControl(''),
+    fileSource: new FormControl(''),
   })
 
 
@@ -52,22 +54,23 @@ ngOnInit(): void {
 
 
 onSubmit() {
-  let user:any={};
-  user.name = this.editUserForm.controls.nameControl.value;
-  user.surname = this.editUserForm.controls.surnameControl.value;
-  user.username = this.editUserForm.controls.usernameControl.value;
-  user.email = this.editUserForm.controls.emailControl.value;
-  user.phoneNumber = this.editUserForm.controls.phoneControl.value;
-  user.subscribed=this.editUserForm.controls.subscribedControl.value;
-  if (this.editUserForm.controls.bioControl.value!==''){
-    user.bio=this.editUserForm.controls.bioControl.value
-  }
   this.getFormValidationErrors()
+  const formData = new FormData()
+  if (this.editUserForm.get('fileSource').value) {formData.append('myImage',this.editUserForm.get('fileSource').value)}
+  formData.append('name',this.editUserForm.controls['nameControl'].value);
+  formData.append('surname',this.editUserForm.controls['surnameControl'].value );
+  formData.append('username',this.editUserForm.controls['usernameControl'].value );
+  formData.append('email',this.editUserForm.controls['emailControl'].value );
+  formData.append('phoneNumber',this.editUserForm.controls['phoneControl'].value );
+  formData.append('subscribed',this.editUserForm.controls['subscribedControl'].value );
+  if (this.editUserForm.controls.bioControl.value!==''){
+    formData.append('bio',this.editUserForm.controls['bioControl'].value );
+  }
   if (this.errors.length!==0){
     this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
     this.editUserForm.markAllAsTouched();
   }else {
-  this.dataService.editUser(user,parseInt(this.route.snapshot.paramMap.get("id")!)).subscribe(async (res:any) => {
+  this.dataService.editUser(formData,parseInt(this.route.snapshot.paramMap.get("id")!)).subscribe(async (res:any) => {
   if (!res.error){
     this.toastr.success('El editado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
     this.router.navigate(['/user', this.user.id])
@@ -78,6 +81,8 @@ onSubmit() {
 }
 
 reset() {
+  this.editUserForm.controls['file'].setValue('')
+  this.editUserForm.controls['fileSource'].setValue('')
   this.editUserForm.controls['usernameControl'].setValue(this.user.username)
   this.editUserForm.controls['nameControl'].setValue(this.user.name)
   this.editUserForm.controls['surnameControl'].setValue(this.user.surname)
@@ -107,5 +112,23 @@ getFormValidationErrors() {
       });}
     }
   );
+}
+
+onFileChange(event:any) {
+
+  if (event.target.files.length > 0) {
+    if(event.target.files[0].size > 4097152){
+    this.toastr.error('El archivo es muy grande' , '🥺' , {positionClass:'toast-bottom-right'});
+    event.target.value = null;
+    event.target.files[0] = "";
+    this.editUserForm.patchValue({
+      fileSource: ""
+    })}
+ else{
+    const file = event.target.files[0];
+    this.editUserForm.patchValue({
+      fileSource: file
+    })}
+  }
 }
 }

@@ -12,7 +12,8 @@ export interface IUser extends IBaseClass {
     bio: string,
     email: string,
     jwt: string,
-    UserVotes: UserVotes[]
+    UserVotes: UserVotes[],
+    path_img:string;
 }
 
 export class User extends BaseClass implements IUser {
@@ -26,5 +27,6 @@ export class User extends BaseClass implements IUser {
     bio: string = "";
     email: string = "";
     jwt: string = "";
+    path_img:string="";
     UserVotes: UserVotes[] = new Array();
 }

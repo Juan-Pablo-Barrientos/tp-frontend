@@ -54,6 +54,8 @@ export class EditPostComponent implements OnInit {
 
 
   resetEditPost() {
+    this.editPostForm.controls['file'].setValue('')
+    this.editPostForm.controls['fileSource'].setValue('')
     this.editPostForm.controls['titleControl'].setValue(this.post.title)
     this.editPostForm.controls['categoryControl'].setValue(this.post.categoryId)
     this.editPostForm.controls['provinceControl'].setValue(this.post.provinceId)

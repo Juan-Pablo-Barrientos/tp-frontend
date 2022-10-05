@@ -1,6 +1,6 @@
 <div class="row my-3 px-3 py-4 shadow-lg rounded-3">
-    <div class="col-12 col-sm-6">
-      <img *ngIf="0" class="rounded-3 img-fluid" [src]="" alt="acá va la foto más adelante">
+    <div *ngIf="user.path_img" class="col-12 col-sm-6">
+      <img  class="rounded-3 img-fluid" [src]="user.path_img" alt="acá va la foto más adelante">
     </div>
     <div class="col-12 col-sm-6 d-flex flex-column justify-content-between">
       <div class="row mb-3">
