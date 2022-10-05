@@ -55,7 +55,6 @@ export class UserListComponent implements OnInit {
       email : this.editUserForm.controls.emailControl.value,
       role: this.editUserForm.controls.role.value,
       phoneNumber: this.editUserForm.controls.phoneNumberControl.value,
-      subscribed: this.editUserForm.controls.subscribedControl.value
     }
     if (this.user.role==="Author"||this.user.role==="Admin") { request.bio= this.editUserForm.controls.bioControl.value}
 
