@@ -76,7 +76,7 @@ export class DataService {
   }
 
   getCurrentWeather(lat:any, lng:any, weatherApi:any): Observable<ArrayBuffer> {
-    return this.http.get<ArrayBuffer>("http://api.weatherapi.com/v1/current.json?key="+weatherApi+"&q="+lat+","+lng+"&aqi=no");
+    return this.http.get<ArrayBuffer>("https://api.weatherapi.com/v1/current.json?key="+weatherApi+"&q="+lat+","+lng+"&aqi=no");
   }
 
   getProvinces(): Observable<RequestResponse<Province[]>> {
