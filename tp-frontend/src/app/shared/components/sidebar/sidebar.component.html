@@ -24,6 +24,23 @@
     </ul>
     <hr>
   </div>
+  <div>
+    <h4 class="h5 text-center" >El tiempo</h4>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <div class="d-inline text-start"><img [src]="weatherData.current.condition.icon"></div>
+        <div class="d-inline text-end h5">{{weatherData.current.temp_c}} C°</div>
+      </div>
+      <div class="col">
+        <div class="text-start">{{weatherData.location.name}}, {{weatherData.location.country}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="font-size: 14px;">Ultima actualizacion: {{weatherData.current.last_updated |slice:11:16}}</div>
+    </div>
+    <hr>
+  </div>
   <div *ngIf="todayPoll.description">
     <h4 class="h4 text-center" >Encuesta del día</h4>
     <hr>
