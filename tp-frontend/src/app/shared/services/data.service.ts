@@ -18,7 +18,6 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
   private baseUrl = environment.apiUrl;
-  private weatherApi = environment.weatherApiKey;
   posts: any = [];
   mostClickedPosts$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   todayPoll$:BehaviorSubject<any> = new BehaviorSubject<any>([])
@@ -71,8 +70,13 @@ export class DataService {
   getMostClickedPosts(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'posts/mostClicked');
   }
-  getCurrentWeather(lat:any, lng:any): Observable<ArrayBuffer> {
-    return this.http.get<ArrayBuffer>("http://api.weatherapi.com/v1/current.json?key="+this.weatherApi+"&q="+lat+","+lng+"&aqi=no");
+
+  getWeatherApiKey(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + 'apiKey');
+  }
+
+  getCurrentWeather(lat:any, lng:any, weatherApi:any): Observable<ArrayBuffer> {
+    return this.http.get<ArrayBuffer>("http://api.weatherapi.com/v1/current.json?key="+weatherApi+"&q="+lat+","+lng+"&aqi=no");
   }
 
   getProvinces(): Observable<RequestResponse<Province[]>> {
