@@ -21,10 +21,10 @@ export class SidebarComponent implements OnInit {
   lat:any;
   lng:any;
 
-  constructor(public authService:AuthService, private dataService:DataService, private router:Router) { }
+  constructor(public authService:AuthService, private dataService:DataService, public router:Router) { }
 
   ngOnInit(): void {
-    this.getLocation();
+    this.getWeather();
     this.pollRadioForm = new FormGroup({
       poll_values: new FormControl('')
     })
@@ -55,7 +55,7 @@ export class SidebarComponent implements OnInit {
 
 
 
-  getLocation() {
+  getWeather() {
     this.dataService.getWeatherApiKey().subscribe((response:any) =>{
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: any) => {
@@ -64,9 +64,6 @@ export class SidebarComponent implements OnInit {
               "Longitude: " + position.coords.longitude);
             this.lat = position.coords.latitude;
             this.lng = position.coords.longitude;
-            console.log(this.lat);
-            console.log(this.lng);
-            console.log(response.data)
             this.dataService.getCurrentWeather(this.lat, this.lng, response.data).subscribe((response:any)=>{
               this.weatherData=response
             })

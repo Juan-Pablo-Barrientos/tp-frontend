@@ -15,6 +15,7 @@ import { UserComponent } from './components/user/user.component';
 import { PollListComponent } from './components/poll-list/poll-list.component';
 import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
 import { EditUserComponent } from './auth/views/edit-user/edit-user.component';
+import { WeatherComponent } from './components/weather/weather.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,11 @@ const routes: Routes = [
   path: 'editUser/:id',
   component: EditUserComponent,
   title: 'Fake News'
+  },
+  {
+  path: 'weatherForecast',
+  component: WeatherComponent,
+  title: 'El clima'
   },
   {
     path: '**',

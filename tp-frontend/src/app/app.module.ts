@@ -24,6 +24,7 @@ import { UserComponent } from './components/user/user.component';
 import { DisqusModule } from 'ngx-disqus';
 import { PollListComponent } from './components/poll-list/poll-list.component';
 import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
+import { WeatherComponent } from './components/weather/weather.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
     CategoryListComponent,
     UserComponent,
     PollListComponent,
+    WeatherComponent,
   ],
   imports: [
     FormsModule,
