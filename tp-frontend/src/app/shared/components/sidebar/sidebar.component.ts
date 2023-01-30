@@ -24,7 +24,11 @@ export class SidebarComponent implements OnInit {
   constructor(public authService:AuthService, private dataService:DataService, public router:Router) { }
 
   ngOnInit(): void {
-    this.getWeather();
+    this.dataService.todayWeather$.subscribe((response) => {
+      if (response) {
+        this.weatherData = response;
+      }
+    })
     this.pollRadioForm = new FormGroup({
       poll_values: new FormControl('')
     })
@@ -51,30 +55,6 @@ export class SidebarComponent implements OnInit {
         this.mostClickedPosts = response.data.slice(0,5);
       }
     });
-  }
-
-
-
-  getWeather() {
-    this.dataService.getWeatherApiKey().subscribe((response:any) =>{
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position: any) => {
-          if (position) {
-            console.log("Latitude: " + position.coords.latitude +
-              "Longitude: " + position.coords.longitude);
-            this.lat = position.coords.latitude;
-            this.lng = position.coords.longitude;
-            this.dataService.getCurrentWeather(this.lat, this.lng, response.data).subscribe((response:any)=>{
-              this.weatherData=response
-            })
-          }
-        },
-          (error: any) => console.log(error));
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-
-    })
   }
 
   votePoll(){

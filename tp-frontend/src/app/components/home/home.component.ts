@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
       this.titleSearch = params["searchbar"]
     })
     this.dataService.getPosts(this.titleSearch ??= "",null,null).subscribe((response: RequestResponse<Post[]>) => {
-      console.log(response);
       this.dataService.posts = response.data;
     });
   }

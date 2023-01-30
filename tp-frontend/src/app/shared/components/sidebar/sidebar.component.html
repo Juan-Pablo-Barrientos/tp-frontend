@@ -24,22 +24,21 @@
     </ul>
     <hr>
   </div>
-  <ng-template #noWeather> n/a</ng-template>
-  <div *ngIf="this.router.url!=='/weatherForecast'">
-    <h4 class="h5 text-center" >El tiempo</h4>
+  <div *ngIf="(this.router.url!=='/weatherForecast') && (weatherData?.length!=0)">
+    <h4 class="h5 text-center">El tiempo</h4>
     <hr>
     <div class="row">
       <div class="col">
-        <div class="d-inline text-start" *ngIf="weatherData;"><img [src]="weatherData?.current.condition.icon"></div>
-        <div class="d-inline text-end h5" *ngIf="weatherData; else noWeather">{{weatherData?.current.temp_c}} </div> °C
+        <div class="d-inline text-start"><img [src]="weatherData?.current.condition.icon"></div>
+        <div class="d-inline text-end h5">{{weatherData?.current.temp_c}} </div> °C
       </div>
       <div class="col">
-        <div class="text-start lead" *ngIf="weatherData; else noWeather">{{weatherData?.location.name}}, {{weatherData?.location.country}}</div>
-        <a style="color:blue;" class="lead" *ngIf="weatherData;" [routerLink]="'/weatherForecast'">Mas informacion</a>
+        <div class="text-start lead">{{weatherData?.location.name}}, {{weatherData?.location.country}}</div>
+        <a style="color:blue;" class="lead" [routerLink]="'/weatherForecast'">Mas informacion</a>
       </div>
     </div>
     <div class="row">
-      <div class="col" style="font-size: 14px;">Ultima actualizacion:<div *ngIf="weatherData; else noWeather">{{weatherData?.current.last_updated |slice:11:16}}</div></div>
+      <div class="col" style="font-size: 14px;">Ultima actualizacion:<div>{{weatherData?.current.last_updated |slice:11:16}}</div></div>
     </div>
     <hr>
   </div>

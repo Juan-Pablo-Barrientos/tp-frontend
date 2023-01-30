@@ -20,6 +20,7 @@ export class DataService {
   private baseUrl = environment.apiUrl;
   posts: any = [];
   mostClickedPosts$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  todayWeather$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   todayPoll$:BehaviorSubject<any> = new BehaviorSubject<any>([])
   constructor(private http: HttpClient) { }
 
@@ -28,6 +29,30 @@ export class DataService {
       this.mostClickedPosts$.next(response);
     });
   }
+
+  reloadTodayWeather() {
+    let lat:any;
+    let lng:any;
+    this.getWeatherApiKey().subscribe((response:any) =>{
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position: any) => {
+          if (position) {
+            console.log("Latitude: " + position.coords.latitude +
+              "Longitude: " + position.coords.longitude);
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+            this.getCurrentWeather(lat, lng, response.data).subscribe((response:any)=>{
+              this.todayWeather$.next(response)
+            })
+          }
+        },
+          (error: any) => console.log(error));
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    })
+  }
+
   reloadtodayPoll() {
     this.getTodayPoll().subscribe((response: any) => {
       if (response){

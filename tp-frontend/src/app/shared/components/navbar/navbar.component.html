@@ -27,6 +27,14 @@
           </a>
         </li>
 
+        <li class="nav-item dropdown d-lg-none" *ngIf="(this.router.url!=='/weatherForecast') && (weatherData?.length!=0)">
+          <a class="nav-link ps-3 ps-lg-2 text-white" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
+            role="button" aria-expanded="false" [routerLink]="'/weatherForecast'" routerLinkActive="bg-secondary rounded-3">
+            El tiempo
+            <fa-icon [icon]="faCloudSun" ></fa-icon>
+          </a>
+        </li>
+
         <li class="nav-item dropdown" *ngIf='this.authService.isLoggedIn() == true'>
           <a class="nav-link ps-3 ps-lg-2 dropdown-toggle text-white" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">

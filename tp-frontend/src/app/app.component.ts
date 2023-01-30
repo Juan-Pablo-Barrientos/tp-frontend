@@ -17,11 +17,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.reloadMostClickedPosts();
     this.dataService.reloadtodayPoll();
+    this.dataService.reloadTodayWeather();
     this.authService.loggedUser===undefined ? this.authService.restoreLoggedUser() : null;
   }
 
   refreshMostClicked() {
     this.dataService.reloadMostClickedPosts();
     this.dataService.reloadtodayPoll();
+    this.dataService.reloadTodayWeather();
   }
 }
