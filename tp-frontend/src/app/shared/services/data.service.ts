@@ -33,16 +33,13 @@ export class DataService {
   reloadTodayWeather() {
     let lat:any;
     let lng:any;
-    this.getWeatherApiKey().subscribe((response:any) =>{
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: any) => {
           if (position) {
-            console.log("Latitude: " + position.coords.latitude +
-              "Longitude: " + position.coords.longitude);
             lat = position.coords.latitude;
             lng = position.coords.longitude;
-            this.getCurrentWeather(lat, lng, response.data).subscribe((response:any)=>{
-              this.todayWeather$.next(response)
+            this.getCurrentWeather(lat, lng).subscribe((response:any)=>{
+              this.todayWeather$.next(response.data)
             })
           }
         },
@@ -50,7 +47,6 @@ export class DataService {
       } else {
         alert("Geolocation is not supported by this browser.");
       }
-    })
   }
 
   reloadtodayPoll() {
@@ -97,15 +93,19 @@ export class DataService {
   }
 
   getWeatherApiKey(): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + 'apiKey');
+    return this.http.get<Response>(this.baseUrl + 'weather');
   }
 
-  getCurrentWeather(lat:any, lng:any, weatherApi:any): Observable<ArrayBuffer> {
-    return this.http.get<ArrayBuffer>("https://api.weatherapi.com/v1/current.json?key="+weatherApi+"&q="+lat+","+lng+"&aqi=no");
+  getCurrentWeather(lat:any, lng:any): Observable<ArrayBuffer> {
+    let params = new HttpParams().set('lat',lat);
+    params = params.append('lng', lng)
+    return this.http.get<ArrayBuffer>(this.baseUrl + 'weather/currentWeather', { params: params });
   }
 
-  getForecast(lat:any, lng:any, weatherApi:any): Observable<ArrayBuffer> {
-    return this.http.get<ArrayBuffer>("https://api.weatherapi.com/v1/forecast.json?key="+weatherApi+"&q="+lat+","+lng+"&aqi=no&days=7");
+  getForecast(lat:any, lng:any): Observable<ArrayBuffer> {
+    let params = new HttpParams().set('lat',lat);
+    params = params.append('lng', lng)
+    return this.http.get<ArrayBuffer>(this.baseUrl + 'weather/forecast', { params: params });
   }
 
   getProvinces(): Observable<RequestResponse<Province[]>> {

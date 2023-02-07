@@ -20,7 +20,6 @@ export class WeatherComponent implements OnInit {
 
 
   getWeather() {
-    this.dataService.getWeatherApiKey().subscribe((response:any) =>{
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: any) => {
           if (position) {
@@ -28,8 +27,9 @@ export class WeatherComponent implements OnInit {
               "Longitude: " + position.coords.longitude);
             this.lat = position.coords.latitude;
             this.lng = position.coords.longitude;
-            this.dataService.getForecast(this.lat, this.lng, response.data).subscribe((response:any)=>{
-              this.weatherData=response
+            this.dataService.getForecast(this.lat, this.lng).subscribe((response:any)=>{
+              console.log(response.data)
+              this.weatherData=response.data
             })
           }
         },
@@ -37,8 +37,6 @@ export class WeatherComponent implements OnInit {
       } else {
         alert("Geolocation is not supported by this browser.");
       }
-
-    })
   }
 
 }
