@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/service/auth.service';
 import { DataService } from './shared/services/data.service';
+import { LoaderService } from './shared/services/loader.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { DataService } from './shared/services/data.service';
 export class AppComponent implements OnInit {
   title = 'tp-frontend';
 
-  constructor(public router: Router, private dataService: DataService, private authService: AuthService) {}
+  constructor(public router: Router, private dataService: DataService, private authService: AuthService, private loadingService:LoaderService) {}
 
   ngOnInit(): void {
     this.dataService.reloadMostClickedPosts();

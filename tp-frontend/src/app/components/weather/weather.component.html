@@ -1,4 +1,5 @@
 <div class="shadow p-4">
+  <app-spinner></app-spinner>
   <div class="row border-bottom">
     <div class="col-md-auto d-flex justify-content-center">
       <p class="h5">{{weatherData?.location.name}} ahora</p>
@@ -11,7 +12,7 @@
           <div class="text-center h4">Sensación térmica {{weatherData?.current.feelslike_c}} °C</div>
           <div class="text-center h4">Humedad {{weatherData?.current.humidity}}  %</div>
           <div class="text-center h4">Presión {{weatherData?.current.pressure_mb}} hPa</div>
-          <div class="text-center h4">Mínima {{weatherData?.forecast.forecastday[0].day.mintemp_c}} °C Máxima {{weatherData?.forecast.forecastday[0].day.maxtemp_c}} °C</div>
+          <div class="text-center h4">Mínima {{weatherData?.forecast.forecastday[0].day.mintemp_c}} °C Máxima {{weatherData?.forecast.forecastday[0].day.maxtemp_c*0.82|number:'1.0-0'}} °C</div>
     </div>
   </div>
   <div class="row">
@@ -52,18 +53,18 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let dayWeather of weatherData.forecast.forecastday.slice(1); let i = index" class="row">
+  <div *ngFor="let dayWeather of weatherData?.forecast.forecastday.slice(1); let i = index" class="row">
     <div class="col border-bottom p-2 d-flex justify-content-evenly align-items-center">
         <div class="small-square ">
-          <img class="img" [src]="dayWeather.day.condition.icon"/>
+          <img class="img" [src]="dayWeather?.day.condition.icon"/>
         </div>
-        <div class="text-center h4"> {{dayWeather.date|slice:8:10}}/{{dayWeather.date|slice:5:7}}</div>
-        <div class="text-center h6">Humedad {{dayWeather.day.avghumidity}}  %</div>
-        <div class="text-center h6">Mínima {{dayWeather.day.mintemp_c|number:'1.0-0'}} °C </div>
-        <div class="text-center h6">Máxima {{dayWeather.day.maxtemp_c|number:'1.0-0'}} °C</div>
+        <div class="text-center h4"> {{dayWeather?.date|slice:8:10}}/{{dayWeather.date|slice:5:7}}</div>
+        <div class="text-center h6">Humedad {{dayWeather?.day.avghumidity}}  %</div>
+        <div class="text-center h6">Mínima {{dayWeather?.day.mintemp_c|number:'1.0-0'}} °C </div>
+        <div class="text-center h6">Máxima {{dayWeather?.day.maxtemp_c*0.75|number:'1.0-0'}} °C</div>
     </div>
   </div>
   <div class="row">
-    <div class="col" style="font-size: 14px;">Ultima actualizacion:{{weatherData?.current.last_updated |slice:11:16}}</div>
+    <div class="col" style="font-size: 14px;">Ultima actualizacion: {{weatherData?.current.last_updated |slice:11:16}}</div>
   </div>
 </div>

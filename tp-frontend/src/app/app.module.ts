@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +25,8 @@ import { DisqusModule } from 'ngx-disqus';
 import { PollListComponent } from './components/poll-list/poll-list.component';
 import { EditPostComponent } from './auth/views/edit-post/edit-post.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,11 @@ import { WeatherComponent } from './components/weather/weather.component';
     DisqusModule.forRoot('fakenews-4'),
     HttpClientJsonpModule
   ],
-  providers: [AuthGuard,AuthorGuard],
+  providers: [AuthGuard,AuthorGuard,
+    {
+    provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

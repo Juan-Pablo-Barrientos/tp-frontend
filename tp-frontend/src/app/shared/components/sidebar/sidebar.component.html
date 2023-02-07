@@ -24,7 +24,7 @@
     </ul>
     <hr>
   </div>
-  <div *ngIf="(this.router.url!=='/weatherForecast') && (weatherData?.length!=0)">
+  <div *ngIf="(weatherData?.length!=0)">
     <h4 class="h5 text-center">El tiempo</h4>
     <hr>
     <div class="row">
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col" style="font-size: 14px;">Ultima actualizacion:<div>{{weatherData?.current.last_updated |slice:11:16}}</div></div>
+      <div class="col" style="font-size: 14px;">Ultima actualizacion: {{weatherData?.current.last_updated |slice:11:16}}</div>
     </div>
     <hr>
   </div>
